@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include "bloodreport.hpp"
+#include "tissuereport.hpp"
+#include "stoolreport.hpp"
 
 /*reportgenerator.hpp
 * This class assumes that an input .csv has standard format.

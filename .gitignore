@@ -1,6 +1,8 @@
 reportgenerator
-bloodreport.o
-reportgenerator.o
 main.o
+reportgenerator.o
+bloodreport.o
+tissuereport.o
+stoolreport.o
 
 testinput.csv
