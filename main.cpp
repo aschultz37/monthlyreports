@@ -78,8 +78,8 @@ int main(int argc, char **argv){
             report.displayReport();
         }
         else if(option == 4){ //write
-            string outputfile = "monthly_report.txt"
-            printf("The output will be written to %s.\n", outputfile);
+            string outputfile = "monthly_report.txt";
+            cout << "The output will be written to " << outputfile << ".\n";
             report.writeReport(outputfile);
         }
         else if(option == 5){ //quit

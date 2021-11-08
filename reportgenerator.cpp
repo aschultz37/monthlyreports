@@ -7,8 +7,23 @@ using namespace std;
 * Types: 1 = blood, 2 = tissue, 3 = stool
 * Requires type of file (blood, tissue, stool) and file name
 */
-void RG::ReportGenerator::importCSV(string inFileName, int fileType){
+void RG::ReportGenerator::importCSV(string inFileName, int infileType){
+    filetype = infileType;
+    ifstream infile; infile.open(inFileName);
+    string tmp = "";
+    while(infile.getline(tmp)){
+        fileLines.push_back(tmp);
+    }
+    //now need to parse it depending on filetype
+    if(filetype == RG::filetypes::blood){
 
+    }
+    else if(filetype == RG::filetypes::tissue){
+
+    }
+    else if(filetype == RG::filetypes::stool){
+
+    }
 }
 
 /*displayReport
