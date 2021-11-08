@@ -14,14 +14,14 @@ void RG::ReportGenerator::importCSV(string inFileName, int fileType){
 /*displayReport
 * Prints resulting/sorted list to terminal
 */
-void RG::ReportGenerator::displayReport(int fileType){
+void RG::ReportGenerator::displayReport(){
 
 }
 
 /*writeReport
 * Writes the resulting/sorted list to txt file
 */
-void RG::ReportGenerator::writeReport(std::string outFileName, int fileType){
+void RG::ReportGenerator::writeReport(std::string outFileName){
 
 }
 
@@ -29,7 +29,7 @@ void RG::ReportGenerator::writeReport(std::string outFileName, int fileType){
 * Copies only lines from the correct month/yr into filteredLines
 * Returns total # entries found
 */
-int RG::ReportGenerator::filterMonth(string month, string year, int fileType){
+int RG::ReportGenerator::filterMonth(string month, string year){
     int numEntries;
     return numEntries;
 }

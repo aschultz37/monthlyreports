@@ -26,9 +26,9 @@ namespace RG{
             ~ReportGenerator(){}
             
             void importCSV(std::string inFileName, int fileType);
-            void displayReport(int fileType);
-            void writeReport(std::string outFileName, int fileType);
-            int filterMonth(std::string month, std::string year, int fileType);
+            void displayReport();
+            void writeReport(std::string outFileName);
+            int filterMonth(std::string month, std::string year);
             void sort(int option);
         private:
             std::vector <std::string> fileLines;
