@@ -4,7 +4,8 @@ using namespace std;
 
 /*importCSV
 * Imports lines from CSV and parses it into struct
-* Requires type of file (blood, stool, tissue) and file name
+* Types: 1 = blood, 2 = tissue, 3 = stool
+* Requires type of file (blood, tissue, stool) and file name
 */
 void importCSV(string inFileName, int fileType){
 
