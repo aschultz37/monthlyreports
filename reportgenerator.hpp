@@ -23,8 +23,8 @@ namespace RG{
 
     class ReportGenerator{
         public:
-            RG::ReportGenerator();
-            ~RG::ReportGenerator(){ //need to delete structs from filteredLines and sortedLines
+            ReportGenerator();
+            ~ReportGenerator(){ //need to delete structs from filteredLines and sortedLines
 
             }
             
@@ -44,5 +44,6 @@ namespace RG{
             void studySort();
             void timeSort();
             void dateSort();
+            int dateCompare(std::string date1, std::string date2); //return 1 if date1 > date2, 0 if =, -1 if date1 < date2
     };
 }

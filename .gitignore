@@ -1,3 +1,5 @@
 reportgenerator
 reportgenerator.o
 main.o
+
+testinput.csv
