@@ -14,6 +14,10 @@ namespace BR{
 
     class BloodReport{
         public:
+            BloodReport();
+            ~BloodReport(){ //delete structs from filteredLines and sortedLines
+
+            }
 
         private:
             std::vector <BR::EntryData> filteredLines;

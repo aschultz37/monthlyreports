@@ -1,8 +1,10 @@
 #include "bloodreport.hpp"
 
+using namespace std;
+
 /*importParser
 * Parses a line of the csv file into fields of EntryData struct
 */
-void importParser(std::string lineIn, BR::EntryData &fieldsOut){
+void importParser(string lineIn, BR::EntryData &fieldsOut){
 
 }

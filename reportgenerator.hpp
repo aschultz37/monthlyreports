@@ -19,9 +19,7 @@ namespace RG{
     class ReportGenerator{
         public:
             ReportGenerator();
-            ~ReportGenerator(){ //need to delete structs from filteredLines and sortedLines
-
-            }
+            ~ReportGenerator();
             
             void importCSV(std::string inFileName, int fileType);
             void displayReport(int fileType);
