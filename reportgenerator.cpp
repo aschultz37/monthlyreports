@@ -14,7 +14,7 @@ void writeReport(std::string outFileName){
 
 }
 
-int filterMonth(string month){
+int filterMonth(string month, string year){
     int numEntries;
     return numEntries;
 }
@@ -23,7 +23,7 @@ int sort(int option){
     return 1;
 }
 
-void importParser(){
+void importParser(std::string lineIn, RG::EntryData &fieldsOut){
 
 }
 
