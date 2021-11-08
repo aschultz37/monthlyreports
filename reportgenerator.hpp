@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <string>
-#include <vector>
+#include "bloodreport.hpp"
 
 /*reportgenerator.hpp
 * This class assumes that an input .csv has standard format.
@@ -11,14 +10,8 @@
 */
 
 namespace RG{
-    struct EntryData{
-        std::string PN;
-        std::string studyArm;
-        std::string visit;
-        std::string oncID;
-        std::string subjectID;
-        std::string received;
-        std::string date;
+    struct ReportSheets{ //blood, tissue, and stool sheets for each report
+
     };
 
     class ReportGenerator{
@@ -28,17 +21,14 @@ namespace RG{
 
             }
             
-            void importCSV(std::string inFileName);
-            void displayReport();
-            void writeReport(std::string outFileName);
-            int filterMonth(std::string month, std::string year);
-            void sort(int option);
+            void importCSV(std::string inFileName, int fileType);
+            void displayReport(int fileType);
+            void writeReport(std::string outFileName, int fileType);
+            int filterMonth(std::string month, std::string year, int fileType);
+            void sort(int option, int fileType);
         private:
             std::vector <std::string> fileLines;
-            std::vector <RG::EntryData> filteredLines;
-            std::vector <RG::EntryData> sortedLines;
-
-            void importParser(std::string lineIn, RG::EntryData &fieldsOut);
+            
             void pnSort();
             void oncSort();
             void subjectSort();

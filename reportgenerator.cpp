@@ -4,22 +4,23 @@ using namespace std;
 
 /*importCSV
 * Imports lines from CSV and parses it into struct
+* Requires type of file (blood, stool, tissue) and file name
 */
-void importCSV(string inFileName){
+void importCSV(string inFileName, int fileType){
 
 }
 
 /*displayReport
 * Prints resulting/sorted list to terminal
 */
-void displayReport(){
+void displayReport(int fileType){
 
 }
 
 /*writeReport
 * Writes the resulting/sorted list to txt file
 */
-void writeReport(std::string outFileName){
+void writeReport(std::string outFileName, int fileType){
 
 }
 
@@ -27,7 +28,7 @@ void writeReport(std::string outFileName){
 * Copies only lines from the correct month/yr into filteredLines
 * Returns total # entries found
 */
-int filterMonth(string month, string year){
+int filterMonth(string month, string year, int fileType){
     int numEntries;
     return numEntries;
 }
@@ -35,15 +36,8 @@ int filterMonth(string month, string year){
 /*sort
 * Sorts by option: 1) PN; 2) OncID; 3) Subject ID; 4) Timepoint; 5) Date
 */
-void sort(int option){
-    return 1;
-}
-
-/*importParser
-* Parses a line of the csv file into fields of EntryData struct
-*/
-void importParser(std::string lineIn, RG::EntryData &fieldsOut){
-
+void sort(int option, int fileType){
+    
 }
 
 /*pnSort

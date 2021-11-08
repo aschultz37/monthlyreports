@@ -1,4 +1,5 @@
 reportgenerator
+bloodreport.o
 reportgenerator.o
 main.o
 
