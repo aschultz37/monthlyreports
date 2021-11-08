@@ -2,51 +2,88 @@
 
 using namespace std;
 
+/*importCSV
+* Imports lines from CSV and parses it into struct
+*/
 void importCSV(string inFileName){
 
 }
 
+/*displayReport
+* Prints resulting/sorted list to terminal
+*/
 void displayReport(){
 
 }
 
+/*writeReport
+* Writes the resulting/sorted list to txt file
+*/
 void writeReport(std::string outFileName){
 
 }
 
+/*filterMonth
+* Copies only lines from the correct month/yr into filteredLines
+* Returns total # entries found
+*/
 int filterMonth(string month, string year){
     int numEntries;
     return numEntries;
 }
 
-int sort(int option){
+/*sort
+* Sorts by option: 1) PN; 2) OncID; 3) Subject ID; 4) Timepoint; 5) Date
+*/
+void sort(int option){
     return 1;
 }
 
+/*importParser
+* Parses a line of the csv file into fields of EntryData struct
+*/
 void importParser(std::string lineIn, RG::EntryData &fieldsOut){
 
 }
 
+/*pnSort
+* Sorts alphabetically by PN
+*/
 void pnSort(){
 
 }
 
+/*oncSort
+* Sorts numerically by Onc ID
+*/
 void oncSort(){
 
 }
 
-void studySort(){
+/*subjectSort
+* Sorts numerically by Subject ID
+*/
+void subjectSort(){
 
 }
 
+/*timeSort
+* Sorts from lowest timepoint to highest timepoint
+*/
 void timeSort(){
 
 }
-
+/*dateSort
+* Sorts from oldest date to most recent date
+*/
 void dateSort(){
 
 }
 
+/*dateCompare
+* Compares two dates formatted as mm/dd/yyyy, m/d/yyyy, mm/d/yyyy, or m/dd/yyyy
+* Returns 1 if date1 > date2, 0 if =, -1 if date1 < date2
+*/
 int dateCompare(string date1, string date2){
     int month1, day1, year1; //number of digits in each field of date1
     month1 = day1 = year1 = 0;
