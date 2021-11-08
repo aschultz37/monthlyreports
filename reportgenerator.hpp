@@ -12,22 +12,28 @@
 */
 
 namespace RG{
-    struct ReportSheets{ //blood, tissue, and stool sheets for each report
+    enum filetypes {blood, tissue, stool};
 
+    struct ReportSheets{ //blood, tissue, and stool sheets for each report
+        BR::BloodReport bloodreport;
+        TR::TissueReport tissuereport;
+        SR::StoolReport stoolreport;
     };
 
     class ReportGenerator{
         public:
-            ReportGenerator();
-            ~ReportGenerator();
+            ReportGenerator(){}
+            ~ReportGenerator(){}
             
             void importCSV(std::string inFileName, int fileType);
             void displayReport(int fileType);
             void writeReport(std::string outFileName, int fileType);
             int filterMonth(std::string month, std::string year, int fileType);
-            void sort(int option, int fileType);
+            void sort(int option);
         private:
             std::vector <std::string> fileLines;
+            std::vector <RG::ReportSheets> sheets;
+            int filetype;
             
             void pnSort();
             void oncSort();

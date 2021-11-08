@@ -7,21 +7,21 @@ using namespace std;
 * Types: 1 = blood, 2 = tissue, 3 = stool
 * Requires type of file (blood, tissue, stool) and file name
 */
-void importCSV(string inFileName, int fileType){
+void RG::ReportGenerator::importCSV(string inFileName, int fileType){
 
 }
 
 /*displayReport
 * Prints resulting/sorted list to terminal
 */
-void displayReport(int fileType){
+void RG::ReportGenerator::displayReport(int fileType){
 
 }
 
 /*writeReport
 * Writes the resulting/sorted list to txt file
 */
-void writeReport(std::string outFileName, int fileType){
+void RG::ReportGenerator::writeReport(std::string outFileName, int fileType){
 
 }
 
@@ -29,7 +29,7 @@ void writeReport(std::string outFileName, int fileType){
 * Copies only lines from the correct month/yr into filteredLines
 * Returns total # entries found
 */
-int filterMonth(string month, string year, int fileType){
+int RG::ReportGenerator::filterMonth(string month, string year, int fileType){
     int numEntries;
     return numEntries;
 }
@@ -37,41 +37,41 @@ int filterMonth(string month, string year, int fileType){
 /*sort
 * Sorts by option: 1) PN; 2) OncID; 3) Subject ID; 4) Timepoint; 5) Date
 */
-void sort(int option, int fileType){
+void RG::ReportGenerator::sort(int option){
     
 }
 
 /*pnSort
 * Sorts alphabetically by PN
 */
-void pnSort(){
+void RG::ReportGenerator::pnSort(){
 
 }
 
 /*oncSort
 * Sorts numerically by Onc ID
 */
-void oncSort(){
+void RG::ReportGenerator::oncSort(){
 
 }
 
 /*subjectSort
 * Sorts numerically by Subject ID
 */
-void subjectSort(){
+void RG::ReportGenerator::subjectSort(){
 
 }
 
 /*timeSort
 * Sorts from lowest timepoint to highest timepoint
 */
-void timeSort(){
+void RG::ReportGenerator::timeSort(){
 
 }
 /*dateSort
 * Sorts from oldest date to most recent date
 */
-void dateSort(){
+void RG::ReportGenerator::dateSort(){
 
 }
 
@@ -79,7 +79,7 @@ void dateSort(){
 * Compares two dates formatted as mm/dd/yyyy, m/d/yyyy, mm/d/yyyy, or m/dd/yyyy
 * Returns 1 if date1 > date2, 0 if =, -1 if date1 < date2
 */
-int dateCompare(string date1, string date2){
+int RG::ReportGenerator::dateCompare(string date1, string date2){
     int month1, day1, year1; //number of digits in each field of date1
     month1 = day1 = year1 = 0;
     int i = 0;
