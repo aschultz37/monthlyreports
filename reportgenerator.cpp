@@ -15,11 +15,12 @@ void writeReport(std::string outFileName){
 }
 
 int filterMonth(string month){
-
+    int numEntries;
+    return numEntries;
 }
 
 int sort(int option){
-
+    return 1;
 }
 
 void importParser(){
