@@ -122,7 +122,7 @@ int yearsetup(){
 int mainmenu(){
     string userChoice = "";
     printf("---MAIN MENU---\nPlease select an option:\n");
-    printf("1. Import file\n2. Sort file\n3. Display results\n4. Write results to file\n5.Quit\n");
+    printf("1. Import file\n2. Sort file\n3. Display results\n4. Write results to file\n5. Quit\n");
     printf("Choice: ");
     cin >> userChoice;
     if(userChoice.compare("1") == 0) return 1;
