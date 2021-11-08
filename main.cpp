@@ -1,4 +1,4 @@
-
+#include "reportgenerator.hpp"
 
 using namespace std;
 
