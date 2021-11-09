@@ -18,6 +18,10 @@ SR::StoolReport::StoolReport(){
 }
 
 SR::StoolReport::~StoolReport(){
+    for(int i = 0; i < parsedLines.length(); i++){
+        delete parsedLines[i];
+        parsedLines[i] = NULL;
+    }
     for(int i = 0; i < filteredLines.length(); i++){
         delete filteredLines[i];
         filteredLines[i] = NULL;

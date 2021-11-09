@@ -93,7 +93,23 @@ void RG::ReportGenerator::writeReport(std::string outFileName){
 * Sorts by option: 1) PN; 2) OncID; 3) Subject ID; 4) Timepoint; 5) Date
 */
 void RG::ReportGenerator::sort(int option){
-    
+    switch (option){
+        case 1:
+            pnSort();
+            break;
+        case 2:
+            oncSort();
+            break;
+        case 3:
+            subjectSort();
+            break;
+        case 4:
+            timeSort();
+            break;
+        case 5:
+            dateSort();
+            break;
+    }
 }
 
 /*pnSort
