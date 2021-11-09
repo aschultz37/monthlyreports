@@ -21,8 +21,8 @@ namespace SR{
             }
 
         private:
-            std::vector <SR::EntryData> filteredLines;
-            std::vector <SR::EntryData> sortedLines;
+            std::vector <SR::EntryData*> filteredLines;
+            std::vector <SR::EntryData*> sortedLines;
 
             void importParser(std::string lineIn, SR::EntryData &fieldsOut);
     };

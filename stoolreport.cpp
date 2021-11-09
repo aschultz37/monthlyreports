@@ -8,3 +8,18 @@ using namespace std;
 void SR::StoolReport::importParser(string lineIn, SR::EntryData &fieldsOut){
 
 }
+
+SR::StoolReport::StoolReport(){
+
+}
+
+SR::StoolReport::~StoolReport(){
+    for(int i = 0; i < filteredLines.length(); i++){
+        delete filteredLines[i];
+        filteredLines[i] = NULL;
+    }
+    for(int i = 0; i < sortedLines.length(); i++){
+        delete sortedLines[i];
+        sortedLines[i] = NULL;
+    }
+}
