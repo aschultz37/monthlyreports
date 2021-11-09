@@ -133,16 +133,16 @@ int RG::ReportGenerator::dateCompare(string date1, string date2){
     return 0;
 }
 
-RG::ReportGenerator::ReportGenerator)(){
+RG::ReportGenerator::ReportGenerator(){
     sheets = new RG::ReportGenerator::ReportSheets;
-    sheets*.bloodreport = new BR::BloodReport;
-    sheets*.tissuereport = new TR::TissueReport;
-    sheets*.stoolreport = new SR::StoolReport;
+    sheets->bloodreport = new BR::BloodReport;
+    sheets->tissuereport = new TR::TissueReport;
+    sheets->stoolreport = new SR::StoolReport;
 }
 
 RG::ReportGenerator::~ReportGenerator(){
-    delete sheets*.bloodreport; sheets*.bloodreport = NULL;
-    delete sheets*.tissuereport; sheets*.tissuereport = NULL;
-    delete sheets*.stoolreport; sheets*.stoolreport = NULL;
+    delete sheets->bloodreport; sheets->bloodreport = NULL;
+    delete sheets->tissuereport; sheets->tissuereport = NULL;
+    delete sheets->stoolreport; sheets->stoolreport = NULL;
     delete sheets; sheets = NULL;
 }
