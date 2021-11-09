@@ -49,7 +49,21 @@ int RG::ReportGenerator::filterMonth(string month, string year, int infileType){
 * Prints resulting/sorted list to terminal
 */
 void RG::ReportGenerator::displayReport(){
-
+    if(filetype == RG::filetypes::blood){
+        for(int i = 0; i < sheets->bloodreport*.getSortedLines().length()){
+            cout << sheets->bloodreport*.getSortedLines().at(i) << '\n';
+        }
+    }
+    else if(filetype == RG::filetypes::tissue){
+        for(int i = 0; i < sheets->tissuereport*.getSortedLines().length()){
+            cout << sheets->tissuereport*.getSortedLines().at(i) << '\n';
+        }
+    }
+    else if(filetype == RG::filetypes::stool){
+        for(int i = 0; i < sheets->stoolreport*.getSortedLines().length()){
+            cout << sheets->stoolreport*.getSortedLines().at(i) << '\n';
+        }
+    }
 }
 
 /*writeReport
