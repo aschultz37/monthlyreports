@@ -5,4 +5,6 @@ bloodreport.o
 tissuereport.o
 stoolreport.o
 
-testinput.csv
+testinput_blood.csv
+testinput_tissue.csv
+testinput_stool.csv
