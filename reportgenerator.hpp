@@ -15,15 +15,15 @@ namespace RG{
     enum filetypes {blood, tissue, stool};
 
     struct ReportSheets{ //blood, tissue, and stool sheets for each report
-        BR::BloodReport bloodreport;
-        TR::TissueReport tissuereport;
-        SR::StoolReport stoolreport;
+        BR::BloodReport* bloodreport;
+        TR::TissueReport* tissuereport;
+        SR::StoolReport* stoolreport;
     };
 
     class ReportGenerator{
         public:
-            ReportGenerator(){}
-            ~ReportGenerator(){}
+            ReportGenerator();
+            ~ReportGenerator();
             
             void importCSV(std::string inFileName, int fileType);
             void displayReport();
@@ -32,7 +32,7 @@ namespace RG{
             void sort(int option);
         private:
             std::vector <std::string> fileLines;
-            std::vector <RG::ReportSheets> sheets;
+            RG::ReportSheets* sheets;
             int filetype;
             
             void pnSort();

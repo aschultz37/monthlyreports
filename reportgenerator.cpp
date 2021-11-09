@@ -16,7 +16,9 @@ void RG::ReportGenerator::importCSV(string inFileName, int infileType){
     }
     //now need to parse it depending on filetype
     if(filetype == RG::filetypes::blood){
-
+        //make BloodReport object in the struct
+        //call import parser for length of fileLines
+        //honestly, need to draw out what this looks like bc too many data structures happening at once
     }
     else if(filetype == RG::filetypes::tissue){
 
@@ -129,4 +131,18 @@ int RG::ReportGenerator::dateCompare(string date1, string date2){
     if(day1val < day2val) return -1;
     //i.e. months, years, & days are ==
     return 0;
+}
+
+RG::ReportGenerator::ReportGenerator)(){
+    sheets = new RG::ReportGenerator::ReportSheets;
+    sheets*.bloodreport = new BR::BloodReport;
+    sheets*.tissuereport = new TR::TissueReport;
+    sheets*.stoolreport = new SR::StoolReport;
+}
+
+RG::ReportGenerator::~ReportGenerator(){
+    delete sheets*.bloodreport; sheets*.bloodreport = NULL;
+    delete sheets*.tissuereport; sheets*.tissuereport = NULL;
+    delete sheets*.stoolreport; sheets*.stoolreport = NULL;
+    delete sheets; sheets = NULL;
 }
