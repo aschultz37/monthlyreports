@@ -17,6 +17,8 @@ namespace BR{
             BloodReport();
             ~BloodReport(); //delete structs from filteredLines and sortedLines
             
+            std::vector <BR::EntryData*> const &getSortedLines(){ return sortedLines;}
+
             void importParser(std::string lineIn);
             int bloodMonthFilter(std::string month, std::string year);
         private:

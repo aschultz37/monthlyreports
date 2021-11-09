@@ -7,21 +7,21 @@ using namespace std;
 */
 void BR::BloodReport::importParser(string lineIn){
     BR::EntryData* tempentry = new BR::EntryData;
-    char delimiter = ','; int numFields = 7; //for a blood report, there are 7 fields separated by 6 commas
+    char delimiter = ','; //for a blood report, there are 7 fields separated by 6 commas
     short PNbeg, PNend, SAbeg, SAend, Vbeg, Vend, Oncbeg, Oncend, SIDbeg, SIDend, Recbeg, Recend, Datebeg, Dateend;
     //determine indices for substrings
     PNbeg = 0;
-    while(lineIn[i] != ','){ i++;}
+    while(lineIn[i] != delimiter){ i++;}
     PNend = i; SAbeg = ++i;
-    while(lineIn[i] != ','){ i++;}
+    while(lineIn[i] != delimiter){ i++;}
     SAend = i; Vbeg = ++i;
-    while(lineIn[i] != ','){ i++;}
+    while(lineIn[i] != delimiter){ i++;}
     Vend = i; Oncbeg = ++i;
-    while(lineIn[i] != ','){ i++;}
+    while(lineIn[i] != delimiter){ i++;}
     Oncend = i; SIDbeg = ++i;
-    while(lineIn[i] != ','){ i++;}
+    while(lineIn[i] != delimiter){ i++;}
     SIDend = i; Recbeg = ++i;
-    while(lineIn[i] != ','){ i++;}
+    while(lineIn[i] != delimiter){ i++;}
     Recend = i; Datebeg = ++i;
     Dateend = lineIn.length();
     //set struct fields to each substring
@@ -37,7 +37,7 @@ void BR::BloodReport::importParser(string lineIn){
 }
 
 int bloodMonthFilter(string month, string year){
-    
+
 }
 
 BR::BloodReport::BloodReport(){

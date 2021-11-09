@@ -56,7 +56,23 @@ void RG::ReportGenerator::displayReport(){
 * Writes the resulting/sorted list to txt file
 */
 void RG::ReportGenerator::writeReport(std::string outFileName){
-
+    ofstream outfile; outfile.open(outFileName);
+    if(filetype == RG::filetypes::blood){
+        for(int i = 0; i < sheets->bloodreport*.getSortedLines().length()){
+            outfile << sheets->bloodreport*.getSortedLines().at(i) << '\n';
+        }
+    }
+    else if(filetype == RG::filetypes::tissue){
+        for(int i = 0; i < sheets->tissuereport*.getSortedLines().length()){
+            outfile << sheets->tissuereport*.getSortedLines().at(i) << '\n';
+        }
+    }
+    else if(filetype == RG::filetypes::stool){
+        for(int i = 0; i < sheets->stoolreport*.getSortedLines().length()){
+            outfile << sheets->stoolreport*.getSortedLines().at(i) << '\n';
+        }
+    }
+    outfile.close();
 }
 
 /*sort

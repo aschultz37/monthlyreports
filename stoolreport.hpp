@@ -20,6 +20,8 @@ namespace SR{
 
             }
            
+            std::vector <SR::EntryData*> const &getSortedLines(){ return sortedLines;}
+
             void importParser(std::string lineIn, SR::EntryData &fieldsOut);
             int stoolMonthFilter(std::string month, std::string year);
         private:
