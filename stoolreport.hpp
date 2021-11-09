@@ -19,11 +19,13 @@ namespace SR{
             ~StoolReport(){ //delete structs from filteredLines and sortedLines
 
             }
-
+           
+            void importParser(std::string lineIn, SR::EntryData &fieldsOut);
+            int stoolMonthFilter(std::string month, std::string year);
         private:
+            std::vector <SR::EntryData*> parsedLines;
             std::vector <SR::EntryData*> filteredLines;
             std::vector <SR::EntryData*> sortedLines;
 
-            void importParser(std::string lineIn, SR::EntryData &fieldsOut);
     };
 }

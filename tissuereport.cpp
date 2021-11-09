@@ -5,8 +5,12 @@ using namespace std;
 /*importParser
 * Parses a line of the csv file into fields of EntryData struct
 */
-void TR::TissueReport::importParser(string lineIn, TR::EntryData &fieldsOut){
+void TR::TissueReport::importParser(string lineIn){
 
+}
+
+int tissueMonthFilter(std::string month, std::string year){
+    
 }
 
 TR::TissueReport::TissueReport(){

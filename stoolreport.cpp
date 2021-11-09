@@ -9,6 +9,10 @@ void SR::StoolReport::importParser(string lineIn, SR::EntryData &fieldsOut){
 
 }
 
+int stoolMonthFilter(std::string month, std::string year){
+    
+}
+
 SR::StoolReport::StoolReport(){
 
 }

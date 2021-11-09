@@ -16,9 +16,9 @@ void RG::ReportGenerator::importCSV(string inFileName, int infileType){
     }
     //now need to parse it depending on filetype
     if(filetype == RG::filetypes::blood){
-        //make BloodReport object in the struct
-        //call import parser for length of fileLines
-        //honestly, need to draw out what this looks like bc too many data structures happening at once
+        for(int i = 0; i < fileLines.length(); i++){
+            sheets->bloodreport*.importParser(fileLines.at(i));
+        }
     }
     else if(filetype == RG::filetypes::tissue){
 
@@ -26,6 +26,23 @@ void RG::ReportGenerator::importCSV(string inFileName, int infileType){
     else if(filetype == RG::filetypes::stool){
 
     }
+}
+
+/*filterMonth
+* Copies only lines from the correct month/yr into filteredLines
+* Returns total # entries found
+*/
+int RG::ReportGenerator::filterMonth(string month, string year, int infileType){
+    if(filetype == RG::filetypes::blood){
+        return sheets->bloodreport*.bloodMonthFilter(month, year, infileType);
+    }
+    else if(filetype == RG::filetypes::tissue){
+        return sheets->tissuereport*.tissueMonthFilter(month, year, infileType);
+    }
+    else if(filetype == RG::filetypes::stool){
+        return sheets->stoolreport*.stoolMonthFilter(month, year, infileType);
+    }
+    return -1;
 }
 
 /*displayReport
@@ -40,15 +57,6 @@ void RG::ReportGenerator::displayReport(){
 */
 void RG::ReportGenerator::writeReport(std::string outFileName){
 
-}
-
-/*filterMonth
-* Copies only lines from the correct month/yr into filteredLines
-* Returns total # entries found
-*/
-int RG::ReportGenerator::filterMonth(string month, string year){
-    int numEntries;
-    return numEntries;
 }
 
 /*sort

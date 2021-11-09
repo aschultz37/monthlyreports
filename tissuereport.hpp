@@ -17,11 +17,13 @@ namespace TR{
         public:
             TissueReport();
             ~TissueReport(); //delete structs from filteredLines and sortedLines
-
+            
+            void importParser(std::string lineIn);
+            int tissueMonthFilter(std::string month, std::string year);
         private:
+            std::vector <TR::EntryData*> parsedLines;
             std::vector <TR::EntryData*> filteredLines;
             std::vector <TR::EntryData*> sortedLines;
 
-            void importParser(std::string lineIn, TR::EntryData &fieldsOut);
     };
 }

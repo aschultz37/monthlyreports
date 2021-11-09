@@ -16,12 +16,12 @@ namespace BR{
         public:
             BloodReport();
             ~BloodReport(); //delete structs from filteredLines and sortedLines
-
-
+            
+            void importParser(std::string lineIn);
+            int bloodMonthFilter(std::string month, std::string year);
         private:
+            std::vector <BR::EntryData*> parsedLines;
             std::vector <BR::EntryData*> filteredLines;
             std::vector <BR::EntryData*> sortedLines;
-
-            void importParser(std::string lineIn, BR::EntryData &fieldsOut);
     };
 }
