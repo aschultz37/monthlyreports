@@ -34,13 +34,13 @@ void RG::ReportGenerator::importCSV(string inFileName, int infileType){
 */
 int RG::ReportGenerator::filterMonth(int month, int year, int infileType){
     if(filetype == RG::filetypes::blood){
-        return sheets->bloodreport*.bloodMonthFilter(month, year, infileType);
+        return sheets->bloodreport*.bloodMonthFilter(month, year);
     }
     else if(filetype == RG::filetypes::tissue){
-        return sheets->tissuereport*.tissueMonthFilter(month, year, infileType);
+        return sheets->tissuereport*.tissueMonthFilter(month, year);
     }
     else if(filetype == RG::filetypes::stool){
-        return sheets->stoolreport*.stoolMonthFilter(month, year, infileType);
+        return sheets->stoolreport*.stoolMonthFilter(month, year);
     }
     return -1;
 }

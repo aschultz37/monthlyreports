@@ -37,11 +37,14 @@ void BR::BloodReport::importParser(string lineIn){
 }
 
 int BR::BloodReport::bloodMonthFilter(int month, int year){
+    int counter = 0;
     for(int i = 0; i < parsedLines.length(); i++){
         if(extractMonth(parsedLines.at(i)->date) == month && extractYear(parsedLines.at(i)->date) == year){
             filteredLines.push_back(parsedLines.at(i));
+            counter++;
         }
     }
+    return counter;
 }
 
 int BR::BloodReport::extractMonth(string date){

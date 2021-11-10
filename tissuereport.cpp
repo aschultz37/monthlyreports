@@ -9,8 +9,33 @@ void TR::TissueReport::importParser(string lineIn){
 
 }
 
-int TR::TissueReport::tissueMonthFilter(std::string month, std::string year){
-    
+int TR::TissueReport::tissueMonthFilter(int month, int year){
+    int counter = 0;
+    for(int i = 0; i < parsedLines.length(); i++){
+        if(extractMonth(parsedLines.at(i)->date) == month && extractYear(parsedLines.at(i)->date) == year){
+            filteredLines.push_back(parsedLines.at(i));
+            counter++;
+        }
+    }
+    return counter;
+}
+
+int TR::TissueReport::extractMonth(string date){
+    char delimiter = '/'; 
+    int i = 0; string month = "";
+    while(date[i] != delimiter){ month.append(date[i++]);}
+    return stoi(month);
+}
+
+int TR::TissueReport::extractYear(string date){
+    char delimiter = '/'; 
+    int i = 0; string year = "";
+    while(date[i++] != delimiter){} //thru month
+    i++; //skip /
+    while(date[i++] != delimiter){} //thru day
+    i++; //skip /
+    while(date[i] < date.length()){ year.append(date[i++]);}
+    return stoi(year);
 }
 
 TR::TissueReport::TissueReport(){

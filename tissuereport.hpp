@@ -27,5 +27,7 @@ namespace TR{
             std::vector <TR::EntryData*> filteredLines;
             std::vector <TR::EntryData*> sortedLines;
 
+            int extractMonth(std::string date);
+            int extractYear(std::string date);
     };
 }

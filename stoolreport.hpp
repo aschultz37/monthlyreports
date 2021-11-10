@@ -29,5 +29,7 @@ namespace SR{
             std::vector <SR::EntryData*> filteredLines;
             std::vector <SR::EntryData*> sortedLines;
 
+            int extractMonth(std::string date);
+            int extractYear(std::string date);
     };
 }
