@@ -21,10 +21,14 @@ void RG::ReportGenerator::importCSV(string inFileName, int infileType){
         }
     }
     else if(filetype == RG::filetypes::tissue){
-
+        for(int i = 0; i < fileLines.length(); i++){
+            sheets->tissuereport*.importParser(fileLines.at(i));
+        }
     }
     else if(filetype == RG::filetypes::stool){
-
+        for(int i = 0; i < fileLines.length(); i++){
+            sheets->stoolreport*.importParser(fileLines.at(i));
+        }
     }
 }
 
@@ -185,6 +189,24 @@ int RG::ReportGenerator::dateCompare(string date1, string date2){
     if(day1val < day2val) return -1;
     //i.e. months, years, & days are ==
     return 0;
+}
+
+void RG::ReportGenerator::bloodSwap(BR::EntryData* &entry1, BR::EntryData* &entry2){
+    BR::EntryData* tempentry = entry1;
+    entry1 = entry2;
+    entry2 = tempentry;
+}
+
+void RG::ReportGenerator::tissueSwap(TR::EntryData &entry1, TR::EntryData &entry2){
+    TR::EntryData* tempentry = entry1;
+    entry1 = entry2;
+    entry2 = tempentry;
+}
+
+void RG::ReportGenerator::stoolSwap(SR::EntryData &entry1, SR::EntryData &entry2){
+    SR::EntryData* tempentry = entry1;
+    entry1 = entry2;
+    entry2 = tempentry;
 }
 
 RG::ReportGenerator::ReportGenerator(){
