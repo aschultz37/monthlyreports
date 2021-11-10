@@ -9,6 +9,10 @@ void TR::TissueReport::importParser(string lineIn){
 
 }
 
+/*tissueMonthFilter
+* Filters parsedLines by month and year, putting valid entries into filteredLines
+* Returns the number of entries in that month/year
+*/
 int TR::TissueReport::tissueMonthFilter(int month, int year){
     int counter = 0;
     for(int i = 0; i < parsedLines.length(); i++){
@@ -20,6 +24,9 @@ int TR::TissueReport::tissueMonthFilter(int month, int year){
     return counter;
 }
 
+/*extractMonth
+* Returns the month (as an integer) as extracted from a date (string) of format m/d/y
+*/
 int TR::TissueReport::extractMonth(string date){
     char delimiter = '/'; 
     int i = 0; string month = "";
@@ -27,6 +34,9 @@ int TR::TissueReport::extractMonth(string date){
     return stoi(month);
 }
 
+/*extractYear
+* Returns the year (as an integer) as extracted from a date (string) of format m/d/y
+*/
 int TR::TissueReport::extractYear(string date){
     char delimiter = '/'; 
     int i = 0; string year = "";
