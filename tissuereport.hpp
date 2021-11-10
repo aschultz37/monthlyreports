@@ -22,10 +22,10 @@ namespace TR{
             std::vector <TR::EntryData*> const &getSortedLines(){ return sortedLines;}
 
             void pushSortedLines(TR::EntryData* input){ sortedLines.push_back(input);}
-            std::vector <TR::EntryData*> &editSortedLines(){ return sortedLines;}
 
             void importParser(std::string lineIn);
             int tissueMonthFilter(int month, int year);
+            void swapSortedLines(int index1, int index2);
         private:
             std::vector <TR::EntryData*> parsedLines;
             std::vector <TR::EntryData*> filteredLines;

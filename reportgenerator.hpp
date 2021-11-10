@@ -30,6 +30,8 @@ namespace RG{
             void displayReport();
             void writeReport(std::string outFileName);
             void sort(int option);
+
+            void setFileType(int inFileType){ filetype = inFileType;}
         private:
             std::vector <std::string> fileLines;
             RG::ReportSheets* sheets;

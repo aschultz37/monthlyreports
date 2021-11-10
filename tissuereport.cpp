@@ -55,6 +55,15 @@ int TR::TissueReport::tissueMonthFilter(int month, int year){
     return counter;
 }
 
+/*swapSortedLines
+* Swaps the EntryData* at two indices in sortedLines
+*/
+void TR::TissueReport::swapSortedLines(int index1, int index2){
+    TR::EntryData* tmp = sortedLines.at(index1);
+    sortedLines.at(index1) = sortedLines.at(index2);
+    sortedLines.at(index2) = tmp;
+}
+
 /*extractMonth
 * Returns the month (as an integer) as extracted from a date (string) of format m/d/y
 */

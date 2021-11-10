@@ -22,10 +22,10 @@ namespace SR{
             std::vector <SR::EntryData*> const &getSortedLines(){ return sortedLines;}
 
             void pushSortedLines(SR::EntryData* input){ sortedLines.push_back(input);}
-            std::vector <SR::EntryData*> &editSortedLines(){ return sortedLines;}
 
             void importParser(std::string lineIn);
             int stoolMonthFilter(int month, int year);
+            void swapSortedLines(int index1, int index2);
         private:
             std::vector <SR::EntryData*> parsedLines;
             std::vector <SR::EntryData*> filteredLines;

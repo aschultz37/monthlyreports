@@ -21,10 +21,10 @@ namespace BR{
             std::vector <BR::EntryData*> const &getSortedLines(){ return sortedLines;}
 
             void pushSortedLines(BR::EntryData* input){ sortedLines.push_back(input);}
-            std::vector <BR::EntryData*> &editSortedLines(){ return sortedLines;}
 
             void importParser(std::string lineIn);
             int bloodMonthFilter(int month, int year);
+            void swapSortedLines(int index1, int index2);
         private:
             std::vector <BR::EntryData*> parsedLines;
             std::vector <BR::EntryData*> filteredLines;
