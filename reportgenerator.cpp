@@ -7,8 +7,7 @@ using namespace std;
 * Types: 1 = blood, 2 = tissue, 3 = stool
 * Requires type of file (blood, tissue, stool) and file name
 */
-void RG::ReportGenerator::importCSV(string inFileName, int infileType){
-    filetype = infileType;
+void RG::ReportGenerator::importCSV(string inFileName){
     ifstream infile; infile.open(inFileName);
     string tmp = "";
     while(getline(infile, tmp)){
@@ -37,7 +36,9 @@ void RG::ReportGenerator::importCSV(string inFileName, int infileType){
 * Returns total # entries found
 */
 int RG::ReportGenerator::filterMonth(int month, int year){
+printf("Filtering by month\n");
     if(filetype == RG::filetypes::blood){
+printf("Blood\n");
         return sheets->bloodreport->bloodMonthFilter(month, year);
     }
     else if(filetype == RG::filetypes::tissue){
@@ -55,7 +56,7 @@ int RG::ReportGenerator::filterMonth(int month, int year){
 void RG::ReportGenerator::displayReport(){
     if(filetype == RG::filetypes::blood){
         for(int i = 0; i < sheets->bloodreport->getSortedLines().size(); i++){
-            cout << sheets->bloodreport->getSortedLines().at(i) << '\n';
+            cout << sheets->bloodreport->getSortedLines().at(i)->date << '\n';
         }
     }
     else if(filetype == RG::filetypes::tissue){

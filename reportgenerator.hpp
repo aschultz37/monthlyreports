@@ -12,7 +12,7 @@
 */
 
 namespace RG{
-    enum filetypes {blood, tissue, stool};
+    enum filetypes {blood = 1, tissue = 2, stool = 3};
 
     struct ReportSheets{ //blood, tissue, and stool sheets for each report
         BR::BloodReport* bloodreport;
@@ -25,7 +25,7 @@ namespace RG{
             ReportGenerator();
             ~ReportGenerator();
             
-            void importCSV(std::string inFileName, int fileType);
+            void importCSV(std::string inFileName);
             int filterMonth(int month, int year);
             void displayReport();
             void writeReport(std::string outFileName);

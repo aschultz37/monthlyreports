@@ -33,7 +33,7 @@ int main(int argc, char **argv){
         printf("You selected %d-%d. Is this correct? (y/n): ", month, year);
         cin >> ynbit;
         if(ynbit.compare("y") == 0 || ynbit.compare("Y") == 0) initbit = false;
-        else printf("OK, try again.\n");
+        else{ printf("OK, try again.\n"); month = 0; year = 0;}
     }
 
     while(runbit){
@@ -54,15 +54,17 @@ int main(int argc, char **argv){
                     printf("Invalid option, please try again.\n");
                     filetype = 0;
                 }
+                report.setFileType(filetype);
             }
             if(filetype != 4){ 
                 string filename = "";
                 printf("Please enter filename (including .csv): ");
                 cin >> filename;
-                report.importCSV(filename, filetype);
+                report.importCSV(filename);
                 printf("File imported successfully.\n");
                 //now filter by month
                 report.filterMonth(month, year);
+                printf("Filtered by %d-%d.\n", month, year);
             }    
         }
         else if(option == 2){ //sort

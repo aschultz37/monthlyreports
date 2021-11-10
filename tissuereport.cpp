@@ -80,11 +80,11 @@ int TR::TissueReport::extractMonth(string date){
 int TR::TissueReport::extractYear(string date){
     char delimiter = '/'; 
     int i = 0; string year = "";
-    while(date[i++] != delimiter){} //thru month
+    while(date[i] != delimiter){i++;} //thru month
     i++; //skip /
-    while(date[i++] != delimiter){} //thru day
+    while(date[i] != delimiter){i++;} //thru day
     i++; //skip /
-    while(date[i] < date.length()){ year.append(1, date[i++]);}
+    year = date.substr(i, date.length());
     return stoi(year);
 }
 
@@ -96,13 +96,5 @@ TR::TissueReport::~TissueReport(){
     for(int i = 0; i < parsedLines.size(); i++){
         delete parsedLines[i];
         parsedLines[i] = NULL;
-    }
-    for(int i = 0; i < filteredLines.size(); i++){
-        delete filteredLines[i];
-        filteredLines[i] = NULL;
-    }
-    for(int i = 0; i < sortedLines.size(); i++){
-        delete sortedLines[i];
-        sortedLines[i] = NULL;
     }
 }
