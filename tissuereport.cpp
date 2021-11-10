@@ -10,6 +10,7 @@ void TR::TissueReport::importParser(string lineIn){
     char delimiter = ','; //for a blood report, there are 7 fields separated by 6 commas
     short PNbeg, PNend, SAbeg, SAend, Vbeg, Vend, Oncbeg, Oncend, SIDbeg, SIDend, STbeg, STend, BTbeg, BTend, Datebeg, Dateend;
     //determine indices for substrings
+    int i = 0;
     PNbeg = 0;
     while(lineIn[i] != delimiter){ i++;}
     PNend = i; SAbeg = ++i;
@@ -45,7 +46,7 @@ void TR::TissueReport::importParser(string lineIn){
 */
 int TR::TissueReport::tissueMonthFilter(int month, int year){
     int counter = 0;
-    for(int i = 0; i < parsedLines.length(); i++){
+    for(int i = 0; i < parsedLines.size(); i++){
         if(extractMonth(parsedLines.at(i)->date) == month && extractYear(parsedLines.at(i)->date) == year){
             filteredLines.push_back(parsedLines.at(i));
             counter++;
@@ -60,7 +61,7 @@ int TR::TissueReport::tissueMonthFilter(int month, int year){
 int TR::TissueReport::extractMonth(string date){
     char delimiter = '/'; 
     int i = 0; string month = "";
-    while(date[i] != delimiter){ month.append(date[i++]);}
+    while(date[i] != delimiter){ month.append(1, date[i++]);}
     return stoi(month);
 }
 
@@ -74,7 +75,7 @@ int TR::TissueReport::extractYear(string date){
     i++; //skip /
     while(date[i++] != delimiter){} //thru day
     i++; //skip /
-    while(date[i] < date.length()){ year.append(date[i++]);}
+    while(date[i] < date.length()){ year.append(1, date[i++]);}
     return stoi(year);
 }
 
@@ -83,15 +84,15 @@ TR::TissueReport::TissueReport(){
 }
 
 TR::TissueReport::~TissueReport(){
-    for(int i = 0; i < parsedLines.length(); i++){
+    for(int i = 0; i < parsedLines.size(); i++){
         delete parsedLines[i];
         parsedLines[i] = NULL;
     }
-    for(int i = 0; i < filteredLines.length(); i++){
+    for(int i = 0; i < filteredLines.size(); i++){
         delete filteredLines[i];
         filteredLines[i] = NULL;
     }
-    for(int i = 0; i < sortedLines.length(); i++){
+    for(int i = 0; i < sortedLines.size(); i++){
         delete sortedLines[i];
         sortedLines[i] = NULL;
     }

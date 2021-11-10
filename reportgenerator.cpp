@@ -11,22 +11,22 @@ void RG::ReportGenerator::importCSV(string inFileName, int infileType){
     filetype = infileType;
     ifstream infile; infile.open(inFileName);
     string tmp = "";
-    while(infile.getline(tmp)){
+    while(getline(infile, tmp)){
         fileLines.push_back(tmp);
     }
     //now need to parse it depending on filetype
     if(filetype == RG::filetypes::blood){
-        for(int i = 0; i < fileLines.length(); i++){
+        for(int i = 0; i < fileLines.size(); i++){
             sheets->bloodreport*.importParser(fileLines.at(i));
         }
     }
     else if(filetype == RG::filetypes::tissue){
-        for(int i = 0; i < fileLines.length(); i++){
+        for(int i = 0; i < fileLines.size(); i++){
             sheets->tissuereport*.importParser(fileLines.at(i));
         }
     }
     else if(filetype == RG::filetypes::stool){
-        for(int i = 0; i < fileLines.length(); i++){
+        for(int i = 0; i < fileLines.size(); i++){
             sheets->stoolreport*.importParser(fileLines.at(i));
         }
     }
@@ -54,17 +54,17 @@ int RG::ReportGenerator::filterMonth(int month, int year, int infileType){
 */
 void RG::ReportGenerator::displayReport(){
     if(filetype == RG::filetypes::blood){
-        for(int i = 0; i < sheets->bloodreport*.getSortedLines().length()){
+        for(int i = 0; i < sheets->bloodreport*.getSortedLines().size()){
             cout << sheets->bloodreport*.getSortedLines().at(i) << '\n';
         }
     }
     else if(filetype == RG::filetypes::tissue){
-        for(int i = 0; i < sheets->tissuereport*.getSortedLines().length()){
+        for(int i = 0; i < sheets->tissuereport*.getSortedLines().size()){
             cout << sheets->tissuereport*.getSortedLines().at(i) << '\n';
         }
     }
     else if(filetype == RG::filetypes::stool){
-        for(int i = 0; i < sheets->stoolreport*.getSortedLines().length()){
+        for(int i = 0; i < sheets->stoolreport*.getSortedLines().size()){
             cout << sheets->stoolreport*.getSortedLines().at(i) << '\n';
         }
     }
@@ -76,17 +76,17 @@ void RG::ReportGenerator::displayReport(){
 void RG::ReportGenerator::writeReport(std::string outFileName){
     ofstream outfile; outfile.open(outFileName);
     if(filetype == RG::filetypes::blood){
-        for(int i = 0; i < sheets->bloodreport*.getSortedLines().length()){
+        for(int i = 0; i < sheets->bloodreport*.getSortedLines().size()){
             outfile << sheets->bloodreport*.getSortedLines().at(i) << '\n';
         }
     }
     else if(filetype == RG::filetypes::tissue){
-        for(int i = 0; i < sheets->tissuereport*.getSortedLines().length()){
+        for(int i = 0; i < sheets->tissuereport*.getSortedLines().size()){
             outfile << sheets->tissuereport*.getSortedLines().at(i) << '\n';
         }
     }
     else if(filetype == RG::filetypes::stool){
-        for(int i = 0; i < sheets->stoolreport*.getSortedLines().length()){
+        for(int i = 0; i < sheets->stoolreport*.getSortedLines().size()){
             outfile << sheets->stoolreport*.getSortedLines().at(i) << '\n';
         }
     }
@@ -149,14 +149,14 @@ void RG::ReportGenerator::timeSort(){
 void RG::ReportGenerator::dateSort(){
     if(filetype == RG::filetypes::blood){
         //copy filteredLines into sortedLines
-        for(int i = 0; i < sheets->bloodreport*.getFilteredLines().length(); i++){
+        for(int i = 0; i < sheets->bloodreport*.getFilteredLines().size(); i++){
             sheets->bloodreport*.pushSortedLines(sheets->bloodreport*.getFilteredLines().at(i));
         }
         //do selection sort on sortedLines
         int min;
-        for(int i = 0; i < sheets->bloodreport*.getSortedLines().length()-1; i++){
+        for(int i = 0; i < sheets->bloodreport*.getSortedLines().size()-1; i++){
             min = i;
-            for(int j = i+1; j < sheets->bloodreport*.getSortedLines.length(); j++){
+            for(int j = i+1; j < sheets->bloodreport*.getSortedLines.size(); j++){
                 if(dateCompare(sheets->bloodreport*.getSortedLines.at(j), sheets->bloodreport*.getSortedLines.at(min)) == -1){
                     min = j;
                 }
@@ -166,14 +166,14 @@ void RG::ReportGenerator::dateSort(){
     }
     else if(filetype == RG::filetypes::tissue){
         //copy filteredLines into sortedLines
-        for(int i = 0; i < sheets->tissuereport*.getFilteredLines().length(); i++){
+        for(int i = 0; i < sheets->tissuereport*.getFilteredLines().size(); i++){
             sheets->tissuereport*.pushSortedLines(sheets->tissuereport*.getFilteredLines().at(i));
         }
         //do selection sort on sortedLines
         int min;
-        for(int i = 0; i < sheets->tissuereport*.getSortedLines().length()-1; i++){
+        for(int i = 0; i < sheets->tissuereport*.getSortedLines().size()-1; i++){
             min = i;
-            for(int j = i+1; j < sheets->tissuereport*.getSortedLines.length(); j++){
+            for(int j = i+1; j < sheets->tissuereport*.getSortedLines.size(); j++){
                 if(dateCompare(sheets->tissuereport*.getSortedLines.at(j), sheets->tissuereport*.getSortedLines.at(min)) == -1){
                     min = j;
                 }
@@ -183,14 +183,14 @@ void RG::ReportGenerator::dateSort(){
     }
     else if(filetype == RG::filetypes::stool){
         //copy filteredLines into sortedLines
-        for(int i = 0; i < sheets->stoolreport*.getFilteredLines().length(); i++){
+        for(int i = 0; i < sheets->stoolreport*.getFilteredLines().size(); i++){
             sheets->stoolreport*.pushSortedLines(sheets->stoolreport*.getFilteredLines().at(i));
         }
         //do selection sort on sortedLines
         int min;
-        for(int i = 0; i < sheets->stoolreport*.getSortedLines().length()-1; i++){
+        for(int i = 0; i < sheets->stoolreport*.getSortedLines().size()-1; i++){
             min = i;
-            for(int j = i+1; j < sheets->stoolreport*.getSortedLines.length(); j++){
+            for(int j = i+1; j < sheets->stoolreport*.getSortedLines.size(); j++){
                 if(dateCompare(sheets->stoolreport*.getSortedLines.at(j), sheets->stoolreport*.getSortedLines.at(min)) == -1){
                     min = j;
                 }
@@ -260,7 +260,7 @@ void RG::ReportGenerator::stoolSwap(SR::EntryData &entry1, SR::EntryData &entry2
 }
 
 RG::ReportGenerator::ReportGenerator(){
-    sheets = new RG::ReportGenerator::ReportSheets;
+    sheets = new RG::ReportSheets;
     sheets->bloodreport = new BR::BloodReport;
     sheets->tissuereport = new TR::TissueReport;
     sheets->stoolreport = new SR::StoolReport;
