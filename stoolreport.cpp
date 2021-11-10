@@ -5,7 +5,7 @@ using namespace std;
 /*importParser
 * Parses a line of the csv file into fields of EntryData struct
 */
-void SR::StoolReport::importParser(string lineIn, SR::EntryData &fieldsOut){
+void SR::StoolReport::importParser(string lineIn){
     SR::EntryData* tempentry = new SR::EntryData;
     char delimiter = ','; //for a blood report, there are 7 fields separated by 6 commas
     short PNbeg, PNend, SAbeg, SAend, Vbeg, Vend, Oncbeg, Oncend, SIDbeg, SIDend, StIDbeg, StIDend, Recbeg, Recend, Datebeg, Dateend;
