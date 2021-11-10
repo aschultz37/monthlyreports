@@ -16,14 +16,16 @@ namespace SR{
     class StoolReport{
         public:
             StoolReport();
-            ~StoolReport(){ //delete structs from filteredLines and sortedLines
-
-            }
+            ~StoolReport(); //delete structs from filteredLines and sortedLines
            
+            std::vector <SR::EntryData*> const &getFilteredLines(){ return filteredLines;}
             std::vector <SR::EntryData*> const &getSortedLines(){ return sortedLines;}
 
-            void importParser(std::string lineIn, SR::EntryData &fieldsOut);
-            int stoolMonthFilter(std::string month, std::string year);
+            void pushSortedLines(SR::EntryData* input){ sortedLines.push_back(input);}
+            std::vector <SR::EntryData*> &editSortedLines(){ return sortedLines;}
+
+            void importParser(std::string lineIn);
+            int stoolMonthFilter(int month, int year);
         private:
             std::vector <SR::EntryData*> parsedLines;
             std::vector <SR::EntryData*> filteredLines;

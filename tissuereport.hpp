@@ -18,10 +18,14 @@ namespace TR{
             TissueReport();
             ~TissueReport(); //delete structs from filteredLines and sortedLines
             
+            std::vector <TR::EntryData*> const &getFilteredLines(){ return filteredLines;}
             std::vector <TR::EntryData*> const &getSortedLines(){ return sortedLines;}
 
+            void pushSortedLines(TR::EntryData* input){ sortedLines.push_back(input);}
+            std::vector <TR::EntryData*> &editSortedLines(){ return sortedLines;}
+
             void importParser(std::string lineIn);
-            int tissueMonthFilter(std::string month, std::string year);
+            int tissueMonthFilter(int month, int year);
         private:
             std::vector <TR::EntryData*> parsedLines;
             std::vector <TR::EntryData*> filteredLines;

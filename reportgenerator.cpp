@@ -147,7 +147,57 @@ void RG::ReportGenerator::timeSort(){
 * Sorts from oldest date to most recent date
 */
 void RG::ReportGenerator::dateSort(){
-
+    if(filetype == RG::filetypes::blood){
+        //copy filteredLines into sortedLines
+        for(int i = 0; i < sheets->bloodreport*.getFilteredLines().length(); i++){
+            sheets->bloodreport*.pushSortedLines(sheets->bloodreport*.getFilteredLines().at(i));
+        }
+        //do selection sort on sortedLines
+        int min;
+        for(int i = 0; i < sheets->bloodreport*.getSortedLines().length()-1; i++){
+            min = i;
+            for(int j = i+1; j < sheets->bloodreport*.getSortedLines.length(); j++){
+                if(dateCompare(sheets->bloodreport*.getSortedLines.at(j), sheets->bloodreport*.getSortedLines.at(min)) == -1){
+                    min = j;
+                }
+                bloodswap(sheets->bloodreport*.editSortedLines().at(i), sheets->bloodreport*.editSortedLines().at(min));
+            }
+        }
+    }
+    else if(filetype == RG::filetypes::tissue){
+        //copy filteredLines into sortedLines
+        for(int i = 0; i < sheets->tissuereport*.getFilteredLines().length(); i++){
+            sheets->tissuereport*.pushSortedLines(sheets->tissuereport*.getFilteredLines().at(i));
+        }
+        //do selection sort on sortedLines
+        int min;
+        for(int i = 0; i < sheets->tissuereport*.getSortedLines().length()-1; i++){
+            min = i;
+            for(int j = i+1; j < sheets->tissuereport*.getSortedLines.length(); j++){
+                if(dateCompare(sheets->tissuereport*.getSortedLines.at(j), sheets->tissuereport*.getSortedLines.at(min)) == -1){
+                    min = j;
+                }
+                tissueswap(sheets->tissuereport*.editSortedLines().at(i), sheets->tissuereport*.editSortedLines().at(min));
+            }
+        }
+    }
+    else if(filetype == RG::filetypes::stool){
+        //copy filteredLines into sortedLines
+        for(int i = 0; i < sheets->stoolreport*.getFilteredLines().length(); i++){
+            sheets->stoolreport*.pushSortedLines(sheets->stoolreport*.getFilteredLines().at(i));
+        }
+        //do selection sort on sortedLines
+        int min;
+        for(int i = 0; i < sheets->stoolreport*.getSortedLines().length()-1; i++){
+            min = i;
+            for(int j = i+1; j < sheets->stoolreport*.getSortedLines.length(); j++){
+                if(dateCompare(sheets->stoolreport*.getSortedLines.at(j), sheets->stoolreport*.getSortedLines.at(min)) == -1){
+                    min = j;
+                }
+                stoolswap(sheets->stoolreport*.editSortedLines().at(i), sheets->stoolreport*.editSortedLines().at(min));
+            }
+        }
+    }
 }
 
 /*dateCompare
