@@ -32,7 +32,7 @@ void RG::ReportGenerator::importCSV(string inFileName, int infileType){
 * Copies only lines from the correct month/yr into filteredLines
 * Returns total # entries found
 */
-int RG::ReportGenerator::filterMonth(string month, string year, int infileType){
+int RG::ReportGenerator::filterMonth(int month, int year, int infileType){
     if(filetype == RG::filetypes::blood){
         return sheets->bloodreport*.bloodMonthFilter(month, year, infileType);
     }

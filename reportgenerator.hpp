@@ -26,7 +26,7 @@ namespace RG{
             ~ReportGenerator();
             
             void importCSV(std::string inFileName, int fileType);
-            int filterMonth(std::string month, std::string year);
+            int filterMonth(int month, int year);
             void displayReport();
             void writeReport(std::string outFileName);
             void sort(int option);

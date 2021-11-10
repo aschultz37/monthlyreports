@@ -9,7 +9,7 @@ void TR::TissueReport::importParser(string lineIn){
 
 }
 
-int tissueMonthFilter(std::string month, std::string year){
+int TR::TissueReport::tissueMonthFilter(std::string month, std::string year){
     
 }
 

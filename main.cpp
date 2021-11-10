@@ -61,6 +61,8 @@ int main(int argc, char **argv){
                 cin >> filename;
                 report.importCSV(filename, filetype);
                 printf("File imported successfully.\n");
+                //now filter by month
+                report.filterMonth(month, year);
             }    
         }
         else if(option == 2){ //sort
