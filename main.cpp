@@ -2,8 +2,9 @@
 
 using namespace std;
 
-int monthsetup();
-int yearsetup();
+void setupMonthYear(int &month, int &year);
+int monthsetup(int &month);
+int yearsetup(int &year);
 int mainmenu();
 int filetypemenu();
 int sortmenu();
@@ -15,17 +16,17 @@ int main(int argc, char **argv){
     RG::ReportGenerator report = RG::ReportGenerator();
 
     int month = 0; int year = 0;
-    while(initbit){
+    /*while(initbit){
         while(month == 0){
-            month = monthsetup();
-            if(month == -1){
+            //month = monthsetup();
+            if(monthsetup(month) == -1){
                 printf("Invalid option, please try again.\n");
                 month = 0;
             }
         }
         while(year == 0){
-            year = yearsetup();
-            if(year == -1){
+            //year = yearsetup();
+            if(yearsetup(year) == -1){
                 printf("Invalid option, please try again.\n");
                 year = 0;
             }
@@ -35,7 +36,8 @@ int main(int argc, char **argv){
         cin >> ynbit;
         if(ynbit.compare("y") == 0 || ynbit.compare("Y") == 0) initbit = false;
         else{ printf("OK, try again.\n"); month = 0; year = 0;}
-    }
+    }*/
+    setupMonthYear(month, year);
 
     while(runbit){
         int option = 0;
@@ -92,7 +94,10 @@ int main(int argc, char **argv){
             cout << "The output will be written to " << outputfile << ".\n";
             report.writeReport(outputfile);
         }
-        else if(option == 5){ //quit
+        else if(option == 5){ //set month/year
+            setupMonthYear(month, year);
+        }
+        else if(option == 6){ //quit
             printf("Program closing.\n");
             runbit = false;
         }
@@ -105,36 +110,62 @@ int main(int argc, char **argv){
     return 0;
 }
 
-int monthsetup(){
+void setupMonthYear(int &month, int &year){
+    bool mybit = true;
+    while(mybit){
+        while(month == 0){
+            //month = monthsetup();
+            if(monthsetup(month) == -1){
+                printf("Invalid option, please try again.\n");
+                month = 0;
+            }
+        }
+        while(year == 0){
+            //year = yearsetup();
+            if(yearsetup(year) == -1){
+                printf("Invalid option, please try again.\n");
+                year = 0;
+            }
+        }
+        string ynbit = "";
+        printf("You selected %d-%d. Is this correct? (y/n): ", month, year);
+        cin >> ynbit;
+        if(ynbit.compare("y") == 0 || ynbit.compare("Y") == 0) mybit = false;
+        else{ printf("OK, try again.\n"); month = 0; year = 0;}
+    }
+}
+
+int monthsetup(int &month){
     string userChoice = "";
     printf("As a number 1-12, please enter the month for the report (e.g., 7 for July): ");
     cin >> userChoice;
-    if(userChoice.compare("1") == 0) return 1;
-    if(userChoice.compare("2") == 0) return 2;
-    if(userChoice.compare("3") == 0) return 3;
-    if(userChoice.compare("4") == 0) return 4;
-    if(userChoice.compare("5") == 0) return 5;
-    if(userChoice.compare("6") == 0) return 6;
-    if(userChoice.compare("7") == 0) return 7;
-    if(userChoice.compare("8") == 0) return 8;
-    if(userChoice.compare("9") == 0) return 9;
-    if(userChoice.compare("10") == 0) return 10;
-    if(userChoice.compare("11") == 0) return 11;
-    if(userChoice.compare("12") == 0) return 12;
+    if(userChoice.compare("1") == 0){ month = 1; return 1;}
+    if(userChoice.compare("2") == 0){ month = 2; return 2;}
+    if(userChoice.compare("3") == 0){ month = 3; return 3;}
+    if(userChoice.compare("4") == 0){ month = 4; return 4;}
+    if(userChoice.compare("5") == 0){ month = 5; return 5;}
+    if(userChoice.compare("6") == 0){ month = 6; return 6;}
+    if(userChoice.compare("7") == 0){ month = 7; return 7;}
+    if(userChoice.compare("8") == 0){ month = 8; return 8;}
+    if(userChoice.compare("9") == 0){ month = 9; return 9;}
+    if(userChoice.compare("10") == 0){ month = 10; return 10;}
+    if(userChoice.compare("11") == 0){ month = 11; return 11;}
+    if(userChoice.compare("12") == 0){ month = 12; return 12;}
     return -1;
 }
 
-int yearsetup(){
+int yearsetup(int &year){
     string userChoice = "";
     printf("Please enter the four-digit year for the report (e.g. 2021): ");
     cin >> userChoice;
-    return stoi(userChoice);
+    year = stoi(userChoice);
+    return year;
 }
 
 int mainmenu(){
     string userChoice = "";
     printf("---MAIN MENU---\nPlease select an option:\n");
-    printf("1. Import file\n2. Sort file\n3. Display results\n4. Write results to file\n5. Quit\n");
+    printf("1. Import File\n2. Sort File\n3. Display Results\n4. Write Results to File\n5. Set Month/Year\n6. Quit\n");
     printf("Choice: ");
     cin >> userChoice;
     if(userChoice.compare("1") == 0) return 1;
@@ -142,6 +173,7 @@ int mainmenu(){
     if(userChoice.compare("3") == 0) return 3;
     if(userChoice.compare("4") == 0) return 4;
     if(userChoice.compare("5") == 0) return 5;
+    if(userChoice.compare("6") == 0) return 6;
     return -1;
 }
 
