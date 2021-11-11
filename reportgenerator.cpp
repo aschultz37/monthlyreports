@@ -163,7 +163,96 @@ void RG::ReportGenerator::subjectSort(){
 * Sorts from lowest timepoint to highest timepoint
 */
 void RG::ReportGenerator::timeSort(){
-
+    if(filetype == RG::filetypes::blood){
+        sheets->bloodreport->clearSort();
+        //list of unique timepoints
+        vector <string> timepoints;
+        for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
+            if(timepoints.size() > 0){ //to account for first iteration
+                bool found = false;
+                for(int j = 0; j < timepoints.size(); j++){
+                    if(timepoints.at(j).compare(sheets->bloodreport->getFilteredLines().at(i)->visit) == 0){ found = true;}
+                }
+                if(!found){ timepoints.push_back(sheets->bloodreport->getFilteredLines().at(i)->visit);}
+            }
+            else timepoints.push_back(sheets->bloodreport->getFilteredLines().at(i)->visit);
+        }
+        //create vector for each unique timepoint & fill w/ each matching entry
+        vector <vector<BR::EntryData*>> timepointVecs(timepoints.size());
+        for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
+            for(int j = 0; j < timepointVecs.size(); j++){
+                if(sheets->bloodreport->getFilteredLines().at(i)->visit.compare(timepoints.at(j)) == 0){
+                    timepointVecs.at(j).push_back(sheets->bloodreport->getFilteredLines().at(i));
+                }
+            }
+        }
+        //push the vectors back into sortedLines
+        for(int i = 0; i < timepointVecs.size(); i++){
+            for(int j = 0; j < timepointVecs.at(i).size(); j++){
+                sheets->bloodreport->pushSortedLines(timepointVecs.at(i).at(j));
+            }
+        }
+    }
+    else if(filetype == RG::filetypes::tissue){
+        sheets->tissuereport->clearSort();
+        //list of unique timepoints
+        vector <string> timepoints;
+        for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
+            if(timepoints.size() > 0){ //to account for first iteration
+                bool found = false;
+                for(int j = 0; j < timepoints.size(); j++){
+                    if(timepoints.at(j).compare(sheets->tissuereport->getFilteredLines().at(i)->visit) == 0){ found = true;}
+                }
+                if(!found){ timepoints.push_back(sheets->tissuereport->getFilteredLines().at(i)->visit);}
+            }
+            else timepoints.push_back(sheets->tissuereport->getFilteredLines().at(i)->visit);
+        }
+        //create vector for each unique timepoint & fill w/ each matching entry
+        vector <vector<TR::EntryData*>> timepointVecs(timepoints.size());
+        for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
+            for(int j = 0; j < timepointVecs.size(); j++){
+                if(sheets->tissuereport->getFilteredLines().at(i)->visit.compare(timepoints.at(j)) == 0){
+                    timepointVecs.at(j).push_back(sheets->tissuereport->getFilteredLines().at(i));
+                }
+            }
+        }
+        //push the vectors back into sortedLines
+        for(int i = 0; i < timepointVecs.size(); i++){
+            for(int j = 0; j < timepointVecs.at(i).size(); j++){
+                sheets->tissuereport->pushSortedLines(timepointVecs.at(i).at(j));
+            }
+        }
+    }
+    else if(filetype == RG::filetypes::stool){
+        sheets->stoolreport->clearSort();
+        //list of unique timepoints
+        vector <string> timepoints;
+        for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
+            if(timepoints.size() > 0){ //to account for first iteration
+                bool found = false;
+                for(int j = 0; j < timepoints.size(); j++){
+                    if(timepoints.at(j).compare(sheets->stoolreport->getFilteredLines().at(i)->visit) == 0){ found = true;}
+                }
+                if(!found){ timepoints.push_back(sheets->stoolreport->getFilteredLines().at(i)->visit);}
+            }
+            else timepoints.push_back(sheets->stoolreport->getFilteredLines().at(i)->visit);
+        }
+        //create vector for each unique timepoint & fill w/ each matching entry
+        vector <vector<SR::EntryData*>> timepointVecs(timepoints.size());
+        for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
+            for(int j = 0; j < timepointVecs.size(); j++){
+                if(sheets->stoolreport->getFilteredLines().at(i)->visit.compare(timepoints.at(j)) == 0){
+                    timepointVecs.at(j).push_back(sheets->stoolreport->getFilteredLines().at(i));
+                }
+            }
+        }
+        //push the vectors back into sortedLines
+        for(int i = 0; i < timepointVecs.size(); i++){
+            for(int j = 0; j < timepointVecs.at(i).size(); j++){
+                sheets->stoolreport->pushSortedLines(timepointVecs.at(i).at(j));
+            }
+        }
+    }
 }
 /*dateSort
 * Sorts from oldest date to most recent date
