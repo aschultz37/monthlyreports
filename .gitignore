@@ -6,6 +6,7 @@ tissuereport.o
 stoolreport.o
 
 testinput_blood.csv
+sacitnbc_blood.csv
 testinput_tissue.csv
 testinput_stool.csv
 monthly_report.txt
