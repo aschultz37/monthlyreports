@@ -10,6 +10,7 @@ using namespace std;
 void RG::ReportGenerator::importCSV(string inFileName){
     ifstream infile; infile.open(inFileName);
     string tmp = "";
+    fileLines.clear();
     while(getline(infile, tmp)){
         fileLines.push_back(tmp);
     }
@@ -273,8 +274,8 @@ RG::ReportGenerator::ReportGenerator(){
 }
 
 RG::ReportGenerator::~ReportGenerator(){
-    delete sheets->bloodreport; sheets->bloodreport = NULL;
-    delete sheets->tissuereport; sheets->tissuereport = NULL;
-    delete sheets->stoolreport; sheets->stoolreport = NULL;
-    delete sheets; sheets = NULL;
+    if(filetype == RG::filetypes::blood){ delete sheets->bloodreport; sheets->bloodreport = NULL;}
+    if(filetype == RG::filetypes::tissue){ delete sheets->tissuereport; sheets->tissuereport = NULL;}
+    if(filetype == RG::filetypes::stool){ delete sheets->stoolreport; sheets->stoolreport = NULL;}
+    //delete sheets; sheets = NULL;
 }

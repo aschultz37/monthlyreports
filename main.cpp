@@ -11,6 +11,7 @@ int sortmenu();
 int main(int argc, char **argv){
     bool initbit = true;
     bool runbit = true;
+    bool rerun = false;
     RG::ReportGenerator report = RG::ReportGenerator();
 
     int month = 0; int year = 0;
@@ -47,6 +48,10 @@ int main(int argc, char **argv){
         }
 
         if(option == 1){ //import
+            if(rerun){
+                report = RG::ReportGenerator();
+            }
+            rerun = true;
             int filetype = 0;
             while(filetype == 0){
                 filetype = filetypemenu();
