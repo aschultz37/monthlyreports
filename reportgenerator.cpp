@@ -142,17 +142,129 @@ void RG::ReportGenerator::sort(int option){
 }
 
 /*pnSort
+* Groups unique PN together; NOTE does not account for unique pt w/ same PN
 * Sorts alphabetically by PN
 */
 void RG::ReportGenerator::pnSort(){
     if(filetype == RG::filetypes::blood){
-
+        sheets->bloodreport->clearSort();
+        vector <string> pns;
+        for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
+            if(pns.size() > 0){ //to account for first iteration
+                bool found = false;
+                for(int j = 0; j < pns.size(); j++){
+                    if(pns.at(j).compare(sheets->bloodreport->getFilteredLines().at(i)->PN) == 0){ found = true;}
+                }
+                if(!found){ pns.push_back(sheets->bloodreport->getFilteredLines().at(i)->PN);}
+            }
+            else pns.push_back(sheets->bloodreport->getFilteredLines().at(i)->PN);
+        }
+        //create vector for each unique PN & fill w/ each matching entry
+        vector <vector<BR::EntryData*>> pnVecs(pns.size());
+        for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
+            for(int j = 0; j < pnVecs.size(); j++){
+                if(sheets->bloodreport->getFilteredLines().at(i)->PN.compare(pns.at(j)) == 0){
+                    pnVecs.at(j).push_back(sheets->bloodreport->getFilteredLines().at(i));
+                }
+            }
+        }
+        //push the vectors back into sortedLines
+        for(int i = 0; i < pnVecs.size(); i++){
+            for(int j = 0; j < pnVecs.at(i).size(); j++){
+                sheets->bloodreport->pushSortedLines(pnVecs.at(i).at(j));
+            }
+        }
+        //do selection sort on sortedLines
+        int min;
+        for(int i = 0; i < sheets->bloodreport->getSortedLines().size()-1; i++){
+            min = i;
+            for(int j = i+1; j < sheets->bloodreport->getSortedLines().size(); j++){
+                if(sheets->bloodreport->getSortedLines().at(j)->PN.compare(sheets->bloodreport->getSortedLines().at(min)->PN) < 0){
+                    min = j;
+                }
+                sheets->bloodreport->swapSortedLines(i,min);
+            }
+        }
     }
     else if(filetype == RG::filetypes::tissue){
-
+        sheets->tissuereport->clearSort();
+        vector <string> pns;
+        for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
+            if(pns.size() > 0){ //to account for first iteration
+                bool found = false;
+                for(int j = 0; j < pns.size(); j++){
+                    if(pns.at(j).compare(sheets->tissuereport->getFilteredLines().at(i)->PN) == 0){ found = true;}
+                }
+                if(!found){ pns.push_back(sheets->tissuereport->getFilteredLines().at(i)->PN);}
+            }
+            else pns.push_back(sheets->tissuereport->getFilteredLines().at(i)->PN);
+        }
+        //create vector for each unique PN & fill w/ each matching entry
+        vector <vector<TR::EntryData*>> pnVecs(pns.size());
+        for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
+            for(int j = 0; j < pnVecs.size(); j++){
+                if(sheets->tissuereport->getFilteredLines().at(i)->PN.compare(pns.at(j)) == 0){
+                    pnVecs.at(j).push_back(sheets->tissuereport->getFilteredLines().at(i));
+                }
+            }
+        }
+        //push the vectors back into sortedLines
+        for(int i = 0; i < pnVecs.size(); i++){
+            for(int j = 0; j < pnVecs.at(i).size(); j++){
+                sheets->tissuereport->pushSortedLines(pnVecs.at(i).at(j));
+            }
+        }
+        //do selection sort on sortedLines
+        int min;
+        for(int i = 0; i < sheets->tissuereport->getSortedLines().size()-1; i++){
+            min = i;
+            for(int j = i+1; j < sheets->tissuereport->getSortedLines().size(); j++){
+                if(sheets->tissuereport->getSortedLines().at(j)->PN.compare(sheets->tissuereport->getSortedLines().at(min)->PN) < 0){
+                    min = j;
+                }
+                sheets->tissuereport->swapSortedLines(i,min);
+            }
+        }
     }
     else if(filetype == RG::filetypes::stool){
-
+        sheets->stoolreport->clearSort();
+        vector <string> pns;
+        for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
+            if(pns.size() > 0){ //to account for first iteration
+                bool found = false;
+                for(int j = 0; j < pns.size(); j++){
+                    if(pns.at(j).compare(sheets->stoolreport->getFilteredLines().at(i)->PN) == 0){ found = true;}
+                }
+                if(!found){ pns.push_back(sheets->stoolreport->getFilteredLines().at(i)->PN);}
+            }
+            else pns.push_back(sheets->stoolreport->getFilteredLines().at(i)->PN);
+        }
+        //create vector for each unique PN & fill w/ each matching entry
+        vector <vector<SR::EntryData*>> pnVecs(pns.size());
+        for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
+            for(int j = 0; j < pnVecs.size(); j++){
+                if(sheets->stoolreport->getFilteredLines().at(i)->PN.compare(pns.at(j)) == 0){
+                    pnVecs.at(j).push_back(sheets->stoolreport->getFilteredLines().at(i));
+                }
+            }
+        }
+        //push the vectors back into sortedLines
+        for(int i = 0; i < pnVecs.size(); i++){
+            for(int j = 0; j < pnVecs.at(i).size(); j++){
+                sheets->stoolreport->pushSortedLines(pnVecs.at(i).at(j));
+            }
+        }
+        //do selection sort on sortedLines
+        int min;
+        for(int i = 0; i < sheets->stoolreport->getSortedLines().size()-1; i++){
+            min = i;
+            for(int j = i+1; j < sheets->stoolreport->getSortedLines().size(); j++){
+                if(sheets->stoolreport->getSortedLines().at(j)->PN.compare(sheets->stoolreport->getSortedLines().at(min)->PN) < 0){
+                    min = j;
+                }
+                sheets->stoolreport->swapSortedLines(i,min);
+            }
+        }
     }
 }
 
