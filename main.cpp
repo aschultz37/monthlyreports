@@ -9,8 +9,9 @@ int mainmenu();
 int filetypemenu();
 int sortmenu();
 
+//TODO: Add error checking for slight input deviations such as extra spaces in date
+
 int main(int argc, char **argv){
-    //bool initbit = true;
     bool runbit = true;
     bool rerun = false;
     RG::ReportGenerator report = RG::ReportGenerator();
