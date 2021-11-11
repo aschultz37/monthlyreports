@@ -10,7 +10,7 @@ int filetypemenu();
 int sortmenu();
 
 int main(int argc, char **argv){
-    bool initbit = true;
+    //bool initbit = true;
     bool runbit = true;
     bool rerun = false;
     RG::ReportGenerator report = RG::ReportGenerator();
@@ -147,7 +147,7 @@ int yearsetup(int &year){
 
 int mainmenu(){
     string userChoice = "";
-    printf("---MAIN MENU---\nPlease select an option:\n");
+    printf("\n\n---MAIN MENU---\nPlease select an option:\n");
     printf("1. Import File\n2. Sort File\n3. Display Results\n4. Write Results to File\n5. Set Month/Year\n6. Quit\n");
     printf("Choice: ");
     cin >> userChoice;
@@ -162,7 +162,7 @@ int mainmenu(){
 
 int filetypemenu(){
     string userChoice = "";
-    printf("-File Type Menu-\nPlease select an option:\n");
+    printf("\n-File Type Menu-\nPlease select an option:\n");
     printf("1. Blood\n2. Tissue\n3. Stool\n4. Back to Main Menu\n");
     printf("Choice: ");
     cin >> userChoice;
@@ -175,7 +175,7 @@ int filetypemenu(){
 
 int sortmenu(){
     string userChoice = "";
-    printf("-Sort Menu-\nPlease select an option:\n");
+    printf("\n-Sort Menu-\nPlease select an option:\n");
     printf("1. PN\n2. OncID\n3. Subject ID\n4. Timepoint\n5. Date\n6. Back to Main Menu\n");
     printf("Choice: ");
     cin >> userChoice;
