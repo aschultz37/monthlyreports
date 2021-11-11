@@ -16,27 +16,6 @@ int main(int argc, char **argv){
     RG::ReportGenerator report = RG::ReportGenerator();
 
     int month = 0; int year = 0;
-    /*while(initbit){
-        while(month == 0){
-            //month = monthsetup();
-            if(monthsetup(month) == -1){
-                printf("Invalid option, please try again.\n");
-                month = 0;
-            }
-        }
-        while(year == 0){
-            //year = yearsetup();
-            if(yearsetup(year) == -1){
-                printf("Invalid option, please try again.\n");
-                year = 0;
-            }
-        }
-        string ynbit = "";
-        printf("You selected %d-%d. Is this correct? (y/n): ", month, year);
-        cin >> ynbit;
-        if(ynbit.compare("y") == 0 || ynbit.compare("Y") == 0) initbit = false;
-        else{ printf("OK, try again.\n"); month = 0; year = 0;}
-    }*/
     setupMonthYear(month, year);
 
     while(runbit){
@@ -95,7 +74,11 @@ int main(int argc, char **argv){
             report.writeReport(outputfile);
         }
         else if(option == 5){ //set month/year
+            month = year = 0;
             setupMonthYear(month, year);
+            report.filterMonth(month, year);
+            printf("Filtered by %d-%d.\n", month, year);
+            report.copytoSort(); //need to do this in case want to display/write without sorting
         }
         else if(option == 6){ //quit
             printf("Program closing.\n");

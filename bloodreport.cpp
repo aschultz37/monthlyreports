@@ -33,6 +33,7 @@ void BR::BloodReport::importParser(const string lineIn){
 * Returns the number of entries in that month/year
 */
 int BR::BloodReport::bloodMonthFilter(int month, int year){
+    clearFiltered();
     int counter = 0;
     for(int i = 0; i < parsedLines.size(); i++){
         if(extractMonth(parsedLines.at(i)->date) == month && extractYear(parsedLines.at(i)->date) == year){
@@ -57,6 +58,13 @@ void BR::BloodReport::copytoSortBlood(){
 */
 void BR::BloodReport::clearSort(){
     sortedLines.clear();
+}
+
+/*clearFiltered()
+* Clears the filteredLines vector
+*/
+void BR::BloodReport::clearFiltered(){
+    filteredLines.clear();
 }
 
 /*swapSortedLines

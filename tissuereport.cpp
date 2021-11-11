@@ -34,6 +34,7 @@ void TR::TissueReport::importParser(string lineIn){
 * Returns the number of entries in that month/year
 */
 int TR::TissueReport::tissueMonthFilter(int month, int year){
+    clearFiltered();
     int counter = 0;
     for(int i = 0; i < parsedLines.size(); i++){
         if(extractMonth(parsedLines.at(i)->date) == month && extractYear(parsedLines.at(i)->date) == year){
@@ -58,6 +59,13 @@ void TR::TissueReport::copytoSortTissue(){
 */
 void TR::TissueReport::clearSort(){
     sortedLines.clear();
+}
+
+/*clearFiltered()
+* Clears the filteredLines vector
+*/
+void TR::TissueReport::clearFiltered(){
+    filteredLines.clear();
 }
 
 /*swapSortedLines

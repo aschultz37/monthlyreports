@@ -54,12 +54,15 @@ int RG::ReportGenerator::filterMonth(int month, int year){
 */
 void RG::ReportGenerator::copytoSort(){
     if(filetype == RG::filetypes::blood){
+        sheets->bloodreport->clearSort();
         sheets->bloodreport->copytoSortBlood();
     }
     else if(filetype == RG::filetypes::tissue){
+        sheets->tissuereport->clearSort();
         sheets->tissuereport->copytoSortTissue();
     }
     else if(filetype == RG::filetypes::stool){
+        sheets->stoolreport->clearSort();
         sheets->stoolreport->copytoSortStool();
     }
 }
