@@ -1,4 +1,5 @@
 #include "tissuereport.hpp"
+#include <sstream>
 
 using namespace std;
 
@@ -8,34 +9,22 @@ using namespace std;
 void TR::TissueReport::importParser(string lineIn){
     TR::EntryData* tempentry = new TR::EntryData;
     char delimiter = ','; //for a blood report, there are 7 fields separated by 6 commas
-    short PNbeg, PNend, SAbeg, SAend, Vbeg, Vend, Oncbeg, Oncend, SIDbeg, SIDend, STbeg, STend, BTbeg, BTend, Datebeg, Dateend;
-    //determine indices for substrings
-    int i = 0;
-    PNbeg = 0;
-    while(lineIn[i] != delimiter){ i++;}
-    PNend = i; SAbeg = ++i;
-    while(lineIn[i] != delimiter){ i++;}
-    SAend = i; Vbeg = ++i;
-    while(lineIn[i] != delimiter){ i++;}
-    Vend = i; Oncbeg = ++i;
-    while(lineIn[i] != delimiter){ i++;}
-    Oncend = i; SIDbeg = ++i;
-    while(lineIn[i] != delimiter){ i++;}
-    SIDend = i; STbeg = ++i;
-    while(lineIn[i] != delimiter){ i++;}
-    STend = i; BTbeg = ++i;
-    while(lineIn[i] != delimiter){ i++;}
-    BTend = i; Datebeg = ++i;
-    Dateend = lineIn.length();
+    vector <string> ar;
+    stringstream inlinestream(lineIn);
+    string token;
+
+    while(getline(inlinestream, token, delimiter)){
+        ar.push_back(token);
+    }
     //set struct fields to each substring
-    tempentry->PN = lineIn.substr(PNbeg, PNend);
-    tempentry->studyArm = lineIn.substr(SAbeg, SAend);
-    tempentry->visit = lineIn.substr(Vbeg, Vend);
-    tempentry->oncID = lineIn.substr(Oncbeg, Oncend);
-    tempentry->subjectID = lineIn.substr(SIDbeg, SIDend);
-    tempentry->sampleType = lineIn.substr(STbeg, STend);
-    tempentry->biopsyType = lineIn.substr(BTbeg, BTend);
-    tempentry->date = lineIn.substr(Datebeg, Dateend);
+    tempentry->PN = ar[0];
+    tempentry->studyArm = ar[1];
+    tempentry->visit = ar[2];
+    tempentry->oncID = ar[3];
+    tempentry->subjectID = ar[4];
+    tempentry->sampleType = ar[5];
+    tempentry->biopsyType = ar[6];
+    tempentry->date = ar[7];
     //store entry in vector
     parsedLines.push_back(tempentry);
 }

@@ -1,38 +1,29 @@
 #include "bloodreport.hpp"
+#include <sstream>
 
 using namespace std;
 
 /*importParser
 * Parses a line of the csv file into fields of EntryData struct
 */
-void BR::BloodReport::importParser(string lineIn){
+void BR::BloodReport::importParser(const string lineIn){
     BR::EntryData* tempentry = new BR::EntryData;
-    char delimiter = ','; //for a blood report, there are 7 fields separated by 6 commas
-    short PNbeg, PNend, SAbeg, SAend, Vbeg, Vend, Oncbeg, Oncend, SIDbeg, SIDend, Recbeg, Recend, Datebeg, Dateend;
-    //determine indices for substrings
-    int i = 0;
-    PNbeg = 0;
-    while(lineIn[i] != delimiter){ i++;}
-    PNend = i; SAbeg = ++i;
-    while(lineIn[i] != delimiter){ i++;}
-    SAend = i; Vbeg = ++i;
-    while(lineIn[i] != delimiter){ i++;}
-    Vend = i; Oncbeg = ++i;
-    while(lineIn[i] != delimiter){ i++;}
-    Oncend = i; SIDbeg = ++i;
-    while(lineIn[i] != delimiter){ i++;}
-    SIDend = i; Recbeg = ++i;
-    while(lineIn[i] != delimiter){ i++;}
-    Recend = i; Datebeg = ++i;
-    Dateend = lineIn.length();
+    char delimiter = ',';
+    vector <string> ar;
+    stringstream inlinestream(lineIn);
+    string token;
+
+    while(getline(inlinestream, token, delimiter)){
+        ar.push_back(token);
+    }
     //set struct fields to each substring
-    tempentry->PN = lineIn.substr(PNbeg, PNend);
-    tempentry->studyArm = lineIn.substr(SAbeg, SAend);
-    tempentry->visit = lineIn.substr(Vbeg, Vend);
-    tempentry->oncID = lineIn.substr(Oncbeg, Oncend);
-    tempentry->subjectID = lineIn.substr(SIDbeg, SIDend);
-    tempentry->received = lineIn.substr(Recbeg, Recend);
-    tempentry->date = lineIn.substr(Datebeg, Dateend);
+    tempentry->PN = ar[0];
+    tempentry->studyArm = ar[1];
+    tempentry->visit = ar[2];
+    tempentry->oncID = ar[3];
+    tempentry->subjectID = ar[4];
+    tempentry->received = ar[5];
+    tempentry->date = ar[6];
     //store entry in vector
     parsedLines.push_back(tempentry);
 }

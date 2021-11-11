@@ -55,7 +55,14 @@ printf("Blood\n");
 */
 void RG::ReportGenerator::displayReport(){
     if(filetype == RG::filetypes::blood){
+        printf("PN\tArm\tVisit\tOncID\tStudyID\tRec.\tDate\n");
         for(int i = 0; i < sheets->bloodreport->getSortedLines().size(); i++){
+            cout << sheets->bloodreport->getSortedLines().at(i)->PN << '\t';
+            cout << sheets->bloodreport->getSortedLines().at(i)->studyArm << '\t';
+            cout << sheets->bloodreport->getSortedLines().at(i)->visit << '\t';
+            cout << sheets->bloodreport->getSortedLines().at(i)->oncID << '\t';
+            cout << sheets->bloodreport->getSortedLines().at(i)->subjectID << '\t';
+            cout << sheets->bloodreport->getSortedLines().at(i)->received << '\t';
             cout << sheets->bloodreport->getSortedLines().at(i)->date << '\n';
         }
     }
