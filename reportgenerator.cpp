@@ -161,13 +161,58 @@ void RG::ReportGenerator::pnSort(){
 */
 void RG::ReportGenerator::oncSort(){
     if(filetype == RG::filetypes::blood){
-
+        sheets->bloodreport->clearSort();
+        //copy filteredLines into sortedLines
+        for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
+            sheets->bloodreport->pushSortedLines(sheets->bloodreport->getFilteredLines().at(i));
+        }
+        //do selection sort on sortedLines
+        int min;
+        for(int i = 0; i < sheets->bloodreport->getSortedLines().size()-1; i++){
+            min = i;
+            for(int j = i+1; j < sheets->bloodreport->getSortedLines().size(); j++){
+                if(stoi(sheets->bloodreport->getSortedLines().at(j)->oncID) < stoi(sheets->bloodreport->getSortedLines().at(min)->oncID)){
+                    min = j;
+                }
+                sheets->bloodreport->swapSortedLines(i,min);
+            }
+        }
     }
     else if(filetype == RG::filetypes::tissue){
-
+        sheets->tissuereport->clearSort();
+        //copy filteredLines into sortedLines
+        for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
+            sheets->tissuereport->pushSortedLines(sheets->tissuereport->getFilteredLines().at(i));
+        }
+        //do selection sort on sortedLines
+        int min;
+        for(int i = 0; i < sheets->tissuereport->getSortedLines().size()-1; i++){
+            min = i;
+            for(int j = i+1; j < sheets->tissuereport->getSortedLines().size(); j++){
+                if(stoi(sheets->tissuereport->getSortedLines().at(j)->oncID) < stoi(sheets->tissuereport->getSortedLines().at(min)->oncID)){
+                    min = j;
+                }
+                sheets->tissuereport->swapSortedLines(i,min);
+            }
+        }
     }
     else if(filetype == RG::filetypes::stool){
-
+        sheets->stoolreport->clearSort();
+        //copy filteredLines into sortedLines
+        for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
+            sheets->stoolreport->pushSortedLines(sheets->stoolreport->getFilteredLines().at(i));
+        }
+        //do selection sort on sortedLines
+        int min;
+        for(int i = 0; i < sheets->stoolreport->getSortedLines().size()-1; i++){
+            min = i;
+            for(int j = i+1; j < sheets->stoolreport->getSortedLines().size(); j++){
+                if(stoi(sheets->stoolreport->getSortedLines().at(j)->oncID) < stoi(sheets->stoolreport->getSortedLines().at(min)->oncID)){
+                    min = j;
+                }
+                sheets->stoolreport->swapSortedLines(i,min);
+            }
+        }
     }
 }
 
