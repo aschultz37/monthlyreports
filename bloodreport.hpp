@@ -25,6 +25,7 @@ namespace BR{
             void importParser(std::string lineIn);
             int bloodMonthFilter(int month, int year);
             void copytoSortBlood();
+            void clearSort();
             void swapSortedLines(int index1, int index2);
         private:
             std::vector <BR::EntryData*> parsedLines;

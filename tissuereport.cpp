@@ -49,8 +49,15 @@ int TR::TissueReport::tissueMonthFilter(int month, int year){
 */
 void TR::TissueReport::copytoSortTissue(){
     for(int i = 0; i < filteredLines.size(); i++){
-        sortedLines.at(i) = filteredLines.at(i);
+        sortedLines.push_back(filteredLines.at(i));
     }
+}
+
+/*clearSort()
+* Clears the sortLines vector
+*/
+void TR::TissueReport::clearSort(){
+    sortedLines.clear();
 }
 
 /*swapSortedLines

@@ -27,6 +27,7 @@ namespace RG{
             
             void importCSV(std::string inFileName);
             int filterMonth(int month, int year);
+            void copytoSort();
             void displayReport();
             void writeReport(std::string outFileName);
             void sort(int option);
@@ -37,7 +38,6 @@ namespace RG{
             RG::ReportSheets* sheets;
             int filetype;
             
-            void copytoSort();
             void pnSort();
             void oncSort();
             void subjectSort();

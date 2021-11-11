@@ -48,6 +48,21 @@ int RG::ReportGenerator::filterMonth(int month, int year){
     return -1;
 }
 
+/*copytoSort
+* Copies filteredLines to sortedLines
+*/
+void RG::ReportGenerator::copytoSort(){
+    if(filetype == RG::filetypes::blood){
+        sheets->bloodreport->copytoSortBlood();
+    }
+    else if(filetype == RG::filetypes::tissue){
+        sheets->tissuereport->copytoSortTissue();
+    }
+    else if(filetype == RG::filetypes::stool){
+        sheets->stoolreport->copytoSortStool();
+    }
+}
+
 /*displayReport
 * Prints resulting/sorted list to terminal
 */
@@ -122,21 +137,6 @@ void RG::ReportGenerator::sort(int option){
     }
 }
 
-/*copytoSort
-* Copies filteredLines to sortedLines
-*/
-void RG::ReportGenerator::copytoSort(){
-    if(filetype == RG::filetypes::blood){
-        sheets->bloodreport->copytoSortBlood();
-    }
-    else if(filetype == RG::filetypes::tissue){
-        sheets->tissuereport->copytoSortTissue();
-    }
-    else if(filetype == RG::filetypes::stool){
-        sheets->stoolreport->copytoSortStool();
-    }
-}
-
 /*pnSort
 * Sorts alphabetically by PN
 */
@@ -169,6 +169,7 @@ void RG::ReportGenerator::timeSort(){
 */
 void RG::ReportGenerator::dateSort(){
     if(filetype == RG::filetypes::blood){
+        sheets->bloodreport->clearSort();
         //copy filteredLines into sortedLines
         for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
             sheets->bloodreport->pushSortedLines(sheets->bloodreport->getFilteredLines().at(i));
@@ -186,6 +187,7 @@ void RG::ReportGenerator::dateSort(){
         }
     }
     else if(filetype == RG::filetypes::tissue){
+        sheets->tissuereport->clearSort();
         //copy filteredLines into sortedLines
         for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
             sheets->tissuereport->pushSortedLines(sheets->tissuereport->getFilteredLines().at(i));
@@ -203,6 +205,7 @@ void RG::ReportGenerator::dateSort(){
         }
     }
     else if(filetype == RG::filetypes::stool){
+        sheets->stoolreport->clearSort();
         //copy filteredLines into sortedLines
         for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
             sheets->stoolreport->pushSortedLines(sheets->stoolreport->getFilteredLines().at(i));

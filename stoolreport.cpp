@@ -49,8 +49,15 @@ int SR::StoolReport::stoolMonthFilter(int month, int year){
 */
 void SR::StoolReport::copytoSortStool(){
     for(int i = 0; i < filteredLines.size(); i++){
-        sortedLines.at(i) = filteredLines.at(i);
+        sortedLines.push_back(filteredLines.at(i));
     }
+}
+
+/*clearSort()
+* Clears the sortLines vector
+*/
+void SR::StoolReport::clearSort(){
+    sortedLines.clear();
 }
 
 /*swapSortedLines

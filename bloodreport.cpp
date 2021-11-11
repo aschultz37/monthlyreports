@@ -48,8 +48,15 @@ int BR::BloodReport::bloodMonthFilter(int month, int year){
 */
 void BR::BloodReport::copytoSortBlood(){
     for(int i = 0; i < filteredLines.size(); i++){
-        sortedLines.at(i) = filteredLines.at(i);
+        sortedLines.push_back(filteredLines.at(i));
     }
+}
+
+/*clearSort()
+* Clears the sortLines vector
+*/
+void BR::BloodReport::clearSort(){
+    sortedLines.clear();
 }
 
 /*swapSortedLines

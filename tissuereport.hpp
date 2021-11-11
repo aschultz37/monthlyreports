@@ -26,6 +26,7 @@ namespace TR{
             void importParser(std::string lineIn);
             int tissueMonthFilter(int month, int year);
             void copytoSortTissue();
+            void clearSort();
             void swapSortedLines(int index1, int index2);
         private:
             std::vector <TR::EntryData*> parsedLines;
