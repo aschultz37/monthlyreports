@@ -145,25 +145,95 @@ void RG::ReportGenerator::sort(int option){
 * Sorts alphabetically by PN
 */
 void RG::ReportGenerator::pnSort(){
+    if(filetype == RG::filetypes::blood){
 
+    }
+    else if(filetype == RG::filetypes::tissue){
+
+    }
+    else if(filetype == RG::filetypes::stool){
+
+    }
 }
 
 /*oncSort
 * Sorts numerically by Onc ID
 */
 void RG::ReportGenerator::oncSort(){
+    if(filetype == RG::filetypes::blood){
 
+    }
+    else if(filetype == RG::filetypes::tissue){
+
+    }
+    else if(filetype == RG::filetypes::stool){
+
+    }
 }
 
 /*subjectSort
 * Sorts numerically by Subject ID
 */
 void RG::ReportGenerator::subjectSort(){
-
+    if(filetype == RG::filetypes::blood){
+        sheets->bloodreport->clearSort();
+        //copy filteredLines into sortedLines
+        for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
+            sheets->bloodreport->pushSortedLines(sheets->bloodreport->getFilteredLines().at(i));
+        }
+        //do selection sort on sortedLines
+        int min;
+        for(int i = 0; i < sheets->bloodreport->getSortedLines().size()-1; i++){
+            min = i;
+            for(int j = i+1; j < sheets->bloodreport->getSortedLines().size(); j++){
+                if(stoi(sheets->bloodreport->getSortedLines().at(j)->subjectID) < stoi(sheets->bloodreport->getSortedLines().at(min)->subjectID)){
+                    min = j;
+                }
+                sheets->bloodreport->swapSortedLines(i,min);
+            }
+        }
+    }
+    else if(filetype == RG::filetypes::tissue){
+        sheets->tissuereport->clearSort();
+        //copy filteredLines into sortedLines
+        for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
+            sheets->tissuereport->pushSortedLines(sheets->tissuereport->getFilteredLines().at(i));
+        }
+        //do selection sort on sortedLines
+        int min;
+        for(int i = 0; i < sheets->tissuereport->getSortedLines().size()-1; i++){
+            min = i;
+            for(int j = i+1; j < sheets->tissuereport->getSortedLines().size(); j++){
+                if(stoi(sheets->tissuereport->getSortedLines().at(j)->subjectID) < stoi(sheets->tissuereport->getSortedLines().at(min)->subjectID)){
+                    min = j;
+                }
+                sheets->tissuereport->swapSortedLines(i,min);
+            }
+        }
+    }
+    else if(filetype == RG::filetypes::stool){
+        sheets->stoolreport->clearSort();
+        //copy filteredLines into sortedLines
+        for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
+            sheets->stoolreport->pushSortedLines(sheets->stoolreport->getFilteredLines().at(i));
+        }
+        //do selection sort on sortedLines
+        int min;
+        for(int i = 0; i < sheets->stoolreport->getSortedLines().size()-1; i++){
+            min = i;
+            for(int j = i+1; j < sheets->stoolreport->getSortedLines().size(); j++){
+                if(stoi(sheets->stoolreport->getSortedLines().at(j)->subjectID) < stoi(sheets->stoolreport->getSortedLines().at(min)->subjectID)){
+                    min = j;
+                }
+                sheets->stoolreport->swapSortedLines(i,min);
+            }
+        }
+    }
 }
 
 /*timeSort
-* Sorts from lowest timepoint to highest timepoint
+* Groups unique timepoints together
+* TODO: Sorts from lowest timepoint to highest timepoint; need to have list of priorities since some similar
 */
 void RG::ReportGenerator::timeSort(){
     if(filetype == RG::filetypes::blood){
