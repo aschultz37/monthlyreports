@@ -43,6 +43,15 @@ int BR::BloodReport::bloodMonthFilter(int month, int year){
     return counter;
 }
 
+/*copytoSortBlood
+* Copies filteredLines to sortedLines
+*/
+void BR::BloodReport::copytoSortBlood(){
+    for(int i = 0; i < filteredLines.size(); i++){
+        sortedLines.at(i) = filteredLines.at(i);
+    }
+}
+
 /*swapSortedLines
 * Swaps the EntryData* at two indices in sortedLines
 */

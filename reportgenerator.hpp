@@ -37,6 +37,7 @@ namespace RG{
             RG::ReportSheets* sheets;
             int filetype;
             
+            void copytoSort();
             void pnSort();
             void oncSort();
             void subjectSort();

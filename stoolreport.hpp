@@ -25,6 +25,7 @@ namespace SR{
 
             void importParser(std::string lineIn);
             int stoolMonthFilter(int month, int year);
+            void copytoSortStool();
             void swapSortedLines(int index1, int index2);
         private:
             std::vector <SR::EntryData*> parsedLines;

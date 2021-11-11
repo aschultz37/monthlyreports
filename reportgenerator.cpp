@@ -36,9 +36,7 @@ void RG::ReportGenerator::importCSV(string inFileName){
 * Returns total # entries found
 */
 int RG::ReportGenerator::filterMonth(int month, int year){
-printf("Filtering by month\n");
     if(filetype == RG::filetypes::blood){
-printf("Blood\n");
         return sheets->bloodreport->bloodMonthFilter(month, year);
     }
     else if(filetype == RG::filetypes::tissue){
@@ -121,6 +119,21 @@ void RG::ReportGenerator::sort(int option){
         case 5:
             dateSort();
             break;
+    }
+}
+
+/*copytoSort
+* Copies filteredLines to sortedLines
+*/
+void RG::ReportGenerator::copytoSort(){
+    if(filetype == RG::filetypes::blood){
+        sheets->bloodreport->copytoSortBlood();
+    }
+    else if(filetype == RG::filetypes::tissue){
+        sheets->tissuereport->copytoSortTissue();
+    }
+    else if(filetype == RG::filetypes::stool){
+        sheets->stoolreport->copytoSortStool();
     }
 }
 

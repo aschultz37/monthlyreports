@@ -44,6 +44,15 @@ int TR::TissueReport::tissueMonthFilter(int month, int year){
     return counter;
 }
 
+/*copytoSortTissue
+* Copies filteredLines to sortedLines
+*/
+void TR::TissueReport::copytoSortTissue(){
+    for(int i = 0; i < filteredLines.size(); i++){
+        sortedLines.at(i) = filteredLines.at(i);
+    }
+}
+
 /*swapSortedLines
 * Swaps the EntryData* at two indices in sortedLines
 */

@@ -65,6 +65,7 @@ int main(int argc, char **argv){
                 //now filter by month
                 report.filterMonth(month, year);
                 printf("Filtered by %d-%d.\n", month, year);
+                report.copytoSort(); //need to do this in case want to display/write without sorting
             }    
         }
         else if(option == 2){ //sort

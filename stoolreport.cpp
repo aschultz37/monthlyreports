@@ -44,6 +44,15 @@ int SR::StoolReport::stoolMonthFilter(int month, int year){
     return counter;
 }
 
+/*copytoSortStool
+* Copies filteredLines to sortedLines
+*/
+void SR::StoolReport::copytoSortStool(){
+    for(int i = 0; i < filteredLines.size(); i++){
+        sortedLines.at(i) = filteredLines.at(i);
+    }
+}
+
 /*swapSortedLines
 * Swaps the EntryData* at two indices in sortedLines
 */
