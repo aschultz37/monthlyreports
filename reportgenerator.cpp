@@ -590,6 +590,25 @@ int RG::ReportGenerator::dateCompare(string date1, string date2){
     return 0;
 }
 
+/*spacelessHash
+* Computes a value based only on alphanumeric characters in a string (i.e. ignores spaces, special chars)
+* For example, " Arm A" would return same value as "Arm A" or "Arm  A "
+*/
+int spacelessHash(string input){
+    int tmp = 0;
+    int KEY_SIZE = 37; //1 space, 26 letters, 10 digits (special char ignored)
+    char key[KEY_SIZE] = {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+                    't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    for(int i = 0; i < input.length(); i++){
+        for(int j = 0; j < KEY_SIZE; j++){
+            if(input[i] == key[j]){
+                tmp += j; //note that space is in index 0 so would not count
+            }
+        }
+    }
+    return tmp;
+}
+
 RG::ReportGenerator::ReportGenerator(){
     sheets = new RG::ReportSheets;
     sheets->bloodreport = new BR::BloodReport;

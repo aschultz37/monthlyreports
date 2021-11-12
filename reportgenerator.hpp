@@ -44,8 +44,6 @@ namespace RG{
             void timeSort();
             void dateSort();
             int dateCompare(std::string date1, std::string date2);
-            void bloodSwap(BR::EntryData &entry1, BR::EntryData &entry2);
-            void tissueSwap(TR::EntryData &entry1, TR::EntryData &entry2);
-            void stoolSwap(SR::EntryData &entry1, SR::EntryData &entry2);
+            int spacelessHash(std::string input);
     };
 }
