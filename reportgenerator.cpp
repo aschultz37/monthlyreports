@@ -192,7 +192,8 @@ void RG::ReportGenerator::pnSort(){
             if(pns.size() > 0){ //to account for first iteration
                 bool found = false;
                 for(int j = 0; j < pns.size(); j++){
-                    if(pns.at(j).compare(sheets->bloodreport->getFilteredLines().at(i)->PN) == 0){ found = true;}
+                    //if(pns.at(j).compare(sheets->bloodreport->getFilteredLines().at(i)->PN) == 0){ found = true;}
+                    if(spacelessHash(sheets->bloodreport->getFilteredLines().at(i)->PN) == spacelessHash(pns.at(j))){ found = true;}
                 }
                 if(!found){ pns.push_back(sheets->bloodreport->getFilteredLines().at(i)->PN);}
             }
@@ -202,7 +203,8 @@ void RG::ReportGenerator::pnSort(){
         vector <vector<BR::EntryData*>> pnVecs(pns.size());
         for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
             for(int j = 0; j < pnVecs.size(); j++){
-                if(sheets->bloodreport->getFilteredLines().at(i)->PN.compare(pns.at(j)) == 0){
+                //if(sheets->bloodreport->getFilteredLines().at(i)->PN.compare(pns.at(j)) == 0){
+                if(spacelessHash(sheets->bloodreport->getFilteredLines().at(i)->PN) == spacelessHash(pns.at(j))){
                     pnVecs.at(j).push_back(sheets->bloodreport->getFilteredLines().at(i));
                 }
             }
@@ -218,6 +220,7 @@ void RG::ReportGenerator::pnSort(){
         for(int i = 0; i < sheets->bloodreport->getSortedLines().size()-1; i++){
             min = i;
             for(int j = i+1; j < sheets->bloodreport->getSortedLines().size(); j++){
+                //TODO Figure out how to use hash w/ selection sort? or just parse to remove spaces/special chars
                 if(sheets->bloodreport->getSortedLines().at(j)->PN.compare(sheets->bloodreport->getSortedLines().at(min)->PN) < 0){
                     min = j;
                 }
@@ -232,7 +235,8 @@ void RG::ReportGenerator::pnSort(){
             if(pns.size() > 0){ //to account for first iteration
                 bool found = false;
                 for(int j = 0; j < pns.size(); j++){
-                    if(pns.at(j).compare(sheets->tissuereport->getFilteredLines().at(i)->PN) == 0){ found = true;}
+                    //if(pns.at(j).compare(sheets->tissuereport->getFilteredLines().at(i)->PN) == 0){ found = true;}
+                    if(spacelessHash(sheets->tissuereport->getFilteredLines().at(i)->PN) == spacelessHash(pns.at(j))){ found = true;}
                 }
                 if(!found){ pns.push_back(sheets->tissuereport->getFilteredLines().at(i)->PN);}
             }
@@ -242,7 +246,8 @@ void RG::ReportGenerator::pnSort(){
         vector <vector<TR::EntryData*>> pnVecs(pns.size());
         for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
             for(int j = 0; j < pnVecs.size(); j++){
-                if(sheets->tissuereport->getFilteredLines().at(i)->PN.compare(pns.at(j)) == 0){
+                //if(sheets->tissuereport->getFilteredLines().at(i)->PN.compare(pns.at(j)) == 0){
+                if(spacelessHash(sheets->tissuereport->getFilteredLines().at(i)->PN) == spacelessHash(pns.at(j))){
                     pnVecs.at(j).push_back(sheets->tissuereport->getFilteredLines().at(i));
                 }
             }
@@ -272,7 +277,8 @@ void RG::ReportGenerator::pnSort(){
             if(pns.size() > 0){ //to account for first iteration
                 bool found = false;
                 for(int j = 0; j < pns.size(); j++){
-                    if(pns.at(j).compare(sheets->stoolreport->getFilteredLines().at(i)->PN) == 0){ found = true;}
+                    //if(pns.at(j).compare(sheets->stoolreport->getFilteredLines().at(i)->PN) == 0){ found = true;}
+                    if(spacelessHash(sheets->stoolreport->getFilteredLines().at(i)->PN) == spacelessHash(pns.at(j))){ found = true;}
                 }
                 if(!found){ pns.push_back(sheets->stoolreport->getFilteredLines().at(i)->PN);}
             }
@@ -282,7 +288,8 @@ void RG::ReportGenerator::pnSort(){
         vector <vector<SR::EntryData*>> pnVecs(pns.size());
         for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
             for(int j = 0; j < pnVecs.size(); j++){
-                if(sheets->stoolreport->getFilteredLines().at(i)->PN.compare(pns.at(j)) == 0){
+                //if(sheets->stoolreport->getFilteredLines().at(i)->PN.compare(pns.at(j)) == 0){
+                if(spacelessHash(sheets->stoolreport->getFilteredLines().at(i)->PN) == spacelessHash(pns.at(j))){
                     pnVecs.at(j).push_back(sheets->stoolreport->getFilteredLines().at(i));
                 }
             }
