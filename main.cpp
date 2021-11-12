@@ -8,6 +8,7 @@ int yearsetup(int &year);
 int mainmenu();
 int filetypemenu();
 int sortmenu();
+void writefile(string &filename);
 
 //TODO: Add error checking for slight input deviations such as extra spaces in date
 
@@ -70,7 +71,8 @@ int main(int argc, char **argv){
             report.displayReport();
         }
         else if(option == 4){ //write
-            string outputfile = "monthly_report.txt";
+            string outputfile = "monthly_report.txt"; //default output location
+            writefile(outputfile);
             cout << "The output will be written to " << outputfile << ".\n";
             report.writeReport(outputfile);
         }
@@ -187,4 +189,27 @@ int sortmenu(){
     if(userChoice.compare("5") == 0) return 5;
     if(userChoice.compare("6") == 0) return 6;
     return -1;
+}
+
+void writefile(string &filename){
+    cout << "Default location: " << filename << endl;
+    bool setbit = true;
+    while(setbit){
+        string userin = "";
+        printf("Would you like to change the file location? (y/n): ");
+        cin >> userin;
+        if(userin.compare("y") == 0 || userin.compare("Y") == 0){
+            string filenamein = "";
+            printf("Please enter the output file name (ending in .txt): ");
+            cin >> filenamein;
+            string checkin = "";
+            cout << "You entered " << filenamein << ", is that correct? (y/n): ";
+            cin >> checkin;
+            if(checkin.compare("y") == 0 || checkin.compare("Y") == 0){ 
+                setbit = false; filename = filenamein;
+            }
+            else{ cout << "OK, try again.\n";}
+        }
+        else setbit = false;
+    }
 }
