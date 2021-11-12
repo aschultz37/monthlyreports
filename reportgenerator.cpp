@@ -84,13 +84,29 @@ void RG::ReportGenerator::displayReport(){
         }
     }
     else if(filetype == RG::filetypes::tissue){
+        printf("PN\tArm\tVisit\tOncID\tStudyID\tSample\tBiopsy\tDate\n");
         for(int i = 0; i < sheets->tissuereport->getSortedLines().size(); i++){
-            cout << sheets->tissuereport->getSortedLines().at(i) << '\n';
+            cout << sheets->tissuereport->getSortedLines().at(i)->PN << '\n';
+            cout << sheets->tissuereport->getSortedLines().at(i)->studyArm << '\t';
+            cout << sheets->tissuereport->getSortedLines().at(i)->visit << '\t';
+            cout << sheets->tissuereport->getSortedLines().at(i)->oncID << '\t';
+            cout << sheets->tissuereport->getSortedLines().at(i)->subjectID << '\t';
+            cout << sheets->tissuereport->getSortedLines().at(i)->sampleType << '\t';
+            cout << sheets->tissuereport->getSortedLines().at(i)->biopsyType << '\t';
+            cout << sheets->tissuereport->getSortedLines().at(i)->date << '\n';
         }
     }
     else if(filetype == RG::filetypes::stool){
+        printf("PN\tArm\tVisit\tOncID\tStudyID\tStoolID\tRec.\tDate\n");
         for(int i = 0; i < sheets->stoolreport->getSortedLines().size(); i++){
-            cout << sheets->stoolreport->getSortedLines().at(i) << '\n';
+            cout << sheets->stoolreport->getSortedLines().at(i)->PN << '\t';
+            cout << sheets->stoolreport->getSortedLines().at(i)->studyArm << '\t';
+            cout << sheets->stoolreport->getSortedLines().at(i)->visit << '\t';
+            cout << sheets->stoolreport->getSortedLines().at(i)->oncID << '\t';
+            cout << sheets->stoolreport->getSortedLines().at(i)->subjectID << '\t';
+            cout << sheets->stoolreport->getSortedLines().at(i)->stoolID << '\t';
+            cout << sheets->stoolreport->getSortedLines().at(i)->received << '\t';
+            cout << sheets->stoolreport->getSortedLines().at(i)->date << '\n';
         }
     }
 }
@@ -101,6 +117,7 @@ void RG::ReportGenerator::displayReport(){
 void RG::ReportGenerator::writeReport(std::string outFileName){
     ofstream outfile; outfile.open(outFileName);
     if(filetype == RG::filetypes::blood){
+        outfile << "PN\tArm\tVisit\tOncID\tStudyID\tRec.\tDate\n";
         for(int i = 0; i < sheets->bloodreport->getSortedLines().size(); i++){
             outfile << sheets->bloodreport->getSortedLines().at(i)->PN << '\t';
             outfile << sheets->bloodreport->getSortedLines().at(i)->studyArm << '\t';
@@ -112,13 +129,29 @@ void RG::ReportGenerator::writeReport(std::string outFileName){
         }
     }
     else if(filetype == RG::filetypes::tissue){
+        outfile << "PN\tArm\tVisit\tOncID\tStudyID\tSample\tBiopsy\tDate\n";
         for(int i = 0; i < sheets->tissuereport->getSortedLines().size(); i++){
-            outfile << sheets->tissuereport->getSortedLines().at(i) << '\n';
+            outfile << sheets->tissuereport->getSortedLines().at(i)->PN << '\n';
+            outfile << sheets->tissuereport->getSortedLines().at(i)->studyArm << '\t';
+            outfile << sheets->tissuereport->getSortedLines().at(i)->visit << '\t';
+            outfile << sheets->tissuereport->getSortedLines().at(i)->oncID << '\t';
+            outfile << sheets->tissuereport->getSortedLines().at(i)->subjectID << '\t';
+            outfile << sheets->tissuereport->getSortedLines().at(i)->sampleType << '\t';
+            outfile << sheets->tissuereport->getSortedLines().at(i)->biopsyType << '\t';
+            outfile << sheets->tissuereport->getSortedLines().at(i)->date << '\n';
         }
     }
     else if(filetype == RG::filetypes::stool){
+        outfile << "PN\tArm\tVisit\tOncID\tStudyID\tStoolID\tRec.\tDate\n";
         for(int i = 0; i < sheets->stoolreport->getSortedLines().size(); i++){
-            outfile << sheets->stoolreport->getSortedLines().at(i) << '\n';
+            outfile << sheets->stoolreport->getSortedLines().at(i)->PN << '\t';
+            outfile << sheets->stoolreport->getSortedLines().at(i)->studyArm << '\t';
+            outfile << sheets->stoolreport->getSortedLines().at(i)->visit << '\t';
+            outfile << sheets->stoolreport->getSortedLines().at(i)->oncID << '\t';
+            outfile << sheets->stoolreport->getSortedLines().at(i)->subjectID << '\t';
+            outfile << sheets->stoolreport->getSortedLines().at(i)->stoolID << '\t';
+            outfile << sheets->stoolreport->getSortedLines().at(i)->received << '\t';
+            outfile << sheets->stoolreport->getSortedLines().at(i)->date << '\n';
         }
     }
     outfile.close();
