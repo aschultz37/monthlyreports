@@ -46,13 +46,16 @@ int main(int argc, char **argv){
                 string filename = "";
                 printf("Please enter filename (including .csv): ");
                 cin >> filename;
-                //TODO catch exception here
-                report.importCSV(filename);
-                printf("File imported successfully.\n");
-                //now filter by month
-                report.filterMonth(month, year);
-                printf("Filtered by %d-%d.\n", month, year);
-                report.copytoSort(); //need to do this in case want to display/write without sorting
+                try{
+                    report.importCSV(filename);
+                    printf("File imported successfully.\n");
+                    //now filter by month
+                    report.filterMonth(month, year);
+                    printf("Filtered by %d-%d.\n", month, year);
+                    report.copytoSort(); //need to do this in case want to display/write without sorting
+                } catch(runtime_error){
+                    cout << "Runtime Error: Check filename and try again.\n";
+                }
             }    
         }
         else if(option == 2){ //sort
@@ -73,8 +76,11 @@ int main(int argc, char **argv){
             string outputfile = "monthly_report.txt"; //default output location
             writefile(outputfile);
             cout << "The output will be written to " << outputfile << ".\n";
-            //TODO catch exception here
-            report.writeReport(outputfile);
+            try{
+                report.writeReport(outputfile);
+            } catch(runtime_error){
+                cout << "Runtime Error: Check filename and try again.\n";
+            }
         }
         else if(option == 5){ //set month/year
             month = year = 0;
