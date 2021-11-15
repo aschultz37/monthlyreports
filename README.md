@@ -16,6 +16,11 @@ Upon startup, the program will prompt for the month and year you wish to view fo
 The input should be in number format (e.g., March would be 3 or 03 and the year would be 2021).  
 This selection can be changed later via the main menu.  
 
+USING MENUS  
+All menus work by taking user input in the console/terminal.  
+Selections for corresponding options should be simply a number (e.g., 1) followed by a press of the enter/return key.  
+Please do not type the name of the option (e.g., Import File) or any characters other than the number.  
+
 FIRST STEP - IMPORT  
 The first step after getting to the main menu should be to Import File. You can select other options, but there isn't much point if there's no data to work with.  
 When importing a file, make sure to select the correct type of file (i.e., Blood, Tissue, or Stool). This is critical for the import process, and the program will not work if you select the wrong type.  
