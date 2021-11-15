@@ -9,7 +9,9 @@ To use the program, a few steps must be followed:
  1) You must use a standardized BTIL Blood, Tissue, or Stool Processing sheet format.  
  2) You must save a copy of the sheet as a comma-delimited .csv file (not .xlsx or .xls).  
     - Note: There are multiple .csv formats, make sure to use comma-delimited option!  
- 3) Run the program.  
+ 3) Remove unnecessary fields from the sheet.  
+    - First Field: PN --> Last Field: Date  
+ 4) Run the program.  
   
 INITIALIZATION  
 Upon startup, the program will prompt for the month and year you wish to view for the report.  
