@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 #include "bloodreport.hpp"
 #include "tissuereport.hpp"
 #include "stoolreport.hpp"

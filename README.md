@@ -8,7 +8,7 @@ PRE-RUN REQUIREMENTS
 To use the program, a few steps must be followed:  
  1) You must use a standardized BTIL Blood, Tissue, or Stool Processing sheet format.  
  2) You must save a copy of the sheet as a comma-delimited .csv file (not .xlsx or .xls).  
-    - Note: There are multiple .csv formats, make sure to use comma-delimited option!  
+    - Note: There are multiple .csv formats, make sure to use (Comma delimited) option! Not UTF-8! 
  3) Remove unnecessary fields from the sheet.  
     - Only include PN --> Date.  
  4) Run the program.  
