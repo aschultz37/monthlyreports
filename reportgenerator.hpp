@@ -39,7 +39,7 @@ namespace RG{
             RG::ReportSheets* sheets;
             int filetype;
             int PNWIDTH = 5; int ARMWIDTH = 7; int VISITWIDTH = 16; int ONCWIDTH = 8; int STUDYWIDTH = 8; int RECWIDTH = 9; 
-            int DATEWIDTH = 12; int SAMPLEWIDTH = 14; int BIOPSYWIDTH = 15; int STOOLWIDTH = 9;
+            int DATEWIDTH = 12; int SAMPLEWIDTH = 14; int BIOPSYWIDTH = 15; int STOOLWIDTH = 11;
             
             void pnSort();
             void oncSort();
