@@ -389,8 +389,12 @@ void RG::ReportGenerator::subjectSort(){
         for(int i = 0; i < sheets->bloodreport->getSortedLines().size()-1; i++){
             min = i;
             for(int j = i+1; j < sheets->bloodreport->getSortedLines().size(); j++){
-                if(stoi(sheets->bloodreport->getSortedLines().at(j)->subjectID) < stoi(sheets->bloodreport->getSortedLines().at(min)->subjectID)){
-                    min = j;
+                try{
+                    if(stoi(sheets->bloodreport->getSortedLines().at(j)->subjectID) < stoi(sheets->bloodreport->getSortedLines().at(min)->subjectID)){
+                        min = j;
+                    }
+                } catch(invalid_argument){ //defining ? as lowest possible value
+                        if(sheets->bloodreport->getSortedLines().at(j)->subjectID.compare("?") == 0) min = j;
                 }
             }
             sheets->bloodreport->swapSortedLines(i,min);
@@ -407,8 +411,12 @@ void RG::ReportGenerator::subjectSort(){
         for(int i = 0; i < sheets->tissuereport->getSortedLines().size()-1; i++){
             min = i;
             for(int j = i+1; j < sheets->tissuereport->getSortedLines().size(); j++){
-                if(stoi(sheets->tissuereport->getSortedLines().at(j)->subjectID) < stoi(sheets->tissuereport->getSortedLines().at(min)->subjectID)){
-                    min = j;
+                try{
+                    if(stoi(sheets->tissuereport->getSortedLines().at(j)->subjectID) < stoi(sheets->tissuereport->getSortedLines().at(min)->subjectID)){
+                        min = j;
+                    }
+                } catch(invalid_argument){ //defining ? as lowest possible value
+                    if(sheets->tissuereport->getSortedLines().at(j)->subjectID.compare("?") == 0) min = j;
                 }
             }
             sheets->tissuereport->swapSortedLines(i,min);
@@ -425,8 +433,12 @@ void RG::ReportGenerator::subjectSort(){
         for(int i = 0; i < sheets->stoolreport->getSortedLines().size()-1; i++){
             min = i;
             for(int j = i+1; j < sheets->stoolreport->getSortedLines().size(); j++){
-                if(stoi(sheets->stoolreport->getSortedLines().at(j)->subjectID) < stoi(sheets->stoolreport->getSortedLines().at(min)->subjectID)){
-                    min = j;
+                try{
+                    if(stoi(sheets->stoolreport->getSortedLines().at(j)->subjectID) < stoi(sheets->stoolreport->getSortedLines().at(min)->subjectID)){
+                        min = j;
+                    }
+                } catch(invalid_argument){ //defining ? as lowest possible value
+                    if(sheets->stoolreport->getSortedLines().at(j)->subjectID.compare("?") == 0) min = j;
                 }
             }
             sheets->stoolreport->swapSortedLines(i,min);
