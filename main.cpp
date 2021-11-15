@@ -48,6 +48,7 @@ int main(int argc, char **argv){
                 string filename = "";
                 printf("Please enter filename (including .csv): ");
                 cin >> filename;
+                //TODO catch exception here
                 report.importCSV(filename);
                 printf("File imported successfully.\n");
                 //now filter by month
@@ -74,6 +75,7 @@ int main(int argc, char **argv){
             string outputfile = "monthly_report.txt"; //default output location
             writefile(outputfile);
             cout << "The output will be written to " << outputfile << ".\n";
+            //TODO catch exception here
             report.writeReport(outputfile);
         }
         else if(option == 5){ //set month/year
@@ -116,6 +118,7 @@ void setupMonthYear(int &month, int &year){
         string ynbit = "";
         printf("You selected %d-%d. Is this correct? (y/n): ", month, year);
         cin >> ynbit;
+        if(ynbit.length() > 0){ ynbit = ynbit.substr(0,1);}
         if(ynbit.compare("y") == 0 || ynbit.compare("Y") == 0) mybit = false;
         else{ printf("OK, try again.\n"); month = 0; year = 0;}
     }
@@ -125,6 +128,7 @@ int monthsetup(int &month){
     string userChoice = "";
     printf("As a number 1-12, please enter the month for the report (e.g., 7 for July): ");
     cin >> userChoice;
+    if(userChoice.length() > 2){ userChoice = userChoice.substr(0,2);}
     if(userChoice.compare("1") == 0){ month = 1; return 1;}
     if(userChoice.compare("2") == 0){ month = 2; return 2;}
     if(userChoice.compare("3") == 0){ month = 3; return 3;}
@@ -144,6 +148,7 @@ int yearsetup(int &year){
     string userChoice = "";
     printf("Please enter the four-digit year for the report (e.g. 2021): ");
     cin >> userChoice;
+    //check for exception on stoi
     year = stoi(userChoice);
     return year;
 }
@@ -153,7 +158,8 @@ int mainmenu(){
     printf("\n\n---MAIN MENU---\nPlease select an option:\n");
     printf("1. Import File\n2. Sort File\n3. Display Results\n4. Write Results to File\n5. Set Month/Year\n6. Quit\n");
     printf("Choice: ");
-    cin >> userChoice;
+    cin >> userChoice; 
+    if(userChoice.length() > 0){ userChoice = userChoice.substr(0,1);}
     if(userChoice.compare("1") == 0) return 1;
     if(userChoice.compare("2") == 0) return 2;
     if(userChoice.compare("3") == 0) return 3;
@@ -169,6 +175,7 @@ int filetypemenu(){
     printf("1. Blood\n2. Tissue\n3. Stool\n4. Back to Main Menu\n");
     printf("Choice: ");
     cin >> userChoice;
+    if(userChoice.length() > 0){ userChoice = userChoice.substr(0,1);}
     if(userChoice.compare("1") == 0) return 1;
     if(userChoice.compare("2") == 0) return 2;
     if(userChoice.compare("3") == 0) return 3;
@@ -182,6 +189,7 @@ int sortmenu(){
     printf("1. PN\n2. OncID\n3. Subject ID\n4. Timepoint\n5. Date\n6. Back to Main Menu\n");
     printf("Choice: ");
     cin >> userChoice;
+    if(userChoice.length() > 0){ userChoice = userChoice.substr(0,1);}
     if(userChoice.compare("1") == 0) return 1;
     if(userChoice.compare("2") == 0) return 2;
     if(userChoice.compare("3") == 0) return 3;
@@ -197,7 +205,8 @@ void writefile(string &filename){
     while(setbit){
         string userin = "";
         printf("Would you like to change the file location? (y/n): ");
-        cin >> userin;
+        cin >> userin; 
+        if(userin.length() > 0){ userin = userin.substr(0,1);}
         if(userin.compare("y") == 0 || userin.compare("Y") == 0){
             string filenamein = "";
             printf("Please enter the output file name (ending in .txt): ");
@@ -205,6 +214,7 @@ void writefile(string &filename){
             string checkin = "";
             cout << "You entered " << filenamein << ", is that correct? (y/n): ";
             cin >> checkin;
+            if(checkin.length() > 0){ checkin = checkin.substr(0,1);}
             if(checkin.compare("y") == 0 || checkin.compare("Y") == 0){ 
                 setbit = false; filename = filenamein;
             }
