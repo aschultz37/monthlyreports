@@ -72,41 +72,44 @@ void RG::ReportGenerator::copytoSort(){
 */
 void RG::ReportGenerator::displayReport(){
     if(filetype == RG::filetypes::blood){
-        cout << setw(5) << "PN" << setw(7) << "Arm" << setw(7) << "Visit" << setw(8) << "OncID" << setw(8) << "StudyID" << setw(9) << "Received" << setw(12) << "Date\n";
+        cout << setw(PNWIDTH) << "PN" << setw(ARMWIDTH) << "Arm" << setw(VISITWIDTH) << "Visit" << setw(ONCWIDTH) << "OncID" 
+        << setw(STUDYWIDTH) << "StudyID" << setw(RECWIDTH) << "Received" << setw(DATEWIDTH) << "Date\n";
         for(int i = 0; i < sheets->bloodreport->getSortedLines().size(); i++){
-            cout << setw(5) << sheets->bloodreport->getSortedLines().at(i)->PN;
-            cout << setw(7) << sheets->bloodreport->getSortedLines().at(i)->studyArm;
-            cout << setw(7) << sheets->bloodreport->getSortedLines().at(i)->visit;
-            cout << setw(8) << sheets->bloodreport->getSortedLines().at(i)->oncID;
-            cout << setw(8) << sheets->bloodreport->getSortedLines().at(i)->subjectID;
-            cout << setw(9) << sheets->bloodreport->getSortedLines().at(i)->received;
-            cout << setw(12) << sheets->bloodreport->getSortedLines().at(i)->date << '\n';
+            cout << setw(PNWIDTH) << sheets->bloodreport->getSortedLines().at(i)->PN;
+            cout << setw(STUDYWIDTH) << sheets->bloodreport->getSortedLines().at(i)->studyArm;
+            cout << setw(VISITWIDTH) << sheets->bloodreport->getSortedLines().at(i)->visit;
+            cout << setw(ONCWIDTH) << sheets->bloodreport->getSortedLines().at(i)->oncID;
+            cout << setw(STUDYWIDTH) << sheets->bloodreport->getSortedLines().at(i)->subjectID;
+            cout << setw(RECWIDTH) << sheets->bloodreport->getSortedLines().at(i)->received;
+            cout << setw(DATEWIDTH) << sheets->bloodreport->getSortedLines().at(i)->date << '\n';
         }
     }
     else if(filetype == RG::filetypes::tissue){
-        cout << setw(5) << "PN" << setw(7) << "Arm" << setw(7) << "Visit" << setw(8) << "OncID" << setw(8) << "StudyID" << setw(14) << "Sample" << setw(14) << "Biopsy" << setw(12) << "Date\n";
+        cout << setw(PNWIDTH) << "PN" << setw(ARMWIDTH) << "Arm" << setw(VISITWIDTH) << "Visit" << setw(ONCWIDTH) << "OncID" 
+        << setw(STUDYWIDTH) << "StudyID" << setw(SAMPLEWIDTH) << "Sample" << setw(BIOPSYWIDTH) << "Biopsy" << setw(DATEWIDTH) << "Date\n";
         for(int i = 0; i < sheets->tissuereport->getSortedLines().size(); i++){
-            cout << setw(5) << sheets->tissuereport->getSortedLines().at(i)->PN;
-            cout << setw(7) << sheets->tissuereport->getSortedLines().at(i)->studyArm;
-            cout << setw(7) << sheets->tissuereport->getSortedLines().at(i)->visit;
-            cout << setw(8) << sheets->tissuereport->getSortedLines().at(i)->oncID;
-            cout << setw(8) <<  sheets->tissuereport->getSortedLines().at(i)->subjectID;
-            cout << setw(14) << sheets->tissuereport->getSortedLines().at(i)->sampleType;
-            cout << setw(14) << sheets->tissuereport->getSortedLines().at(i)->biopsyType;
-            cout << setw(12) << sheets->tissuereport->getSortedLines().at(i)->date << '\n';
+            cout << setw(PNWIDTH) << sheets->tissuereport->getSortedLines().at(i)->PN;
+            cout << setw(ARMWIDTH) << sheets->tissuereport->getSortedLines().at(i)->studyArm;
+            cout << setw(VISITWIDTH) << sheets->tissuereport->getSortedLines().at(i)->visit;
+            cout << setw(ONCWIDTH) << sheets->tissuereport->getSortedLines().at(i)->oncID;
+            cout << setw(STUDYWIDTH) <<  sheets->tissuereport->getSortedLines().at(i)->subjectID;
+            cout << setw(SAMPLEWIDTH) << sheets->tissuereport->getSortedLines().at(i)->sampleType;
+            cout << setw(BIOPSYWIDTH) << sheets->tissuereport->getSortedLines().at(i)->biopsyType;
+            cout << setw(DATEWIDTH) << sheets->tissuereport->getSortedLines().at(i)->date << '\n';
         }
     }
     else if(filetype == RG::filetypes::stool){
-        cout << setw(5) << "PN" << setw(7) << "Arm" << setw(7) << "Visit" << setw(8) << "OncID" << setw(8) << "StudyID" << setw(9) << "StoolID" << setw(9) << "Received" << setw(12) << "Date\n";
+        cout << setw(PNWIDTH) << "PN" << setw(ARMWIDTH) << "Arm" << setw(VISITWIDTH) << "Visit" << setw(ONCWIDTH) << "OncID" 
+        << setw(STUDYWIDTH) << "StudyID" << setw(STOOLWIDTH) << "StoolID" << setw(RECWIDTH) << "Received" << setw(DATEWIDTH) << "Date\n";
         for(int i = 0; i < sheets->stoolreport->getSortedLines().size(); i++){
-            cout << setw(5) << sheets->stoolreport->getSortedLines().at(i)->PN;
-            cout << setw(7) << sheets->stoolreport->getSortedLines().at(i)->studyArm;
-            cout << setw(7) << sheets->stoolreport->getSortedLines().at(i)->visit;
-            cout << setw(8) << sheets->stoolreport->getSortedLines().at(i)->oncID;
-            cout << setw(8) << sheets->stoolreport->getSortedLines().at(i)->subjectID;
-            cout << setw(9) << sheets->stoolreport->getSortedLines().at(i)->stoolID;
-            cout << setw(9) << sheets->stoolreport->getSortedLines().at(i)->received;
-            cout << setw(12) << sheets->stoolreport->getSortedLines().at(i)->date << '\n';
+            cout << setw(PNWIDTH) << sheets->stoolreport->getSortedLines().at(i)->PN;
+            cout << setw(ARMWIDTH) << sheets->stoolreport->getSortedLines().at(i)->studyArm;
+            cout << setw(VISITWIDTH) << sheets->stoolreport->getSortedLines().at(i)->visit;
+            cout << setw(ONCWIDTH) << sheets->stoolreport->getSortedLines().at(i)->oncID;
+            cout << setw(STUDYWIDTH) << sheets->stoolreport->getSortedLines().at(i)->subjectID;
+            cout << setw(STOOLWIDTH) << sheets->stoolreport->getSortedLines().at(i)->stoolID;
+            cout << setw(RECWIDTH) << sheets->stoolreport->getSortedLines().at(i)->received;
+            cout << setw(DATEWIDTH) << sheets->stoolreport->getSortedLines().at(i)->date << '\n';
         }
     }
 }
@@ -117,41 +120,44 @@ void RG::ReportGenerator::displayReport(){
 void RG::ReportGenerator::writeReport(std::string outFileName){
     ofstream outfile; outfile.open(outFileName);
     if(filetype == RG::filetypes::blood){
-        outfile << setw(5) << "PN" << setw(7) << "Arm" << setw(7) << "Visit" << setw(8) << "OncID" << setw(8) << "StudyID" << setw(9) << "Received" << setw(12) << "Date\n";
+        outfile << setw(PNWIDTH) << "PN" << setw(ARMWIDTH) << "Arm" << setw(VISITWIDTH) << "Visit" << setw(ONCWIDTH) << "OncID" 
+        << setw(STUDYWIDTH) << "StudyID" << setw(RECWIDTH) << "Received" << setw(DATEWIDTH) << "Date\n";  
         for(int i = 0; i < sheets->bloodreport->getSortedLines().size(); i++){
-            outfile << setw(5) << sheets->bloodreport->getSortedLines().at(i)->PN;
-            outfile << setw(7) << sheets->bloodreport->getSortedLines().at(i)->studyArm;
-            outfile << setw(7) << sheets->bloodreport->getSortedLines().at(i)->visit;
-            outfile << setw(8) << sheets->bloodreport->getSortedLines().at(i)->oncID;
-            outfile << setw(8) << sheets->bloodreport->getSortedLines().at(i)->subjectID;
-            outfile << setw(9) << sheets->bloodreport->getSortedLines().at(i)->received;
-            outfile << setw(12) << sheets->bloodreport->getSortedLines().at(i)->date << '\n';
+            outfile << setw(PNWIDTH) << sheets->bloodreport->getSortedLines().at(i)->PN;
+            outfile << setw(STUDYWIDTH) << sheets->bloodreport->getSortedLines().at(i)->studyArm;
+            outfile << setw(VISITWIDTH) << sheets->bloodreport->getSortedLines().at(i)->visit;
+            outfile << setw(ONCWIDTH) << sheets->bloodreport->getSortedLines().at(i)->oncID;
+            outfile << setw(STUDYWIDTH) << sheets->bloodreport->getSortedLines().at(i)->subjectID;
+            outfile << setw(RECWIDTH) << sheets->bloodreport->getSortedLines().at(i)->received;
+            outfile << setw(DATEWIDTH) << sheets->bloodreport->getSortedLines().at(i)->date << '\n';
         }
     }
     else if(filetype == RG::filetypes::tissue){
-        outfile << setw(5) << "PN" << setw(7) << "Arm" << setw(7) << "Visit" << setw(8) << "OncID" << setw(8) << "StudyID" << setw(14) << "Sample" << setw(14) << "Biopsy" << setw(12) << "Date\n";
+        outfile << setw(PNWIDTH) << "PN" << setw(ARMWIDTH) << "Arm" << setw(VISITWIDTH) << "Visit" << setw(ONCWIDTH) << "OncID" 
+        << setw(STUDYWIDTH) << "StudyID" << setw(SAMPLEWIDTH) << "Sample" << setw(BIOPSYWIDTH) << "Biopsy" << setw(DATEWIDTH) << "Date\n";
         for(int i = 0; i < sheets->tissuereport->getSortedLines().size(); i++){
-            outfile << setw(5) << sheets->tissuereport->getSortedLines().at(i)->PN;
-            outfile << setw(7) << sheets->tissuereport->getSortedLines().at(i)->studyArm;
-            outfile << setw(7) << sheets->tissuereport->getSortedLines().at(i)->visit;
-            outfile << setw(8) << sheets->tissuereport->getSortedLines().at(i)->oncID;
-            outfile << setw(8) <<  sheets->tissuereport->getSortedLines().at(i)->subjectID;
-            outfile << setw(14) << sheets->tissuereport->getSortedLines().at(i)->sampleType;
-            outfile << setw(14) << sheets->tissuereport->getSortedLines().at(i)->biopsyType;
-            outfile << setw(12) << sheets->tissuereport->getSortedLines().at(i)->date << '\n';
+            outfile << setw(PNWIDTH) << sheets->tissuereport->getSortedLines().at(i)->PN;
+            outfile << setw(ARMWIDTH) << sheets->tissuereport->getSortedLines().at(i)->studyArm;
+            outfile << setw(VISITWIDTH) << sheets->tissuereport->getSortedLines().at(i)->visit;
+            outfile << setw(ONCWIDTH) << sheets->tissuereport->getSortedLines().at(i)->oncID;
+            outfile << setw(STUDYWIDTH) <<  sheets->tissuereport->getSortedLines().at(i)->subjectID;
+            outfile << setw(SAMPLEWIDTH) << sheets->tissuereport->getSortedLines().at(i)->sampleType;
+            outfile << setw(BIOPSYWIDTH) << sheets->tissuereport->getSortedLines().at(i)->biopsyType;
+            outfile << setw(DATEWIDTH) << sheets->tissuereport->getSortedLines().at(i)->date << '\n';
         }
     }
     else if(filetype == RG::filetypes::stool){
-        outfile << setw(5) << "PN" << setw(7) << "Arm" << setw(7) << "Visit" << setw(8) << "OncID" << setw(8) << "StudyID" << setw(9) << "StoolID" << setw(9) << "Received" << setw(12) << "Date\n";
+        outfile << setw(PNWIDTH) << "PN" << setw(ARMWIDTH) << "Arm" << setw(VISITWIDTH) << "Visit" << setw(ONCWIDTH) << "OncID" 
+        << setw(STUDYWIDTH) << "StudyID" << setw(STOOLWIDTH) << "StoolID" << setw(RECWIDTH) << "Received" << setw(DATEWIDTH) << "Date\n";
         for(int i = 0; i < sheets->stoolreport->getSortedLines().size(); i++){
-            outfile << setw(5) << sheets->stoolreport->getSortedLines().at(i)->PN;
-            outfile << setw(7) << sheets->stoolreport->getSortedLines().at(i)->studyArm;
-            outfile << setw(7) << sheets->stoolreport->getSortedLines().at(i)->visit;
-            outfile << setw(8) << sheets->stoolreport->getSortedLines().at(i)->oncID;
-            outfile << setw(8) << sheets->stoolreport->getSortedLines().at(i)->subjectID;
-            outfile << setw(9) << sheets->stoolreport->getSortedLines().at(i)->stoolID;
-            outfile << setw(9) << sheets->stoolreport->getSortedLines().at(i)->received;
-            outfile << setw(12) << sheets->stoolreport->getSortedLines().at(i)->date << '\n';
+            outfile << setw(PNWIDTH) << sheets->stoolreport->getSortedLines().at(i)->PN;
+            outfile << setw(ARMWIDTH) << sheets->stoolreport->getSortedLines().at(i)->studyArm;
+            outfile << setw(VISITWIDTH) << sheets->stoolreport->getSortedLines().at(i)->visit;
+            outfile << setw(ONCWIDTH) << sheets->stoolreport->getSortedLines().at(i)->oncID;
+            outfile << setw(STUDYWIDTH) << sheets->stoolreport->getSortedLines().at(i)->subjectID;
+            outfile << setw(STOOLWIDTH) << sheets->stoolreport->getSortedLines().at(i)->stoolID;
+            outfile << setw(RECWIDTH) << sheets->stoolreport->getSortedLines().at(i)->received;
+            outfile << setw(DATEWIDTH) << sheets->stoolreport->getSortedLines().at(i)->date << '\n';
         }
     }
     outfile.close();
