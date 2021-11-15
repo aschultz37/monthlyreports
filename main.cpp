@@ -55,6 +55,8 @@ int main(int argc, char **argv){
                     report.copytoSort(); //need to do this in case want to display/write without sorting
                 } catch(runtime_error){
                     cout << "Runtime Error: Check file name/type and try again.\n";
+                } catch(logic_error){
+                    cout << "Logic Error: Check file name/type and try again.\n";
                 }
             }    
         }
@@ -79,7 +81,9 @@ int main(int argc, char **argv){
             try{
                 report.writeReport(outputfile);
             } catch(runtime_error){
-                cout << "Runtime Error: Check filename and try again.\n";
+                cout << "Runtime Error: Check file name and try again.\n";
+            } catch(logic_error){
+                cout << "Logic Error: Check file name and try again.\n";
             }
         }
         else if(option == 5){ //set month/year
