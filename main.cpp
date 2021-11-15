@@ -145,11 +145,18 @@ int monthsetup(int &month){
 }
 
 int yearsetup(int &year){
-    string userChoice = "";
-    printf("Please enter the four-digit year for the report (e.g. 2021): ");
-    cin >> userChoice;
-    //check for exception on stoi
-    year = stoi(userChoice);
+    bool waiting = true;
+    while(waiting){
+        string userChoice = "";
+        printf("Please enter the four-digit year for the report (e.g. 2021): ");
+        cin >> userChoice;
+        try{
+            year = stoi(userChoice);
+            waiting = false;
+        } catch(invalid_argument){
+            cout << "Input not a number, please try again.\n";
+        }
+    }
     return year;
 }
 
