@@ -68,6 +68,13 @@ int main(int argc, char **argv){
                     printf("Invalid option, please try again.\n");
                     sorttype = 0;
                 }
+                if(sorttype == 4){ //stool ID sort
+                    if(report.getFileType() != RG::filetypes::stool){
+                        printf("Error: You cannot sort by Stool ID for a non-stool sheet, please try again.\n");
+                        printf("For VICTORY, please sort by Subject ID.\n");
+                        sorttype = 0; 
+                    }
+                }
             }
             report.sort(sorttype);
         }
@@ -199,7 +206,7 @@ int filetypemenu(){
 int sortmenu(){
     string userChoice = "";
     printf("\n-Sort Menu-\nPlease select an option:\n");
-    printf("1. PN\n2. OncID\n3. Subject ID\n4. Timepoint\n5. Date\n6. Back to Main Menu\n");
+    printf("1. PN\n2. OncID\n3. Subject ID\n4. Stool ID\n5. Timepoint\n6. Date\n7. Back to Main Menu\n");
     printf("Choice: ");
     cin >> userChoice;
     if(userChoice.length() > 0){ userChoice = userChoice.substr(0,1);}
@@ -209,6 +216,7 @@ int sortmenu(){
     if(userChoice.compare("4") == 0) return 4;
     if(userChoice.compare("5") == 0) return 5;
     if(userChoice.compare("6") == 0) return 6;
+    if(userChoice.compare("7") == 0) return 7;
     return -1;
 }
 

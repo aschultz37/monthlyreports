@@ -178,9 +178,12 @@ void RG::ReportGenerator::sort(int option){
             subjectSort();
             break;
         case 4:
-            timeSort();
+            stoolSort();
             break;
         case 5:
+            timeSort();
+            break;
+        case 6:
             dateSort();
             break;
     }
@@ -464,6 +467,13 @@ void RG::ReportGenerator::subjectSort(){
     }
 }
 
+/*stoolSort
+* Sorts by Stool ID (groups by site, then numerically)
+*/
+void RG::ReportGenerator::stoolSort(){
+
+}
+
 /*timeSort
 * Groups unique timepoints together
 * TODO: Sorts from lowest timepoint to highest timepoint; need to have list of priorities since some similar
@@ -566,6 +576,7 @@ void RG::ReportGenerator::timeSort(){
         }
     }
 }
+
 /*dateSort
 * Sorts from oldest date to most recent date
 */

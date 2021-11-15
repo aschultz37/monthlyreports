@@ -34,6 +34,7 @@ namespace RG{
             void sort(int option);
 
             void setFileType(int inFileType){ filetype = inFileType;}
+            int getFileType(){ return filetype;}
         private:
             std::vector <std::string> fileLines;
             RG::ReportSheets* sheets;
@@ -44,6 +45,7 @@ namespace RG{
             void pnSort();
             void oncSort();
             void subjectSort();
+            void stoolSort();
             void timeSort();
             void dateSort();
             int dateCompare(std::string date1, std::string date2);
