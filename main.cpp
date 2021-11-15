@@ -54,7 +54,7 @@ int main(int argc, char **argv){
                     printf("Filtered by %d-%d.\n", month, year);
                     report.copytoSort(); //need to do this in case want to display/write without sorting
                 } catch(runtime_error){
-                    cout << "Runtime Error: Check filename and try again.\n";
+                    cout << "Runtime Error: Check file name/type and try again.\n";
                 }
             }    
         }
