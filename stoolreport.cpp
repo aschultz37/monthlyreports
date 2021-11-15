@@ -1,5 +1,4 @@
 #include "stoolreport.hpp"
-#include <sstream>
 
 using namespace std;
 

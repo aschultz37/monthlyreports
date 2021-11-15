@@ -10,8 +10,6 @@ int filetypemenu();
 int sortmenu();
 void writefile(string &filename);
 
-//TODO: Add error checking for slight input deviations such as extra spaces in date
-
 int main(int argc, char **argv){
     bool runbit = true;
     bool rerun = false;
@@ -102,14 +100,12 @@ void setupMonthYear(int &month, int &year){
     bool mybit = true;
     while(mybit){
         while(month == 0){
-            //month = monthsetup();
             if(monthsetup(month) == -1){
                 printf("Invalid option, please try again.\n");
                 month = 0;
             }
         }
         while(year == 0){
-            //year = yearsetup();
             if(yearsetup(year) == -1){
                 printf("Invalid option, please try again.\n");
                 year = 0;

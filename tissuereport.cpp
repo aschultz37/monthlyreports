@@ -1,5 +1,4 @@
 #include "tissuereport.hpp"
-#include <sstream>
 
 using namespace std;
 

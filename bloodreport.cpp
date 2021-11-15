@@ -1,5 +1,4 @@
 #include "bloodreport.hpp"
-#include <sstream>
 
 using namespace std;
 
