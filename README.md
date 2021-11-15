@@ -10,7 +10,7 @@ To use the program, a few steps must be followed:
  2) You must save a copy of the sheet as a comma-delimited .csv file (not .xlsx or .xls).  
     - Note: There are multiple .csv formats, make sure to use comma-delimited option!  
  3) Remove unnecessary fields from the sheet.  
-    - First Field: PN --> Last Field: Date  
+    - Only include PN --> Date.  
  4) Run the program.  
   
 INITIALIZATION  
