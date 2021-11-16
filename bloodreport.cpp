@@ -82,7 +82,11 @@ int BR::BloodReport::extractMonth(string date){
     char delimiter = '/'; 
     int i = 0; string month = "";
     while(date[i] != delimiter){ month.append(1, date[i++]);}
-    return stoi(month);
+    try{
+        return stoi(month);
+    } catch(invalid_argument){
+        return 0;
+    }
 }
 
 /*extractYear
@@ -96,7 +100,11 @@ int BR::BloodReport::extractYear(string date){
     while(date[i] != delimiter){i++;} //thru day
     i++; //skip /
     year = date.substr(i, date.length());
-    return stoi(year);
+    try{
+        return stoi(year);
+    } catch(invalid_argument){
+        return 0;
+    }
 }
 
 BR::BloodReport::BloodReport(){
