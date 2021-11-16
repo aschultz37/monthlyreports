@@ -705,19 +705,23 @@ int RG::ReportGenerator::spacelessHash(string input){
 /*stoolHash()
 * Hash function that prioritizes letters as coarse magnitude, then numbers as fine offset
 * For example, DF-0091 would have large magnitude based on DF, then offset of 91 from that
+* Ignores non-alphanumeric characters
 */
 long RG::ReportGenerator::stoolHash(string input){
     long hashvalue = 0;
-    char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+    int NUM_LETTERS = 26; int NUM_DIGITS = 10;
+    char letters[NUM_LETTERS] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
                     't', 'u', 'v', 'w', 'x', 'y', 'z'};
-    char numbers[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    char numbers[NUM_DIGITS] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     int lettercount = 0; int placevalue = 1;
-    for(int i = 0; i < input.length(); i++){
-        for(int j = 0; j < letters.size(); j++){
+    for(int i = 0; i < input.length(); i++){ // hashvalue = (letter^3 + letter^3 + ...)
+        for(int j = 0; j < NUM_LETTERS; j++){
             if(input[i] == letters[j]){ hashvalue += (j*j*j); lettercount++;}
         }
-        hashvalue = hashvalue * (lettercount * lettercount);
-        for(int j = input.length()-1; j >= 0; j--){
+    }
+    hashvalue = hashvalue * (lettercount * lettercount); // hashvalue = hashvalue * (#letters^2)
+    for(int i = input.length()-1; i >= 0; i--){ //hashvalue += numeric value from stool ID
+        for(int j = 0; j < NUM_DIGITS; j++){
             if(input[i] == numbers[j]){ hashvalue += (j*placevalue); placevalue = placevalue * 10;}
         }
     }
