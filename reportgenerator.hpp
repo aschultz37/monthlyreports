@@ -50,5 +50,6 @@ namespace RG{
             void dateSort();
             int dateCompare(std::string date1, std::string date2);
             int spacelessHash(std::string input);
+            long stoolHash(std::string input);
     };
 }

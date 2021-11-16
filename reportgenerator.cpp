@@ -325,6 +325,7 @@ void RG::ReportGenerator::pnSort(){
 
 /*oncSort
 * Sorts numerically by Onc ID
+* TODO convert to the stoolSort hash function
 */
 void RG::ReportGenerator::oncSort(){
     if(filetype == RG::filetypes::blood){
@@ -397,6 +398,7 @@ void RG::ReportGenerator::oncSort(){
 
 /*subjectSort
 * Sorts numerically by Subject ID
+* TODO convert to the stoolSort hash function
 */
 void RG::ReportGenerator::subjectSort(){
     if(filetype == RG::filetypes::blood){
@@ -469,8 +471,11 @@ void RG::ReportGenerator::subjectSort(){
 
 /*stoolSort
 * Sorts by Stool ID (groups by site, then numerically)
+* Only callable for stoolreport
+* TODO make hash function that prioritizes letters as coarse magnitude, then numbers as fine offset
 */
 void RG::ReportGenerator::stoolSort(){
+    if(filetype != RG::filetypes::stool){ return;}
 
 }
 
@@ -695,6 +700,28 @@ int RG::ReportGenerator::spacelessHash(string input){
         }
     }
     return tmp;
+}
+
+/*stoolHash()
+* Hash function that prioritizes letters as coarse magnitude, then numbers as fine offset
+* For example, DF-0091 would have large magnitude based on DF, then offset of 91 from that
+*/
+long RG::ReportGenerator::stoolHash(string input){
+    long hashvalue = 0;
+    char letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+                    't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    char numbers[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    int lettercount = 0; int placevalue = 1;
+    for(int i = 0; i < input.length(); i++){
+        for(int j = 0; j < letters.size(); j++){
+            if(input[i] == letters[j]){ hashvalue += (j*j*j); lettercount++;}
+        }
+        hashvalue = hashvalue * (lettercount * lettercount);
+        for(int j = input.length()-1; j >= 0; j--){
+            if(input[i] == numbers[j]){ hashvalue += (j*placevalue); placevalue = placevalue * 10;}
+        }
+    }
+    return hashvalue;
 }
 
 RG::ReportGenerator::ReportGenerator(){
