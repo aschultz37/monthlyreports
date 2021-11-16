@@ -325,7 +325,6 @@ void RG::ReportGenerator::pnSort(){
 
 /*oncSort
 * Sorts numerically by Onc ID
-* TODO convert to the stoolSort hash function
 */
 void RG::ReportGenerator::oncSort(){
     if(filetype == RG::filetypes::blood){
@@ -340,7 +339,7 @@ void RG::ReportGenerator::oncSort(){
             min = i;
             for(int j = i+1; j < sheets->bloodreport->getSortedLines().size(); j++){
                 try{
-                    if(stoi(sheets->bloodreport->getSortedLines().at(j)->oncID) < stoi(sheets->bloodreport->getSortedLines().at(min)->oncID)){
+                    if(stoolHash(sheets->bloodreport->getSortedLines().at(j)->oncID) < stoolHash(sheets->bloodreport->getSortedLines().at(min)->oncID)){
                         min = j;
                     }
                 } catch(invalid_argument){ //defining ? as lowest possible value
@@ -362,7 +361,7 @@ void RG::ReportGenerator::oncSort(){
             min = i;
             for(int j = i+1; j < sheets->tissuereport->getSortedLines().size(); j++){
                 try{
-                    if(stoi(sheets->tissuereport->getSortedLines().at(j)->oncID) < stoi(sheets->tissuereport->getSortedLines().at(min)->oncID)){
+                    if(stoolHash(sheets->tissuereport->getSortedLines().at(j)->oncID) < stoolHash(sheets->tissuereport->getSortedLines().at(min)->oncID)){
                         min = j;
                     }
                 } catch(invalid_argument){ //defining ? as lowest possible value
@@ -384,7 +383,7 @@ void RG::ReportGenerator::oncSort(){
             min = i;
             for(int j = i+1; j < sheets->stoolreport->getSortedLines().size(); j++){
                 try{
-                    if(stoi(sheets->stoolreport->getSortedLines().at(j)->oncID) < stoi(sheets->stoolreport->getSortedLines().at(min)->oncID)){
+                    if(stoolHash(sheets->stoolreport->getSortedLines().at(j)->oncID) < stoolHash(sheets->stoolreport->getSortedLines().at(min)->oncID)){
                         min = j;
                     }
                 } catch(invalid_argument){ //defining ? as lowest possible value
@@ -398,7 +397,6 @@ void RG::ReportGenerator::oncSort(){
 
 /*subjectSort
 * Sorts numerically by Subject ID
-* TODO convert to the stoolSort hash function
 */
 void RG::ReportGenerator::subjectSort(){
     if(filetype == RG::filetypes::blood){
@@ -413,7 +411,7 @@ void RG::ReportGenerator::subjectSort(){
             min = i;
             for(int j = i+1; j < sheets->bloodreport->getSortedLines().size(); j++){
                 try{
-                    if(stoi(sheets->bloodreport->getSortedLines().at(j)->subjectID) < stoi(sheets->bloodreport->getSortedLines().at(min)->subjectID)){
+                    if(stoolHash(sheets->bloodreport->getSortedLines().at(j)->subjectID) < stoolHash(sheets->bloodreport->getSortedLines().at(min)->subjectID)){
                         min = j;
                     }
                 } catch(invalid_argument){ //defining ? as lowest possible value
@@ -435,7 +433,7 @@ void RG::ReportGenerator::subjectSort(){
             min = i;
             for(int j = i+1; j < sheets->tissuereport->getSortedLines().size(); j++){
                 try{
-                    if(stoi(sheets->tissuereport->getSortedLines().at(j)->subjectID) < stoi(sheets->tissuereport->getSortedLines().at(min)->subjectID)){
+                    if(stoolHash(sheets->tissuereport->getSortedLines().at(j)->subjectID) < stoolHash(sheets->tissuereport->getSortedLines().at(min)->subjectID)){
                         min = j;
                     }
                 } catch(invalid_argument){ //defining ? as lowest possible value
@@ -457,7 +455,7 @@ void RG::ReportGenerator::subjectSort(){
             min = i;
             for(int j = i+1; j < sheets->stoolreport->getSortedLines().size(); j++){
                 try{
-                    if(stoi(sheets->stoolreport->getSortedLines().at(j)->subjectID) < stoi(sheets->stoolreport->getSortedLines().at(min)->subjectID)){
+                    if(stoolHash(sheets->stoolreport->getSortedLines().at(j)->subjectID) < stoolHash(sheets->stoolreport->getSortedLines().at(min)->subjectID)){
                         min = j;
                     }
                 } catch(invalid_argument){ //defining ? as lowest possible value
@@ -472,7 +470,6 @@ void RG::ReportGenerator::subjectSort(){
 /*stoolSort
 * Sorts by Stool ID (groups by site, then numerically)
 * Only callable for stoolreport
-* TODO make hash function that prioritizes letters as coarse magnitude, then numbers as fine offset
 */
 void RG::ReportGenerator::stoolSort(){
     if(filetype != RG::filetypes::stool){ return;}
