@@ -164,7 +164,7 @@ void RG::ReportGenerator::writeReport(std::string outFileName){
 }
 
 /*sort
-* Sorts by option: 1) PN; 2) OncID; 3) Subject ID; 4) Timepoint; 5) Date
+* Sorts by option: 1) PN; 2) OncID; 3) Subject ID; 4) Stool ID; 5) Timepoint; 6) Date
 */
 void RG::ReportGenerator::sort(int option){
     switch (option){
