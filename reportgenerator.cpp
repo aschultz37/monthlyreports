@@ -476,7 +476,26 @@ void RG::ReportGenerator::subjectSort(){
 */
 void RG::ReportGenerator::stoolSort(){
     if(filetype != RG::filetypes::stool){ return;}
-
+    sheets->stoolreport->clearSort();
+    //copy filteredLines into sortedLines
+    for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
+        sheets->stoolreport->pushSortedLines(sheets->stoolreport->getFilteredLines().at(i));
+    }
+    //do selection sort on sortedLines
+    int min;
+    for(int i = 0; i < sheets->stoolreport->getSortedLines().size()-1; i++){
+        min = i;
+        for(int j = i+1; j < sheets->stoolreport->getSortedLines().size(); j++){
+            try{
+                if(stoolHash(sheets->stoolreport->getSortedLines().at(j)->stoolID) < stoolHash(sheets->stoolreport->getSortedLines().at(min)->stoolID)){
+                    min = j;
+                }
+            } catch(invalid_argument){ //defining ? as lowest possible value
+                if(sheets->stoolreport->getSortedLines().at(j)->stoolID.compare("?") == 0) min = j;
+            }
+        }
+        sheets->stoolreport->swapSortedLines(i,min);
+    }
 }
 
 /*timeSort
