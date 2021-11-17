@@ -124,7 +124,7 @@ void RG::ReportGenerator::writeReport(std::string outFileName){
         << setw(STUDYWIDTH) << "StudyID" << setw(RECWIDTH) << "Received" << setw(DATEWIDTH) << "Date\n";  
         for(int i = 0; i < sheets->bloodreport->getSortedLines().size(); i++){
             outfile << setw(PNWIDTH) << sheets->bloodreport->getSortedLines().at(i)->PN;
-            outfile << setw(STUDYWIDTH) << sheets->bloodreport->getSortedLines().at(i)->studyArm;
+            outfile << setw(ARMWIDTH) << sheets->bloodreport->getSortedLines().at(i)->studyArm;
             outfile << setw(VISITWIDTH) << sheets->bloodreport->getSortedLines().at(i)->visit;
             outfile << setw(ONCWIDTH) << sheets->bloodreport->getSortedLines().at(i)->oncID;
             outfile << setw(STUDYWIDTH) << sheets->bloodreport->getSortedLines().at(i)->subjectID;
