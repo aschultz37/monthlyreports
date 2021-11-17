@@ -525,6 +525,13 @@ void RG::ReportGenerator::timeSort(){
                 }
             }
         }
+        //fill timepointTracker w/ entry for each timepoint
+        for(int i = 0; i < timepoints.size(); i++){
+            RG::TimepointCount* tmp = new RG::TimepointCount;
+            tmp->timepoint = timepoints.at(i);
+            tmp->count = timepointVecs.at(i).size();
+            timepointTracker.push_back(tmp);
+        }
         //push the vectors back into sortedLines
         for(int i = 0; i < timepointVecs.size(); i++){
             for(int j = 0; j < timepointVecs.at(i).size(); j++){
@@ -557,6 +564,13 @@ void RG::ReportGenerator::timeSort(){
                 }
             }
         }
+        //fill timepointTracker w/ entry for each timepoint
+        for(int i = 0; i < timepoints.size(); i++){
+            RG::TimepointCount* tmp = new RG::TimepointCount;
+            tmp->timepoint = timepoints.at(i);
+            tmp->count = timepointVecs.at(i).size();
+            timepointTracker.push_back(tmp);
+        }
         //push the vectors back into sortedLines
         for(int i = 0; i < timepointVecs.size(); i++){
             for(int j = 0; j < timepointVecs.at(i).size(); j++){
@@ -588,6 +602,13 @@ void RG::ReportGenerator::timeSort(){
                     timepointVecs.at(j).push_back(sheets->stoolreport->getFilteredLines().at(i));
                 }
             }
+        }
+        //fill timepointTracker w/ entry for each timepoint
+        for(int i = 0; i < timepoints.size(); i++){
+            RG::TimepointCount* tmp = new RG::TimepointCount;
+            tmp->timepoint = timepoints.at(i);
+            tmp->count = timepointVecs.at(i).size();
+            timepointTracker.push_back(tmp);
         }
         //push the vectors back into sortedLines
         for(int i = 0; i < timepointVecs.size(); i++){
@@ -755,5 +776,6 @@ RG::ReportGenerator::~ReportGenerator(){
     if(filetype == RG::filetypes::blood){ delete sheets->bloodreport; sheets->bloodreport = NULL;}
     if(filetype == RG::filetypes::tissue){ delete sheets->tissuereport; sheets->tissuereport = NULL;}
     if(filetype == RG::filetypes::stool){ delete sheets->stoolreport; sheets->stoolreport = NULL;}
+    for(int i = 0; i < timepointTracker.size(); i++){ delete timepointTracker.at(i); timepointTracker.at(i) = NULL;}
     //delete sheets; sheets = NULL;
 }

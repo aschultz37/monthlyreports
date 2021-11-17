@@ -50,8 +50,8 @@ int main(int argc, char **argv){
                     report.importCSV(filename);
                     printf("File imported successfully.\n");
                     //now filter by month
-                    report.filterMonth(month, year);
-                    printf("Filtered by %d-%d.\n", month, year);
+                    int numEntriesMonth = report.filterMonth(month, year);
+                    printf("Filtered by %d-%d.\n\nThere are %d samples.\n", month, year, numEntriesMonth);
                     report.copytoSort(); //need to do this in case want to display/write without sorting
                 } catch(runtime_error){
                     cout << "Runtime Error: Check file name/type and try again.\n";
@@ -77,6 +77,12 @@ int main(int argc, char **argv){
                 }
             }
             report.sort(sorttype);
+            if(sorttype == 5){ //timepoint sort
+                for(int i = 0; i < report.getTimepointTracker().size(); i++){
+                    cout << setw(16) << "Timepoint" << setw(10) << "Number\n";
+                    cout << setw(16) << report.getTimepointTracker().at(i)->timepoint << setw(10) << report.getTimepointTracker().at(i)->count << "\n";
+                }
+            }
         }
         else if(option == 3){ //display
             report.displayReport();
