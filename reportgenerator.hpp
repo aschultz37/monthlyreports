@@ -35,6 +35,7 @@ namespace RG{
             int filterMonth(int month, int year);
             void copytoSort();
             void displayReport();
+            void displayTimepointTracker();
             void writeReport(std::string outFileName);
             void sort(int option);
 

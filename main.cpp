@@ -77,12 +77,6 @@ int main(int argc, char **argv){
                 }
             }
             report.sort(sorttype);
-            if(sorttype == 5){ //timepoint sort
-                for(int i = 0; i < report.getTimepointTracker().size(); i++){
-                    cout << setw(16) << "Timepoint" << setw(10) << "Number\n";
-                    cout << setw(16) << report.getTimepointTracker().at(i)->timepoint << setw(10) << report.getTimepointTracker().at(i)->count << "\n";
-                }
-            }
         }
         else if(option == 3){ //display
             report.displayReport();

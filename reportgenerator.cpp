@@ -114,6 +114,16 @@ void RG::ReportGenerator::displayReport(){
     }
 }
 
+/*displayTimepointTracker
+* Prints a list of timepoints and the number of samples per timepoint to terminal
+*/
+void RG::ReportGenerator::displayTimepointTracker(){
+    cout << setw(16) << "Timepoint" << setw(10) << "Number\n";
+    for(int i = 0; i < timepointTracker.size(); i++){
+        cout << setw(16) << timepointTracker.at(i)->timepoint << setw(10) << timepointTracker.at(i)->count << "\n";
+    }
+}
+
 /*writeReport
 * Writes the resulting/sorted list to txt file
 */
@@ -182,6 +192,7 @@ void RG::ReportGenerator::sort(int option){
             break;
         case 5:
             timeSort();
+            displayTimepointTracker();
             break;
         case 6:
             dateSort();
