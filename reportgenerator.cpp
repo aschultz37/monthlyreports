@@ -73,10 +73,10 @@ void RG::ReportGenerator::copytoSort(){
 void RG::ReportGenerator::displayReport(){
     if(filetype == RG::filetypes::blood){
         cout << setw(PNWIDTH) << "PN" << setw(ARMWIDTH) << "Arm" << setw(VISITWIDTH) << "Visit" << setw(ONCWIDTH) << "OncID" 
-        << setw(STUDYWIDTH) << "StudyID" << setw(RECWIDTH) << "Received" << setw(DATEWIDTH) << "Date\n";
+        << setw(STUDYWIDTH) << "StudyID" << setw(RECWIDTH) << "Rec." << setw(DATEWIDTH) << "Date\n";
         for(int i = 0; i < sheets->bloodreport->getSortedLines().size(); i++){
             cout << setw(PNWIDTH) << sheets->bloodreport->getSortedLines().at(i)->PN;
-            cout << setw(STUDYWIDTH) << sheets->bloodreport->getSortedLines().at(i)->studyArm;
+            cout << setw(ARMWIDTH) << sheets->bloodreport->getSortedLines().at(i)->studyArm;
             cout << setw(VISITWIDTH) << sheets->bloodreport->getSortedLines().at(i)->visit;
             cout << setw(ONCWIDTH) << sheets->bloodreport->getSortedLines().at(i)->oncID;
             cout << setw(STUDYWIDTH) << sheets->bloodreport->getSortedLines().at(i)->subjectID;
