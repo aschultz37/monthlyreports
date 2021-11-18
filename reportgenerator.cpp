@@ -512,7 +512,6 @@ void RG::ReportGenerator::timeSort(){
             if(timepoints.size() > 0){ //to account for first iteration
                 bool found = false;
                 for(int j = 0; j < timepoints.size(); j++){
-                    //if(timepoints.at(j).compare(sheets->bloodreport->getFilteredLines().at(i)->visit) == 0){ found = true;}
                     if(spacelessHash(sheets->bloodreport->getFilteredLines().at(i)->visit) == spacelessHash(timepoints.at(j))){ found = true;}
                 }
                 if(!found){ timepoints.push_back(sheets->bloodreport->getFilteredLines().at(i)->visit);}
@@ -523,7 +522,6 @@ void RG::ReportGenerator::timeSort(){
         vector <vector<BR::EntryData*>> timepointVecs(timepoints.size());
         for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
             for(int j = 0; j < timepointVecs.size(); j++){
-                //if(sheets->bloodreport->getFilteredLines().at(i)->visit.compare(timepoints.at(j)) == 0){
                 if(spacelessHash(sheets->bloodreport->getFilteredLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                     timepointVecs.at(j).push_back(sheets->bloodreport->getFilteredLines().at(i));
                 }
@@ -551,7 +549,6 @@ void RG::ReportGenerator::timeSort(){
             if(timepoints.size() > 0){ //to account for first iteration
                 bool found = false;
                 for(int j = 0; j < timepoints.size(); j++){
-                    //if(timepoints.at(j).compare(sheets->tissuereport->getFilteredLines().at(i)->visit) == 0){ found = true;}
                     if(spacelessHash(sheets->tissuereport->getFilteredLines().at(i)->visit) == spacelessHash(timepoints.at(j))){ found = true;}
                 }
                 if(!found){ timepoints.push_back(sheets->tissuereport->getFilteredLines().at(i)->visit);}
@@ -562,7 +559,6 @@ void RG::ReportGenerator::timeSort(){
         vector <vector<TR::EntryData*>> timepointVecs(timepoints.size());
         for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
             for(int j = 0; j < timepointVecs.size(); j++){
-                //if(sheets->tissuereport->getFilteredLines().at(i)->visit.compare(timepoints.at(j)) == 0){
                 if(spacelessHash(sheets->tissuereport->getFilteredLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                     timepointVecs.at(j).push_back(sheets->tissuereport->getFilteredLines().at(i));
                 }
@@ -590,7 +586,6 @@ void RG::ReportGenerator::timeSort(){
             if(timepoints.size() > 0){ //to account for first iteration
                 bool found = false;
                 for(int j = 0; j < timepoints.size(); j++){
-                    //if(timepoints.at(j).compare(sheets->stoolreport->getFilteredLines().at(i)->visit) == 0){ found = true;}
                     if(spacelessHash(sheets->stoolreport->getFilteredLines().at(i)->visit) == spacelessHash(timepoints.at(j))){ found = true;}
                 }
                 if(!found){ timepoints.push_back(sheets->stoolreport->getFilteredLines().at(i)->visit);}
@@ -601,7 +596,6 @@ void RG::ReportGenerator::timeSort(){
         vector <vector<SR::EntryData*>> timepointVecs(timepoints.size());
         for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
             for(int j = 0; j < timepointVecs.size(); j++){
-                //if(sheets->stoolreport->getFilteredLines().at(i)->visit.compare(timepoints.at(j)) == 0){
                 if(spacelessHash(sheets->stoolreport->getFilteredLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                     timepointVecs.at(j).push_back(sheets->stoolreport->getFilteredLines().at(i));
                 }

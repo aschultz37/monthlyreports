@@ -4,6 +4,7 @@
 #include "bloodreport.hpp"
 #include "tissuereport.hpp"
 #include "stoolreport.hpp"
+#include "studylist.hpp"
 
 /*reportgenerator.hpp
 * This class assumes that an input .csv has standard format.
@@ -26,6 +27,11 @@ namespace RG{
         int count;
     };
 
+    struct StudyTimepoints{
+        std::string studyNumber;
+        vector <std::string> timepoints;
+    };
+
     class ReportGenerator{
         public:
             ReportGenerator();
@@ -41,12 +47,15 @@ namespace RG{
 
             void setFileType(int inFileType){ filetype = inFileType;}
             int getFileType(){ return filetype;}
+            void setStudyNumber(std::string studynumberin){ studynumber = studynumberin;}
+            std::string getStudyNumber(){ return studynumber;}
             std::vector <RG::TimepointCount*> const &getTimepointTracker(){ return timepointTracker;}
         private:
             std::vector <std::string> fileLines;
             std::vector <RG::TimepointCount*> timepointTracker;
+            std::vector <RG::StudyTimepoints*> studyList;
             RG::ReportSheets* sheets;
-            int filetype;
+            int filetype; std::string studynumber;
             int PNWIDTH = 5; int ARMWIDTH = 7; int VISITWIDTH = 16; int ONCWIDTH = 8; int STUDYWIDTH = 8; int RECWIDTH = 5; 
             int DATEWIDTH = 12; int SAMPLEWIDTH = 14; int BIOPSYWIDTH = 15; int STOOLWIDTH = 11;
             

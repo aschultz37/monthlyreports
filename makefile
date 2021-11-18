@@ -6,7 +6,7 @@ reportgenerator: main.o reportgenerator.o bloodreport.o tissuereport.o stoolrepo
 
 main.o: main.cpp reportgenerator.o
 
-reportgenerator.o: reportgenerator.cpp reportgenerator.hpp bloodreport.o tissuereport.o stoolreport.o
+reportgenerator.o: reportgenerator.cpp reportgenerator.hpp bloodreport.o tissuereport.o stoolreport.o studylist.hpp
 
 bloodreport.o: bloodreport.cpp bloodreport.hpp
 
