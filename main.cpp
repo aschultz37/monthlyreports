@@ -7,6 +7,7 @@ int monthsetup(int &month);
 int yearsetup(int &year);
 int mainmenu();
 int filetypemenu();
+string studyNumMenu();
 int sortmenu();
 void writefile(string &filename);
 
@@ -42,6 +43,7 @@ int main(int argc, char **argv){
                 }
                 report.setFileType(filetype);
             }
+            report.setStudyNumber(studyNumMenu());
             if(filetype != 4){ 
                 string filename = "";
                 printf("Please enter filename (including .csv): ");
@@ -201,6 +203,21 @@ int filetypemenu(){
     if(userChoice.compare("3") == 0) return 3;
     if(userChoice.compare("4") == 0) return 4;
     return -1;
+}
+
+string studyNumMenu(){
+    string userInput = "";
+    bool running = true;
+    while(running){
+        string userChoice = "";
+        printf("Please enter the study number without a hyphen (e.g. 20166): ");
+        cin >> userInput;
+        cout << "You input " << userInput << ", is that correct? (y/n): ";
+        cin >> userChoice;
+        if(userChoice.compare("y") == 0 || userChoice.compare("Y") == 0){ running = false;}
+        else{ printf("OK, try again.\n"); userInput = "";}
+    }
+    return userInput;
 }
 
 int sortmenu(){
