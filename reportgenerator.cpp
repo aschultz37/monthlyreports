@@ -540,6 +540,7 @@ void RG::ReportGenerator::timeSort(){
                 sheets->bloodreport->pushSortedLines(timepointVecs.at(i).at(j));
             }
         }
+        //do selection sort on sortedLines using timepointTracker and spacelessHash
     }
     else if(filetype == RG::filetypes::tissue){
         sheets->tissuereport->clearSort();
@@ -737,7 +738,7 @@ int RG::ReportGenerator::spacelessHash(string input){
     return tmp;
 }
 
-/*stoolHash()
+/*stoolHash
 * Hash function that prioritizes letters as coarse magnitude, then numbers as fine offset
 * For example, DF-0091 would have large magnitude based on DF, then offset of 91 from that
 * Ignores non-alphanumeric characters
@@ -763,11 +764,26 @@ long RG::ReportGenerator::stoolHash(string input){
     return hashvalue;
 }
 
+/*buildStudyList
+* Fills studyList based on studylist.hpp data
+*/
+void RG::ReportGenerator::buildStudyList(){
+    for(int i = 0; i < studyNums.size(); i++){
+        RG::StudyTimepoints* tmp = new RG::StudyTimepoints;
+        tmp->studyNumber = studyNums[i];
+        for(int j = 0; j < timepointsList.at(i).size(); j++){
+            tmp->timepoints.push_back(timepointsList[i][j]);
+        }
+        studyList.push_back(tmp);
+    }
+}
+
 RG::ReportGenerator::ReportGenerator(){
     sheets = new RG::ReportSheets;
     sheets->bloodreport = new BR::BloodReport;
     sheets->tissuereport = new TR::TissueReport;
     sheets->stoolreport = new SR::StoolReport;
+    buildStudyList();
 }
 
 RG::ReportGenerator::~ReportGenerator(){
@@ -775,5 +791,6 @@ RG::ReportGenerator::~ReportGenerator(){
     if(filetype == RG::filetypes::tissue){ delete sheets->tissuereport; sheets->tissuereport = NULL;}
     if(filetype == RG::filetypes::stool){ delete sheets->stoolreport; sheets->stoolreport = NULL;}
     for(int i = 0; i < timepointTracker.size(); i++){ delete timepointTracker.at(i); timepointTracker.at(i) = NULL;}
+    for(int i = 0; i < studyList.size(); i++){ delete studyList.at(i); studyList.at(i) = NULL;}
     //delete sheets; sheets = NULL;
 }
