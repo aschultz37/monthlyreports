@@ -534,13 +534,20 @@ void RG::ReportGenerator::timeSort(){
             tmp->count = timepointVecs.at(i).size();
             timepointTracker.push_back(tmp);
         }
+        //figure out the order of each vector w/ studyList and spacelessHash
+        int studyNumKey = -1;
+        for(int i = 0; i < studyNums.size(); i++){ //first find the key for which study it is
+            if(spacelessHash(studyNums[i]) == spacelessHash(studynumber)){ studyNumKey = i;}
+        }
+        if(studyNumKey != -1){ //if key is -1, the study wasn't found and we just won't try to sort
+
+        }
         //push the vectors back into sortedLines
         for(int i = 0; i < timepointVecs.size(); i++){
             for(int j = 0; j < timepointVecs.at(i).size(); j++){
                 sheets->bloodreport->pushSortedLines(timepointVecs.at(i).at(j));
             }
         }
-        //do selection sort on sortedLines using timepointTracker and spacelessHash
     }
     else if(filetype == RG::filetypes::tissue){
         sheets->tissuereport->clearSort();
@@ -764,26 +771,11 @@ long RG::ReportGenerator::stoolHash(string input){
     return hashvalue;
 }
 
-/*buildStudyList
-* Fills studyList based on studylist.hpp data
-*/
-void RG::ReportGenerator::buildStudyList(){
-    for(int i = 0; i < studyNums.size(); i++){
-        RG::StudyTimepoints* tmp = new RG::StudyTimepoints;
-        tmp->studyNumber = studyNums[i];
-        for(int j = 0; j < timepointsList.at(i).size(); j++){
-            tmp->timepoints.push_back(timepointsList[i][j]);
-        }
-        studyList.push_back(tmp);
-    }
-}
-
 RG::ReportGenerator::ReportGenerator(){
     sheets = new RG::ReportSheets;
     sheets->bloodreport = new BR::BloodReport;
     sheets->tissuereport = new TR::TissueReport;
     sheets->stoolreport = new SR::StoolReport;
-    buildStudyList();
 }
 
 RG::ReportGenerator::~ReportGenerator(){
@@ -791,6 +783,4 @@ RG::ReportGenerator::~ReportGenerator(){
     if(filetype == RG::filetypes::tissue){ delete sheets->tissuereport; sheets->tissuereport = NULL;}
     if(filetype == RG::filetypes::stool){ delete sheets->stoolreport; sheets->stoolreport = NULL;}
     for(int i = 0; i < timepointTracker.size(); i++){ delete timepointTracker.at(i); timepointTracker.at(i) = NULL;}
-    for(int i = 0; i < studyList.size(); i++){ delete studyList.at(i); studyList.at(i) = NULL;}
-    //delete sheets; sheets = NULL;
 }

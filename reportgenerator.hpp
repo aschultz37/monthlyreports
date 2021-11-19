@@ -26,11 +26,6 @@ namespace RG{
         int count;
     };
 
-    struct StudyTimepoints{
-        std::string studyNumber;
-        std::vector <std::string> timepoints;
-    };
-
     class ReportGenerator{
         public:
             ReportGenerator();
@@ -52,7 +47,6 @@ namespace RG{
         private:
             std::vector <std::string> fileLines;
             std::vector <RG::TimepointCount*> timepointTracker;
-            std::vector <RG::StudyTimepoints*> studyList;
             RG::ReportSheets* sheets;
             int filetype; std::string studynumber;
             int PNWIDTH = 5; int ARMWIDTH = 7; int VISITWIDTH = 16; int ONCWIDTH = 8; int STUDYWIDTH = 8; int RECWIDTH = 5; 
@@ -67,9 +61,8 @@ namespace RG{
             int dateCompare(std::string date1, std::string date2);
             int spacelessHash(std::string input);
             long stoolHash(std::string input);
-            void buildStudyList();
 
-                //list of studies
+            //list of studies
             std::vector <std::string> studyNums = 
                 {"20028", 
                 "17455", 
