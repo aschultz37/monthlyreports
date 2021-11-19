@@ -539,8 +539,10 @@ void RG::ReportGenerator::timeSort(){
         for(int i = 0; i < studyNums.size(); i++){ //first find the key for which study it is
             if(spacelessHash(studyNums[i]) == spacelessHash(studynumber)){ studyNumKey = i;}
         }
-        if(studyNumKey != -1){ //if key is -1, the study wasn't found and we just won't try to sort
-
+        if(studyNumKey >= 0){ //else the study wasn't found and we just won't try to sort
+            for(int i = 0; i < timepointsList[studyNumKey].size(); i++){
+                //check which priority the timepointVecs vec is & compare to others (selection sort)
+            }
         }
         //push the vectors back into sortedLines
         for(int i = 0; i < timepointVecs.size(); i++){

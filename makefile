@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -std=c++2a
+CFLAGS = -std=c++2a -Ox
 
 reportgenerator: main.o reportgenerator.o bloodreport.o tissuereport.o stoolreport.o
 	$(CC) $(CFLAGS) -o reportgenerator main.o reportgenerator.o bloodreport.o tissuereport.o stoolreport.o
