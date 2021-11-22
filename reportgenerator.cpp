@@ -534,16 +534,6 @@ void RG::ReportGenerator::timeSort(){
             tmp->count = timepointVecs.at(i).size();
             timepointTracker.push_back(tmp);
         }
-        //figure out the order of each vector w/ studyList and spacelessHash
-        int studyNumKey = -1;
-        for(int i = 0; i < studyNums.size(); i++){ //first find the key for which study it is
-            if(spacelessHash(studyNums[i]) == spacelessHash(studynumber)){ studyNumKey = i;}
-        }
-        if(studyNumKey >= 0){ //else the study wasn't found and we just won't try to sort
-            for(int i = 0; i < timepointsList[studyNumKey].size(); i++){
-                //check which priority the timepointVecs vec is & compare to others (selection sort)
-            }
-        }
         //push the vectors back into sortedLines
         for(int i = 0; i < timepointVecs.size(); i++){
             for(int j = 0; j < timepointVecs.at(i).size(); j++){

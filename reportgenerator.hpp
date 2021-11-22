@@ -61,7 +61,7 @@ namespace RG{
             int dateCompare(std::string date1, std::string date2);
             int spacelessHash(std::string input);
             long stoolHash(std::string input);
-
+            /*
             //list of studies
             std::vector <std::string> studyNums = 
                 {"20028", 
@@ -89,6 +89,6 @@ namespace RG{
                 {"baseline", "c1d1", "c4d1", "c7d1", "c8d1", "c9d1", "c10d1", "c13d1", "c14d1", "c16d1", "c19d1", "c22d1", "c25d1", "eot"},
                 {"baseline", "c2d1", "c3d1", "c4d1", "c5d1", "c6d1", "pre-op", "eot", "recurrence"},
                 {},
-                {"s1", "s2", "s3", "s4", "s5"}};
+                {"s1", "s2", "s3", "s4", "s5"}};*/
     };
 }
