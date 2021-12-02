@@ -33,6 +33,7 @@ int main(int argc, char **argv){ //argv format:./a.out mm yyyy filetype infilena
                 report.sort(6); //sort by date
                 report.writeReport(argv[5]); //write to file specified
             }
+            return 0;
         } catch(std::exception){
             cout << "Error: Invalid command line argument. Proceeding to manual setup.\n";
             setupMonthYear(month, year);
