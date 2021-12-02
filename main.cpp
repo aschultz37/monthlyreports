@@ -11,13 +11,34 @@ string studyNumMenu();
 int sortmenu();
 void writefile(string &filename);
 
-int main(int argc, char **argv){
+int main(int argc, char **argv){ //argv format:./a.out mm yyyy filetype infilename outfilename
     bool runbit = true;
     bool rerun = false;
     RG::ReportGenerator report = RG::ReportGenerator();
 
     int month = 0; int year = 0;
-    setupMonthYear(month, year);
+
+    if(argc >= 5){
+        try{
+            month = stoi(argv[1]);
+            year = stoi(argv[2]);
+            report.setFileType(stoi(argv[3]));
+            report.importCSV(argv[4]);
+            printf("File imported successfully.\n");
+            //now filter by month
+            int numEntriesMonth = report.filterMonth(month, year);
+            printf("Filtered by %d-%d.\n\nThere are %d samples.\n", month, year, numEntriesMonth);
+            report.copytoSort(); //need to do this in case want to display/write without sorting
+            if(argc >= 6){
+                report.sort(6); //sort by date
+                report.writeReport(argv[5]); //write to file specified
+            }
+        } catch(std::exception){
+            cout << "Error: Invalid command line argument. Proceeding to manual setup.\n";
+            setupMonthYear(month, year);
+        }
+    }
+    else{ setupMonthYear(month, year);}
 
     while(runbit){
         int option = 0;

@@ -9,7 +9,7 @@
 * This class assumes that an input .csv has standard format.
 * The .csv should be a standard Blood/Tissue/Stool Processing sheet from BTIL Biospecimens.
 * This class can extract and manipulate entries from a given month/year combination.
-* Results can be displayed to the terminal or written to a .txt file.
+* Results can be displayed to the terminal or written to a .csv file.
 */
 
 namespace RG{
