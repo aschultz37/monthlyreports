@@ -22,11 +22,11 @@ done
 shopt -s nullglob
 for sourcefile in $SOURCEDIRTISSUE; do
     BASE=${sourcefile##*/}
-    /home/aus87/BTIL/monthlyreports/reportgenerator $month $year "1" $sourcefile "${DESTDIRTISSUE}${BASE}"
+    /home/aus87/BTIL/monthlyreports/reportgenerator $month $year "2" $sourcefile "${DESTDIRTISSUE}${BASE}"
 done
 
 shopt -s nullglob
 for sourcefile in $SOURCEDIRSTOOL; do
     BASE=${sourcefile##*/}
-    /home/aus87/BTIL/monthlyreports/reportgenerator $month $year "1" $sourcefile "${DESTDIRSTOOL}${BASE}"
+    /home/aus87/BTIL/monthlyreports/reportgenerator $month $year "3" $sourcefile "${DESTDIRSTOOL}${BASE}"
 done
