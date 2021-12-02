@@ -43,7 +43,7 @@ int main(int argc, char **argv){
                 }
                 report.setFileType(filetype);
             }
-            report.setStudyNumber(studyNumMenu());
+            //report.setStudyNumber(studyNumMenu());
             if(filetype != 4){ 
                 string filename = "";
                 printf("Please enter filename (including .csv): ");
@@ -247,7 +247,7 @@ void writefile(string &filename){
         if(userin.length() > 0){ userin = userin.substr(0,1);}
         if(userin.compare("y") == 0 || userin.compare("Y") == 0){
             string filenamein = "";
-            printf("Please enter the output file name (ending in .txt): ");
+            printf("Please enter the output file name (ending in .csv): ");
             cin >> filenamein;
             string checkin = "";
             cout << "You entered " << filenamein << ", is that correct? (y/n): ";

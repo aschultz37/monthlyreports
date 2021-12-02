@@ -130,7 +130,7 @@ void RG::ReportGenerator::displayTimepointTracker(){
 void RG::ReportGenerator::writeReport(std::string outFileName){
     ofstream outfile; outfile.open(outFileName);
     if(filetype == RG::filetypes::blood){
-        outfile << setw(PNWIDTH) << "PN" << setw(ARMWIDTH) << "Arm" << setw(VISITWIDTH) << "Visit" << setw(ONCWIDTH) << "OncID" 
+        /*outfile << setw(PNWIDTH) << "PN" << setw(ARMWIDTH) << "Arm" << setw(VISITWIDTH) << "Visit" << setw(ONCWIDTH) << "OncID" 
         << setw(STUDYWIDTH) << "StudyID" << setw(RECWIDTH) << "Received" << setw(DATEWIDTH) << "Date\n";  
         for(int i = 0; i < sheets->bloodreport->getSortedLines().size(); i++){
             outfile << setw(PNWIDTH) << sheets->bloodreport->getSortedLines().at(i)->PN;
@@ -140,10 +140,16 @@ void RG::ReportGenerator::writeReport(std::string outFileName){
             outfile << setw(STUDYWIDTH) << sheets->bloodreport->getSortedLines().at(i)->subjectID;
             outfile << setw(RECWIDTH) << sheets->bloodreport->getSortedLines().at(i)->received;
             outfile << setw(DATEWIDTH) << sheets->bloodreport->getSortedLines().at(i)->date << '\n';
+        }*/
+        outfile << "PN,Arm,Visit,OncID,StudyID,Rec.,Date" << endl;
+        for(int i = 0; i < sheets->bloodreport->getSortedLines().size(); i++){
+            BR::EntryData* tmp = sheets->bloodreport->getSortedLines().at(i);
+            outfile << tmp->PN << "," << tmp->studyArm << "," << tmp->visit << "," << tmp->oncID << "," << tmp->subjectID << "," 
+                << tmp->received << "," << tmp->date << endl;
         }
     }
     else if(filetype == RG::filetypes::tissue){
-        outfile << setw(PNWIDTH) << "PN" << setw(ARMWIDTH) << "Arm" << setw(VISITWIDTH) << "Visit" << setw(ONCWIDTH) << "OncID" 
+        /*outfile << setw(PNWIDTH) << "PN" << setw(ARMWIDTH) << "Arm" << setw(VISITWIDTH) << "Visit" << setw(ONCWIDTH) << "OncID" 
         << setw(STUDYWIDTH) << "StudyID" << setw(SAMPLEWIDTH) << "Sample" << setw(BIOPSYWIDTH) << "Biopsy" << setw(DATEWIDTH) << "Date\n";
         for(int i = 0; i < sheets->tissuereport->getSortedLines().size(); i++){
             outfile << setw(PNWIDTH) << sheets->tissuereport->getSortedLines().at(i)->PN;
@@ -154,10 +160,16 @@ void RG::ReportGenerator::writeReport(std::string outFileName){
             outfile << setw(SAMPLEWIDTH) << sheets->tissuereport->getSortedLines().at(i)->sampleType;
             outfile << setw(BIOPSYWIDTH) << sheets->tissuereport->getSortedLines().at(i)->biopsyType;
             outfile << setw(DATEWIDTH) << sheets->tissuereport->getSortedLines().at(i)->date << '\n';
+        }*/
+        outfile << "PN,Arm,Visit,OncID,StudyID,Sample,Biopsy,Date" << endl;
+        for(int i = 0; i < sheets->tissuereport->getSortedLines().size(); i++){
+            TR::EntryData* tmp = sheets->tissuereport->getSortedLines().at(i);
+            outfile << tmp->PN << "," << tmp->studyArm << "," << tmp->visit << "," << tmp->oncID << "," << tmp->subjectID << "," 
+                << tmp->sampleType << "," << tmp->biopsyType << "," << tmp->date << endl;
         }
     }
     else if(filetype == RG::filetypes::stool){
-        outfile << setw(PNWIDTH) << "PN" << setw(ARMWIDTH) << "Arm" << setw(VISITWIDTH) << "Visit" << setw(ONCWIDTH) << "OncID" 
+        /*outfile << setw(PNWIDTH) << "PN" << setw(ARMWIDTH) << "Arm" << setw(VISITWIDTH) << "Visit" << setw(ONCWIDTH) << "OncID" 
         << setw(STUDYWIDTH) << "StudyID" << setw(STOOLWIDTH) << "StoolID" << setw(RECWIDTH) << "Received" << setw(DATEWIDTH) << "Date\n";
         for(int i = 0; i < sheets->stoolreport->getSortedLines().size(); i++){
             outfile << setw(PNWIDTH) << sheets->stoolreport->getSortedLines().at(i)->PN;
@@ -168,6 +180,12 @@ void RG::ReportGenerator::writeReport(std::string outFileName){
             outfile << setw(STOOLWIDTH) << sheets->stoolreport->getSortedLines().at(i)->stoolID;
             outfile << setw(RECWIDTH) << sheets->stoolreport->getSortedLines().at(i)->received;
             outfile << setw(DATEWIDTH) << sheets->stoolreport->getSortedLines().at(i)->date << '\n';
+        }*/
+        outfile << "PN,Arm,Visit,OncID,StudyID,StoolID,Rec.,Date" << endl;
+        for(int i = 0; i < sheets->stoolreport->getSortedLines().size(); i++){
+            SR::EntryData* tmp = sheets->stoolreport->getSortedLines().at(i);
+            outfile << tmp->PN << "," << tmp->studyArm << "," << tmp->visit << "," << tmp->oncID << "," << tmp->subjectID << "," 
+                << tmp->stoolID << "," << tmp->received << "," << tmp->date << endl;
         }
     }
     outfile.close();
