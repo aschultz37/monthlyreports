@@ -25,6 +25,7 @@ int main(int argc, char **argv){ //argv format:./a.out mm yyyy filetype infilena
             report.setFileType(stoi(argv[3]));
             report.importCSV(argv[4]);
             printf("File imported successfully.\n");
+            //TODO count total # of each timepoint; use parsedLines from <type>report.hpp
             //now filter by month
             int numEntriesMonth = report.filterMonth(month, year);
             printf("Filtered by %d-%d.\n\nThere are %d samples.\n", month, year, numEntriesMonth);

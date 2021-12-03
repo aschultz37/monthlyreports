@@ -125,7 +125,7 @@ void RG::ReportGenerator::displayTimepointTracker(){
 }
 
 /*writeReport
-* Writes the resulting/sorted list to txt file
+* Writes the resulting/sorted list to csv file
 */
 void RG::ReportGenerator::writeReport(std::string outFileName){
     ofstream outfile; outfile.open(outFileName);
