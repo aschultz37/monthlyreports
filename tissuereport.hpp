@@ -22,6 +22,7 @@ namespace TR{
             
             std::vector <TR::EntryData*> const &getFilteredLines(){ return filteredLines;}
             std::vector <TR::EntryData*> const &getSortedLines(){ return sortedLines;}
+            std::vector <TR::EntryData*> const &getParsedLines(){ return parsedLines;}
 
             void pushSortedLines(TR::EntryData* input){ sortedLines.push_back(input);}
 

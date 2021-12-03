@@ -21,6 +21,7 @@ namespace BR{
             
             std::vector <BR::EntryData*> const &getFilteredLines(){ return filteredLines;}
             std::vector <BR::EntryData*> const &getSortedLines(){ return sortedLines;}
+            std::vector <BR::EntryData*> const &getParsedLines(){ return parsedLines;}
 
             void pushSortedLines(BR::EntryData* input){ sortedLines.push_back(input);}
 

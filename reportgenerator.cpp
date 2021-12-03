@@ -124,12 +124,111 @@ void RG::ReportGenerator::displayTimepointTracker(){
     }
 }
 
+/*totalTimepoints
+* Determines the total # of samples per timepoint of the entire report (pre-month filter)
+* Fills vector timepointTotal based on parsedLines from <type>report.hpp
+*/
+void RG::ReportGenerator::totalTimepoints(){
+    if(filetype == RG::filetypes::blood){
+        vector <string> timepoints;
+        for(int i = 0; i < sheets->bloodreport->getParsedLines().size(); i++){
+            if(timepoints.size() > 0){ //to account for first iteration
+                bool found = false;
+                for(int j = 0; j < timepoints.size(); j++){
+                    if(spacelessHash(sheets->bloodreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){ found = true;}
+                }
+                if(!found){ timepoints.push_back(sheets->bloodreport->getParsedLines().at(i)->visit);}
+            }
+            else timepoints.push_back(sheets->bloodreport->getParsedLines().at(i)->visit);
+        }
+        //create vector for each unique timepoint & fill w/ each matching entry
+        vector <vector<BR::EntryData*>> timepointVecs(timepoints.size());
+        for(int i = 0; i < sheets->bloodreport->getParsedLines().size(); i++){
+            for(int j = 0; j < timepointVecs.size(); j++){
+                if(spacelessHash(sheets->bloodreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
+                    timepointVecs.at(j).push_back(sheets->bloodreport->getParsedLines().at(i));
+                }
+            }
+        }
+        //fill timepointTotal w/ entry for each timepoint
+        for(int i = 0; i < timepoints.size(); i++){
+            RG::TimepointCount* tmp = new RG::TimepointCount;
+            tmp->timepoint = timepoints.at(i);
+            tmp->count = timepointVecs.at(i).size();
+            timepointTotal.push_back(tmp);
+        }
+    }
+    else if(filetype == RG::filetypes::tissue){
+        vector <string> timepoints;
+        for(int i = 0; i < sheets->tissuereport->getParsedLines().size(); i++){
+            if(timepoints.size() > 0){ //to account for first iteration
+                bool found = false;
+                for(int j = 0; j < timepoints.size(); j++){
+                    if(spacelessHash(sheets->tissuereport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){ found = true;}
+                }
+                if(!found){ timepoints.push_back(sheets->tissuereport->getParsedLines().at(i)->visit);}
+            }
+            else timepoints.push_back(sheets->tissuereport->getParsedLines().at(i)->visit);
+        }
+        //create vector for each unique timepoint & fill w/ each matching entry
+        vector <vector<TR::EntryData*>> timepointVecs(timepoints.size());
+        for(int i = 0; i < sheets->tissuereport->getParsedLines().size(); i++){
+            for(int j = 0; j < timepointVecs.size(); j++){
+                if(spacelessHash(sheets->tissuereport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
+                    timepointVecs.at(j).push_back(sheets->tissuereport->getParsedLines().at(i));
+                }
+            }
+        }
+        //fill timepointTotal w/ entry for each timepoint
+        for(int i = 0; i < timepoints.size(); i++){
+            RG::TimepointCount* tmp = new RG::TimepointCount;
+            tmp->timepoint = timepoints.at(i);
+            tmp->count = timepointVecs.at(i).size();
+            timepointTotal.push_back(tmp);
+        }
+    }
+    else if(filetype == RG::filetypes::stool){
+        //list of unique timepoints
+        vector <string> timepoints;
+        for(int i = 0; i < sheets->stoolreport->getParsedLines().size(); i++){
+            if(timepoints.size() > 0){ //to account for first iteration
+                bool found = false;
+                for(int j = 0; j < timepoints.size(); j++){
+                    if(spacelessHash(sheets->stoolreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){ found = true;}
+                }
+                if(!found){ timepoints.push_back(sheets->stoolreport->getParsedLines().at(i)->visit);}
+            }
+            else timepoints.push_back(sheets->stoolreport->getParsedLines().at(i)->visit);
+        }
+        //create vector for each unique timepoint & fill w/ each matching entry
+        vector <vector<SR::EntryData*>> timepointVecs(timepoints.size());
+        for(int i = 0; i < sheets->stoolreport->getParsedLines().size(); i++){
+            for(int j = 0; j < timepointVecs.size(); j++){
+                if(spacelessHash(sheets->stoolreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
+                    timepointVecs.at(j).push_back(sheets->stoolreport->getParsedLines().at(i));
+                }
+            }
+        }
+        //fill timepointTotal w/ entry for each timepoint
+        for(int i = 0; i < timepoints.size(); i++){
+            RG::TimepointCount* tmp = new RG::TimepointCount;
+            tmp->timepoint = timepoints.at(i);
+            tmp->count = timepointVecs.at(i).size();
+            timepointTotal.push_back(tmp);
+        }
+    }
+}
+
 /*writeReport
 * Writes the resulting/sorted list to csv file
 */
 void RG::ReportGenerator::writeReport(std::string outFileName){
     ofstream outfile; outfile.open(outFileName);
-    outfile << "Timepoint,Number" << endl;
+    outfile << "Timepoint,Number,TOTAL" << endl;
+    for(int i = 0; i < timepointTotal.size(); i++){
+        outfile << timepointTotal.at(i)->timepoint << "," << timepointTotal.at(i)->count << endl;
+    }
+    outfile << "Timepoint,Number,MONTHLY" << endl;
     for(int i = 0; i < timepointTracker.size(); i++){
         outfile << timepointTracker.at(i)->timepoint << "," << timepointTracker.at(i)->count << endl;
     }
@@ -762,4 +861,5 @@ RG::ReportGenerator::~ReportGenerator(){
     if(filetype == RG::filetypes::tissue){ delete sheets->tissuereport; sheets->tissuereport = NULL;}
     if(filetype == RG::filetypes::stool){ delete sheets->stoolreport; sheets->stoolreport = NULL;}
     for(int i = 0; i < timepointTracker.size(); i++){ delete timepointTracker.at(i); timepointTracker.at(i) = NULL;}
+    for(int i = 0; i < timepointTotal.size(); i++){ delete timepointTotal.at(i); timepointTotal.at(i) = NULL;}
 }

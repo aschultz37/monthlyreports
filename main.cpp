@@ -18,19 +18,20 @@ int main(int argc, char **argv){ //argv format:./a.out mm yyyy filetype infilena
 
     int month = 0; int year = 0;
 
-    if(argc >= 5){
+    if(argc >= 5){ //for use with script
         try{
             month = stoi(argv[1]);
             year = stoi(argv[2]);
             report.setFileType(stoi(argv[3]));
             report.importCSV(argv[4]);
             printf("File imported successfully.\n");
-            //TODO count total # of each timepoint; use parsedLines from <type>report.hpp
+            //count total # of each timepoint
+            report.totalTimepoints();
             //now filter by month
             int numEntriesMonth = report.filterMonth(month, year);
             printf("Filtered by %d-%d.\n\nThere are %d samples.\n", month, year, numEntriesMonth);
             report.copytoSort(); //need to do this in case want to display/write without sorting
-            if(numEntriesMonth == 0){ runbit = false;}            
+            if(argc >= 6 && numEntriesMonth == 0){ runbit = false;}            
             else if(argc >= 6){
                 report.sort(5); //sort by timepoint (to fill timepointTracker)
                 report.sort(6); //sort by date
@@ -76,6 +77,8 @@ int main(int argc, char **argv){ //argv format:./a.out mm yyyy filetype infilena
                 try{
                     report.importCSV(filename);
                     printf("File imported successfully.\n");
+                    //count total # of each timepoint
+                    report.totalTimepoints();
                     //now filter by month
                     int numEntriesMonth = report.filterMonth(month, year);
                     printf("Filtered by %d-%d.\n\nThere are %d samples.\n", month, year, numEntriesMonth);

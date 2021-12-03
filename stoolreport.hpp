@@ -22,6 +22,7 @@ namespace SR{
            
             std::vector <SR::EntryData*> const &getFilteredLines(){ return filteredLines;}
             std::vector <SR::EntryData*> const &getSortedLines(){ return sortedLines;}
+            std::vector <SR::EntryData*> const &getParsedLines(){ return parsedLines;}
 
             void pushSortedLines(SR::EntryData* input){ sortedLines.push_back(input);}
 
