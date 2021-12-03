@@ -31,6 +31,7 @@ int main(int argc, char **argv){ //argv format:./a.out mm yyyy filetype infilena
             report.copytoSort(); //need to do this in case want to display/write without sorting
             if(numEntriesMonth == 0){ runbit = false;}            
             else if(argc >= 6){
+                report.sort(5); //sort by timepoint (to fill timepointTracker)
                 report.sort(6); //sort by date
                 report.writeReport(argv[5]); //write to file specified
                 runbit = false;
