@@ -37,6 +37,7 @@ You can also import a different file and/or change the month/year from the main 
 Note that while the program can deal with some formatting and input discrepanices, it is best not to rely on error handling! :)  
 
 SCRIPT USE  
+NOTE: There is very limited/no error checking when using script mode.  
 Set up the file system:  
  - Make separate source and destination folders for blood, stool, and tissue sheets  
  - Set the variables at the top of generator.sh to these filepaths, ending SOURCE paths with /*  
