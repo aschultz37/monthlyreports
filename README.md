@@ -40,10 +40,12 @@ SCRIPT USE
 Set up the file system:  
  - Make separate source and destination folders for blood, stool, and tissue sheets  
  - Set the variables at the top of generator.sh to these filepaths, ending SOURCE paths with /*  
+
 Create the .csv files:  
  - Copy from the Processing Excel sheets into a .csv (comma-delimited) file.  
  - DO NOT copy the first line/two lines which are only headings; start at first patient.  
  - Copy from PN (leftmost column) through Date - DO NOT copy past date!  
+
 Make sure the .csv files are in the appropriate folder (blood/stool/tissue).  
 Change the program location appropriately.  
 Run the script: ./generator.sh  
