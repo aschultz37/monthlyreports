@@ -23,8 +23,10 @@ int main(int argc, char **argv){ //argv format:./a.out mm yyyy filetype infilena
             month = stoi(argv[1]);
             year = stoi(argv[2]);
             report.setFileType(stoi(argv[3]));
-            report.importCSV(argv[4]);
-            printf("File imported successfully.\n");
+            string infilename = argv[4];
+            report.importCSV(infilename);
+            cout << infilename << " imported successfully.\n";
+            //printf("File imported successfully.\n");
             //count total # of each timepoint
             report.totalTimepoints();
             //now filter by month
@@ -112,7 +114,7 @@ int main(int argc, char **argv){ //argv format:./a.out mm yyyy filetype infilena
             report.displayReport();
         }
         else if(option == 4){ //write
-            string outputfile = "monthly_report.txt"; //default output location
+            string outputfile = "monthly_report.csv"; //default output location
             writefile(outputfile);
             cout << "The output will be written to " << outputfile << ".\n";
             try{
