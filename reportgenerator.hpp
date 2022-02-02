@@ -36,7 +36,7 @@ namespace RG{
             void copytoSort();
             void displayReport();
             void displayTimepointTracker();
-            void totalTimepoints();
+            void totalTimepoints(int month, int year);
             void writeReport(std::string outFileName);
             void sort(int option);
 

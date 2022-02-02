@@ -128,7 +128,7 @@ void RG::ReportGenerator::displayTimepointTracker(){
 * Determines the total # of samples per timepoint of the entire report (pre-month filter)
 * Fills vector timepointTotal based on parsedLines from <type>report.hpp
 */
-void RG::ReportGenerator::totalTimepoints(){
+void RG::ReportGenerator::totalTimepoints(int month, int year){
     if(filetype == RG::filetypes::blood){
         vector <string> timepoints;
         for(int i = 0; i < sheets->bloodreport->getParsedLines().size(); i++){
@@ -146,6 +146,7 @@ void RG::ReportGenerator::totalTimepoints(){
         for(int i = 0; i < sheets->bloodreport->getParsedLines().size(); i++){
             for(int j = 0; j < timepointVecs.size(); j++){
                 if(spacelessHash(sheets->bloodreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
+                    //TODO CHECK IF DATE IS <= THE REPORT MM-YYYY
                     timepointVecs.at(j).push_back(sheets->bloodreport->getParsedLines().at(i));
                 }
             }
