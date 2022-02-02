@@ -146,8 +146,12 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
         for(int i = 0; i < sheets->bloodreport->getParsedLines().size(); i++){
             for(int j = 0; j < timepointVecs.size(); j++){
                 if(spacelessHash(sheets->bloodreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
-                    //TODO CHECK IF DATE IS <= THE REPORT MM-YYYY
-                    timepointVecs.at(j).push_back(sheets->bloodreport->getParsedLines().at(i));
+                    //check year, month <= parsedLines.at(i)->date; check for return 0 exception
+                    if(year <= sheets->bloodreport->extractYear(sheets->bloodreport->getParsedLines().at(i)->date) && year != 0){
+                        if(month <= sheets->bloodreport->extractMonth(sheets->bloodreport->getParsedLines().at(i)->date) && year != 0){
+                            timepointVecs.at(j).push_back(sheets->bloodreport->getParsedLines().at(i));
+                        }
+                    }
                 }
             }
         }
@@ -176,6 +180,7 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
         for(int i = 0; i < sheets->tissuereport->getParsedLines().size(); i++){
             for(int j = 0; j < timepointVecs.size(); j++){
                 if(spacelessHash(sheets->tissuereport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
+                    //TODO CHECK IF DATE IS <= THE REPORT MM-YYYY
                     timepointVecs.at(j).push_back(sheets->tissuereport->getParsedLines().at(i));
                 }
             }
@@ -206,6 +211,7 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
         for(int i = 0; i < sheets->stoolreport->getParsedLines().size(); i++){
             for(int j = 0; j < timepointVecs.size(); j++){
                 if(spacelessHash(sheets->stoolreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
+                    //TODO CHECK IF DATE IS <= THE REPORT MM-YYYY
                     timepointVecs.at(j).push_back(sheets->stoolreport->getParsedLines().at(i));
                 }
             }

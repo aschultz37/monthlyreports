@@ -32,12 +32,11 @@ namespace SR{
             void clearSort();
             void clearFiltered();
             void swapSortedLines(int index1, int index2);
+            int extractMonth(std::string date);
+            int extractYear(std::string date);
         private:
             std::vector <SR::EntryData*> parsedLines;
             std::vector <SR::EntryData*> filteredLines;
             std::vector <SR::EntryData*> sortedLines;
-
-            int extractMonth(std::string date);
-            int extractYear(std::string date);
     };
 }
