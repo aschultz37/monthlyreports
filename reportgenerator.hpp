@@ -64,5 +64,7 @@ namespace RG{
             int dateCompare(std::string date1, std::string date2);
             int spacelessHash(std::string input);
             long stoolHash(std::string input);
+            int extractMonth(std::string date);
+            int extractYear(std::string date);
     };
 }

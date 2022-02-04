@@ -147,8 +147,8 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
             for(int j = 0; j < timepointVecs.size(); j++){
                 if(spacelessHash(sheets->bloodreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                     //check year, month <= parsedLines.at(i)->date; check for return 0 exception
-                    if(year <= sheets->bloodreport->extractYear(sheets->bloodreport->getParsedLines().at(i)->date) && year != 0){
-                        if(month <= sheets->bloodreport->extractMonth(sheets->bloodreport->getParsedLines().at(i)->date) && year != 0){
+                    if(year <= extractYear(sheets->bloodreport->getParsedLines().at(i)->date) && year != 0){
+                        if(month <= extractMonth(sheets->bloodreport->getParsedLines().at(i)->date) && year != 0){
                             timepointVecs.at(j).push_back(sheets->bloodreport->getParsedLines().at(i));
                         }
                     }
@@ -181,8 +181,8 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
             for(int j = 0; j < timepointVecs.size(); j++){
                 if(spacelessHash(sheets->tissuereport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                     //check year, month <= parsedLines.at(i)->date; check for return 0 exception
-                    if(year <= sheets->tissuereport->extractYear(sheets->tissuereport->getParsedLines().at(i)->date) && year != 0){
-                        if(month <= sheets->tissuereport->extractMonth(sheets->tissuereport->getParsedLines().at(i)->date) && year != 0){
+                    if(year <= extractYear(sheets->tissuereport->getParsedLines().at(i)->date) && year != 0){
+                        if(month <= extractMonth(sheets->tissuereport->getParsedLines().at(i)->date) && year != 0){
                             timepointVecs.at(j).push_back(sheets->tissuereport->getParsedLines().at(i));
                         }
                     }
@@ -216,8 +216,8 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
             for(int j = 0; j < timepointVecs.size(); j++){
                 if(spacelessHash(sheets->stoolreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                     //check year, month <= parsedLines.at(i)->date; check for return 0 exception
-                    if(year <= sheets->stoolreport->extractYear(sheets->stoolreport->getParsedLines().at(i)->date) && year != 0){
-                        if(month <= sheets->stoolreport->extractMonth(sheets->stoolreport->getParsedLines().at(i)->date) && year != 0){
+                    if(year <= extractYear(sheets->stoolreport->getParsedLines().at(i)->date) && year != 0){
+                        if(month <= extractMonth(sheets->stoolreport->getParsedLines().at(i)->date) && year != 0){
                             timepointVecs.at(j).push_back(sheets->stoolreport->getParsedLines().at(i));
                         }
                     }
@@ -862,6 +862,38 @@ long RG::ReportGenerator::stoolHash(string input){
         }
     }
     return hashvalue;
+}
+
+/*extractMonth
+* Returns the month (as an integer) as extracted from a date (string) of format m/d/y
+*/
+int RG::ReportGenerator::extractMonth(string date){
+    char delimiter = '/'; 
+    int i = 0; string month = "";
+    while(date[i] != delimiter){ month.append(1, date[i++]);}
+    try{
+        return stoi(month);
+    } catch(invalid_argument){
+        return 0;
+    }
+}
+
+/*extractYear
+* Returns the year (as an integer) as extracted from a date (string) of format m/d/y
+*/
+int RG::ReportGenerator::extractYear(string date){
+    char delimiter = '/'; 
+    int i = 0; string year = "";
+    while(date[i] != delimiter){i++;} //thru month
+    i++; //skip /
+    while(date[i] != delimiter){i++;} //thru day
+    i++; //skip /
+    year = date.substr(i, date.length());
+    try{
+        return stoi(year);
+    } catch(invalid_argument){
+        return 0;
+    }
 }
 
 RG::ReportGenerator::ReportGenerator(){
