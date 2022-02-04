@@ -189,7 +189,7 @@ int monthsetup(int &month){
     return -1;
 }
 
-int yearsetup(int &year){ 
+int yearsetup(int &year){
     bool waiting = true;
     while(waiting){
         string userChoice = "";
