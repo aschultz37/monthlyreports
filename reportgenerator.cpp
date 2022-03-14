@@ -177,19 +177,25 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
                 for(int j = 0; j < timepoints.size(); j++){
                     if(spacelessHash(sheets->tissuereport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){ found = true;}
                 }
-                if(!found){ timepoints.push_back(sheets->tissuereport->getParsedLines().at(i)->visit);}
+                if(!found){ 
+                    if(!sheets->tissuereport->isEmpty(i)){
+                        timepoints.push_back(sheets->tissuereport->getParsedLines().at(i)->visit);
+                    }
+                }
             }
             else timepoints.push_back(sheets->tissuereport->getParsedLines().at(i)->visit);
         }
         //create vector for each unique timepoint & fill w/ each matching entry
         vector <vector<TR::EntryData*>> timepointVecs(timepoints.size());
         for(int i = 0; i < sheets->tissuereport->getParsedLines().size(); i++){
-            for(int j = 0; j < timepointVecs.size(); j++){
-                if(spacelessHash(sheets->tissuereport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
-                    //check year, month <= parsedLines.at(i)->date; check for return 0 exception
-                    if(extractYear(sheets->tissuereport->getParsedLines().at(i)->date) <= year){
-                        if(extractMonth(sheets->tissuereport->getParsedLines().at(i)->date) <= month){
-                            timepointVecs.at(j).push_back(sheets->tissuereport->getParsedLines().at(i));
+            if(!sheets->tissuereport->isEmpty(i)){
+                for(int j = 0; j < timepointVecs.size(); j++){
+                    if(spacelessHash(sheets->tissuereport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
+                        //check year, month <= parsedLines.at(i)->date; check for return 0 exception
+                        if(extractYear(sheets->tissuereport->getParsedLines().at(i)->date) <= year){
+                            if(extractMonth(sheets->tissuereport->getParsedLines().at(i)->date) <= month){
+                                timepointVecs.at(j).push_back(sheets->tissuereport->getParsedLines().at(i));
+                            }
                         }
                     }
                 }
@@ -212,19 +218,25 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
                 for(int j = 0; j < timepoints.size(); j++){
                     if(spacelessHash(sheets->stoolreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){ found = true;}
                 }
-                if(!found){ timepoints.push_back(sheets->stoolreport->getParsedLines().at(i)->visit);}
+                if(!found){ 
+                    if(!sheets->stoolreport->isEmpty(i)){
+                        timepoints.push_back(sheets->stoolreport->getParsedLines().at(i)->visit);
+                    }
+                }
             }
             else timepoints.push_back(sheets->stoolreport->getParsedLines().at(i)->visit);
         }
         //create vector for each unique timepoint & fill w/ each matching entry
         vector <vector<SR::EntryData*>> timepointVecs(timepoints.size());
         for(int i = 0; i < sheets->stoolreport->getParsedLines().size(); i++){
-            for(int j = 0; j < timepointVecs.size(); j++){
-                if(spacelessHash(sheets->stoolreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
-                    //check year, month <= parsedLines.at(i)->date; check for return 0 exception
-                    if(extractYear(sheets->stoolreport->getParsedLines().at(i)->date) <= year){
-                        if(extractMonth(sheets->stoolreport->getParsedLines().at(i)->date) <= month){
-                            timepointVecs.at(j).push_back(sheets->stoolreport->getParsedLines().at(i));
+            if(!sheets->stoolreport->isEmpty(i)){
+                for(int j = 0; j < timepointVecs.size(); j++){
+                    if(spacelessHash(sheets->stoolreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
+                        //check year, month <= parsedLines.at(i)->date; check for return 0 exception
+                        if(extractYear(sheets->stoolreport->getParsedLines().at(i)->date) <= year){
+                            if(extractMonth(sheets->stoolreport->getParsedLines().at(i)->date) <= month){
+                                timepointVecs.at(j).push_back(sheets->stoolreport->getParsedLines().at(i));
+                            }
                         }
                     }
                 }

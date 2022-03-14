@@ -76,6 +76,22 @@ void TR::TissueReport::swapSortedLines(int index1, int index2){
     sortedLines.at(index2) = tmp;
 }
 
+/*isEmpty
+* Determines if all fields of the struct located at parsedLines(index) are empty
+* Returns true if empty, false if filled w/ info
+*/
+bool TR::TissueReport::isEmpty(int index){
+    if(parsedLines.at(index)->date.length() >= 2){ return false;}
+    else if(parsedLines.at(index)->PN.length() != 0){ return false;}
+    else if(parsedLines.at(index)->studyArm.length() != 0){ return false;}
+    else if(parsedLines.at(index)->visit.length() != 0){ return false;}
+    else if(parsedLines.at(index)->oncID.length() != 0){ return false;}
+    else if(parsedLines.at(index)->subjectID.length() != 0){ return false;}
+    else if(parsedLines.at(index)->sampleType.length() != 0){ return false;}
+    else if(parsedLines.at(index)->biopsyType.length() != 0){ return false;}
+    else return true;
+}
+
 /*extractMonth
 * Returns the month (as an integer) as extracted from a date (string) of format m/d/y
 */

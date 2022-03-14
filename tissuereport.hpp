@@ -32,6 +32,7 @@ namespace TR{
             void clearSort();
             void clearFiltered();
             void swapSortedLines(int index1, int index2);
+            bool isEmpty(int index);
         private:
             std::vector <TR::EntryData*> parsedLines;
             std::vector <TR::EntryData*> filteredLines;
