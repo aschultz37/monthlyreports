@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <ctype.h>
 #include "bloodreport.hpp"
 #include "tissuereport.hpp"
 #include "stoolreport.hpp"
@@ -66,5 +67,6 @@ namespace RG{
             long stoolHash(std::string input);
             int extractMonth(std::string date);
             int extractYear(std::string date);
+            bool validDate(std::string date, char delimiter);
     };
 }

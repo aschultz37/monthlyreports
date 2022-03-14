@@ -137,19 +137,25 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
                 for(int j = 0; j < timepoints.size(); j++){
                     if(spacelessHash(sheets->bloodreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){ found = true;}
                 }
-                if(!found){ timepoints.push_back(sheets->bloodreport->getParsedLines().at(i)->visit);}
+                if(!found){ 
+                    if(!sheets->bloodreport->isEmpty(i)){
+                        timepoints.push_back(sheets->bloodreport->getParsedLines().at(i)->visit);
+                    }
+                }
             }
             else timepoints.push_back(sheets->bloodreport->getParsedLines().at(i)->visit);
         }
         //create vector for each unique timepoint & fill w/ each matching entry
         vector <vector<BR::EntryData*>> timepointVecs(timepoints.size());
         for(int i = 0; i < sheets->bloodreport->getParsedLines().size(); i++){
-            for(int j = 0; j < timepointVecs.size(); j++){
-                if(spacelessHash(sheets->bloodreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
-                    //check year, month <= parsedLines.at(i)->date; still count return 0 exceptions
-                    if(extractYear(sheets->bloodreport->getParsedLines().at(i)->date) <= year){
-                        if(extractMonth(sheets->bloodreport->getParsedLines().at(i)->date) <= month){
-                            timepointVecs.at(j).push_back(sheets->bloodreport->getParsedLines().at(i));
+            if(!sheets->bloodreport->isEmpty(i)){ //check if entry has any info in it
+                for(int j = 0; j < timepointVecs.size(); j++){
+                    if(spacelessHash(sheets->bloodreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
+                        //check year, month <= parsedLines.at(i)->date; still count return 0 exceptions
+                        if(extractYear(sheets->bloodreport->getParsedLines().at(i)->date) <= year){
+                            if(extractMonth(sheets->bloodreport->getParsedLines().at(i)->date) <= month){
+                                timepointVecs.at(j).push_back(sheets->bloodreport->getParsedLines().at(i));
+                            }
                         }
                     }
                 }
