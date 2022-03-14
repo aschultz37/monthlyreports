@@ -31,6 +31,7 @@ namespace BR{
             void clearSort();
             void clearFiltered();
             void swapSortedLines(int index1, int index2);
+            bool isEmpty(int index);
         private:
             std::vector <BR::EntryData*> parsedLines;
             std::vector <BR::EntryData*> filteredLines;
