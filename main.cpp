@@ -131,6 +131,9 @@ int main(int argc, char **argv){ //argv format:./a.out mm yyyy filetype infilena
             report.filterMonth(month, year);
             printf("Filtered by %d-%d.\n", month, year);
             report.copytoSort(); //need to do this in case want to display/write without sorting
+            report.clearTimepointTracker(); //clear timepointTracker
+            report.clearTimepointTotal(); //clear timepointTotal
+            report.totalTimepoints(month, year); //recalculate totalTimepoints with new month/year
         }
         else if(option == 6){ //quit
             printf("Program closing.\n");

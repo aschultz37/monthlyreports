@@ -910,6 +910,20 @@ int RG::ReportGenerator::extractYear(string date){
     }
 }
 
+void RG::ReportGenerator::clearTimepointTracker(){
+    for(int i = 0; i < timepointTracker.size(); i++){ 
+        delete timepointTracker.at(i); 
+        timepointTracker.clear();
+    }
+}
+
+void RG::ReportGenerator::clearTimepointTotal(){
+    for(int i = 0; i < timepointTotal.size(); i++){ 
+        delete timepointTotal.at(i); 
+        timepointTotal.clear();
+    }
+}
+
 RG::ReportGenerator::ReportGenerator(){
     sheets = new RG::ReportSheets;
     sheets->bloodreport = new BR::BloodReport;

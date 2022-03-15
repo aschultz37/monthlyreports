@@ -47,6 +47,8 @@ namespace RG{
             std::string getStudyNumber(){ return studynumber;}
             std::vector <RG::TimepointCount*> const &getTimepointTracker(){ return timepointTracker;}
             std::vector <RG::TimepointCount*> const &getTimepointTotal(){ return timepointTotal;}
+            void clearTimepointTracker();
+            void clearTimepointTotal();
         private:
             std::vector <std::string> fileLines;
             std::vector <RG::TimepointCount*> timepointTracker;
