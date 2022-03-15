@@ -89,6 +89,7 @@ bool BR::BloodReport::isEmpty(int index){
     else if(parsedLines.at(index)->received.length() != 0){ return false;}
     else return true;
 }
+
 /*extractMonth
 * Returns the month (as an integer) as extracted from a date (string) of format m/d/y
 */
