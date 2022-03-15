@@ -892,7 +892,7 @@ int RG::ReportGenerator::extractMonth(string date){
         return stoi(month);
     }
     catch(std::exception){
-        return 13; //exclude things with no/invalid date
+        return 0; //exclude things with no/invalid date
     }
 }
 
@@ -906,7 +906,7 @@ int RG::ReportGenerator::extractYear(string date){
         string year = date.substr((delimiter1+1), date.length());
         return stoi(year);
     } catch(std::exception){
-        return 9999; //exclude things with no/invalid date
+        return 0; //exclude things with no/invalid date
     }
 }
 
