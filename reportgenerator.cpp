@@ -153,7 +153,7 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
                     if(spacelessHash(sheets->bloodreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                         //check year, month <= parsedLines.at(i)->date; still count return 0 exceptions
                         if(extractYear(sheets->bloodreport->getParsedLines().at(i)->date) <= year){
-                            if(extractMonth(sheets->bloodreport->getParsedLines().at(i)->date) <= month){
+                            if(extractMonth(sheets->bloodreport->getParsedLines().at(i)->date) <= month || extractYear(sheets->bloodreport->getParsedLines().at(i)->date) < year){
                                 timepointVecs.at(j).push_back(sheets->bloodreport->getParsedLines().at(i));
                             }
                         }
@@ -193,7 +193,7 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
                     if(spacelessHash(sheets->tissuereport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                         //check year, month <= parsedLines.at(i)->date; check for return 0 exception
                         if(extractYear(sheets->tissuereport->getParsedLines().at(i)->date) <= year){
-                            if(extractMonth(sheets->tissuereport->getParsedLines().at(i)->date) <= month){
+                            if(extractMonth(sheets->tissuereport->getParsedLines().at(i)->date) <= month || extractYear(sheets->bloodreport->getParsedLines().at(i)->date) < year){
                                 timepointVecs.at(j).push_back(sheets->tissuereport->getParsedLines().at(i));
                             }
                         }
@@ -234,7 +234,7 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
                     if(spacelessHash(sheets->stoolreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                         //check year, month <= parsedLines.at(i)->date; check for return 0 exception
                         if(extractYear(sheets->stoolreport->getParsedLines().at(i)->date) <= year){
-                            if(extractMonth(sheets->stoolreport->getParsedLines().at(i)->date) <= month){
+                            if(extractMonth(sheets->stoolreport->getParsedLines().at(i)->date) <= month || extractYear(sheets->bloodreport->getParsedLines().at(i)->date) < year){
                                 timepointVecs.at(j).push_back(sheets->stoolreport->getParsedLines().at(i));
                             }
                         }
@@ -886,24 +886,13 @@ long RG::ReportGenerator::stoolHash(string input){
 * Returns the month (as an integer) as extracted from a date (string) of format m/d/y
 */
 int RG::ReportGenerator::extractMonth(string date){
-    char delimiter = '/';
-    bool format1 = false; bool format2 = true;
-    for(int j = 0; j < date.length(); j++){ //check if formatted with at least one /
-        if(date[j] == delimiter) format1 = true;
-    }
-    for(int j = 0; j < date.length(); j++){ //check if all chars are numeric or delimiters
-        if(date[j] != '0' && date[j] != '1' && date[j] != '2' && date[j] != '3' && date[j] != '4' 
-        && date[j] != '5' && date[j] != '6' && date[j] != '7' && date[j] != '8' && date[j] != '9' && date[j] != delimiter){
-            format2 = false;
-        }
-    }
-    if(!format1 || !format2){ return 0;} //if not formatted w / or not all valid chars, return 0 
-    int i = 0; string month = "";
-    while(date[i] != delimiter){ month.append(1, date[i++]);}
+    string delimiter = "/";
     try{
+        string month = date.substr(0, date.find(delimiter));
         return stoi(month);
-    } catch(invalid_argument){
-        return 0;
+    }
+    catch(std::exception){
+        return 13; //exclude things with no/invalid date
     }
 }
 
@@ -911,28 +900,13 @@ int RG::ReportGenerator::extractMonth(string date){
 * Returns the year (as an integer) as extracted from a date (string) of format m/d/y
 */
 int RG::ReportGenerator::extractYear(string date){
-    char delimiter = '/'; 
-    bool format1 = false; bool format2 = true;
-    for(int j = 0; j < date.length(); j++){ //check if formatted with at least one /
-        if(date[j] == delimiter) format1 = true;
-    }
-    for(int j = 0; j < date.length(); j++){ //check if all chars are numeric or delimiters
-        if(date[j] != '0' && date[j] != '1' && date[j] != '2' && date[j] != '3' && date[j] != '4' 
-        && date[j] != '5' && date[j] != '6' && date[j] != '7' && date[j] != '8' && date[j] != '9' && date[j] != delimiter){
-            format2 = false;
-        }
-    }
-    if(!format1 || !format2){ return 0;} //if not formatted w / or not all valid chars, return 0
-    int i = 0; string year = "";
-    while(date[i] != delimiter){i++;} //thru month
-    i++; //skip /
-    while(date[i] != delimiter){i++;} //thru day
-    i++; //skip /
-    year = date.substr(i, date.length());
+    string delimiter = "/";
     try{
+        int delimiter1 = date.find_last_of(delimiter);
+        string year = date.substr((delimiter1+1), date.length());
         return stoi(year);
-    } catch(invalid_argument){
-        return 0;
+    } catch(std::exception){
+        return 9999; //exclude things with no/invalid date
     }
 }
 
