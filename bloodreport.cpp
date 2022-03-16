@@ -127,8 +127,5 @@ BR::BloodReport::BloodReport(){
 }
 
 BR::BloodReport::~BloodReport(){
-    for(int i = 0; i < parsedLines.size(); i++){
-        delete parsedLines[i];
-        parsedLines[i] = NULL;
-    }
+    for(int i = 0; i < parsedLines.size(); i++){ delete parsedLines[i]; parsedLines[i] = NULL;}
 }

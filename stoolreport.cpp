@@ -129,8 +129,5 @@ SR::StoolReport::StoolReport(){
 }
 
 SR::StoolReport::~StoolReport(){
-    for(int i = 0; i < parsedLines.size(); i++){
-        delete parsedLines[i];
-        parsedLines[i] = NULL;
-    }
+    for(int i = 0; i < parsedLines.size(); i++){ delete parsedLines[i]; parsedLines[i] = NULL;}
 }
