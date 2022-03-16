@@ -45,12 +45,11 @@ int TR::TissueReport::tissueMonthFilter(int month, int year){
 }
 
 /*sampleTypeSort()
-* Prerequisites: sortedLines is sorted by timepoint
-* Counts # of each sample type per timepoint, ex. C1D1 FFPE 5; C1D1 OCT 3; C2D1 RNAlater 2
+* Counts # of each sample type per timepoint in a month, ex. C1D1 FFPE 5; C1D1 OCT 3; C2D1 FFPE 2
 */
 void TR::TissueReport::sampleTypeSort(){
     if(sortedLines.size() > 0){ //if not empty, account for 0th iteration in below for loop
-        TimepointSampleCount *tmp = new TimepointSampleCount;
+        TimepointSampleCount *tmp = new TimepointSampleCount; //consider using filteredLines instead of sortedLines?
         tmp->timepoint = sortedLines.at(0)->visit;
         tmp->sampleType.push_back(sortedLines.at(0)->sampleType);
         tmp->count.push_back(1);

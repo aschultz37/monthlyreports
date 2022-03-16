@@ -37,11 +37,8 @@ namespace TR{
             int tissueMonthFilter(int month, int year);
             void sampleTypeSort();
             void copytoSortTissue();
-            //void copySortedLines();
-            //void copyBackSortedLines();
             void clearSort();
             void clearFiltered();
-            //void clearSortedCopy();
             void clearSampleSortedLines();
             void swapSortedLines(int index1, int index2);
             bool isEmpty(int index);
@@ -49,7 +46,6 @@ namespace TR{
             std::vector <TR::EntryData*> parsedLines;
             std::vector <TR::EntryData*> filteredLines;
             std::vector <TR::EntryData*> sortedLines;
-            //std::vector <TR::EntryData*> sortedLinesCopy;
             std::vector <TR::TimepointSampleCount*> sampleSortedLines;
 
             int extractMonth(std::string date);
