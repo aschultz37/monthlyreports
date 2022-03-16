@@ -44,6 +44,47 @@ int TR::TissueReport::tissueMonthFilter(int month, int year){
     return counter;
 }
 
+/*sampleTypeSort()
+* Prerequisites: sortedLines is sorted by timepoint
+* Counts # of each sample type per timepoint, ex. C1D1 FFPE 5; C1D1 OCT 3; C2D1 RNAlater 2
+*/
+void TR::TissueReport::sampleTypeSort(){
+    if(sortedLines.size() > 0){ //if not empty, account for 0th iteration in below for loop
+        TimepointSampleCount *tmp = new TimepointSampleCount;
+        tmp->timepoint = sortedLines.at(0)->visit;
+        tmp->sampleType.push_back(sortedLines.at(0)->sampleType);
+        tmp->count.push_back(1);
+        sampleSortedLines.push_back(tmp);
+    }
+    else return; //no need to sort if list is empty
+    for(int i = 1; i < sortedLines.size(); i++){ //already added the first item to vector, start at 1
+        bool foundTime = false; bool foundSampleType = false; //check 1) is timepoint present 2) is sample type present in that timepoint
+        int timepointIndex = -1;
+        for(int j = 0; j < sampleSortedLines.size(); j++){
+            if(spacelessHash(sortedLines.at(i)->visit) == spacelessHash(sampleSortedLines.at(j)->timepoint)){ 
+                foundTime = true; timepointIndex = j;
+                for(int r = 0; r < sampleSortedLines.at(j)->sampleType.size(); r++){
+                    if(spacelessHash(sortedLines.at(i)->sampleType) == spacelessHash(sampleSortedLines.at(j)->sampleType.at(r))){
+                        foundSampleType = true;
+                        sampleSortedLines.at(j)->count.at(r)++;
+                    }
+                }
+            }
+        }
+        if(foundTime == false){
+            TimepointSampleCount *tmp = new TimepointSampleCount;
+            tmp->timepoint = sortedLines.at(i)->visit;
+            tmp->sampleType.push_back(sortedLines.at(i)->sampleType);
+            tmp->count.push_back(1);
+            sampleSortedLines.push_back(tmp);
+        }
+        else if(foundTime == true && foundSampleType == false){
+            sampleSortedLines.at(timepointIndex)->sampleType.push_back(sortedLines.at(i)->sampleType);
+            sampleSortedLines.at(timepointIndex)->count.push_back(1);
+        }
+    }
+}
+
 /*copytoSortTissue
 * Copies filteredLines to sortedLines
 */
@@ -52,6 +93,24 @@ void TR::TissueReport::copytoSortTissue(){
         sortedLines.push_back(filteredLines.at(i));
     }
 }
+
+// /*copySortedLines
+// * Copies sortedLines to sortedLinesCopy
+// */
+// void TR::TissueReport::copySortedLines(){
+//     for(int i = 0; i < sortedLines.size(); i++){
+//         sortedLinesCopy.push_back(sortedLines.at(i));
+//     }
+// }
+
+// /*copyBackSortedLines
+// * Copies sortedLinesCopy back to sortedLines
+// */
+// void TR::TissueReport::copyBackSortedLines(){
+//     for(int i = 0; i < sortedLinesCopy.size(); i++){
+//         sortedLines.push_back(sortedLinesCopy.at(i));
+//     }
+// }
 
 /*clearSort()
 * Clears the sortLines vector
@@ -65,6 +124,20 @@ void TR::TissueReport::clearSort(){
 */
 void TR::TissueReport::clearFiltered(){
     filteredLines.clear();
+}
+
+// /*clearSortedCopy()
+// * Clears the sortedLinesCopy vector
+// */
+// void TR::TissueReport::clearSortedCopy(){
+//     sortedLinesCopy.clear();
+// }
+
+/*clearSampleSortedLines()
+* Clears the sampleSortedLines vector
+*/
+void TR::TissueReport::clearSampleSortedLines(){
+    sampleSortedLines.clear();
 }
 
 /*swapSortedLines
@@ -124,13 +197,31 @@ int TR::TissueReport::extractYear(string date){
     }
 }
 
+/*spacelessHash
+* Computes a value based only on alphanumeric characters in a string (i.e. ignores spaces, special chars)
+* For example, " Arm A" would return same value as "Arm A" or "Arm  A "
+*/
+int TR::TissueReport::spacelessHash(string input){
+    int tmp = 0;
+    int KEY_SIZE = 37; //1 space, 26 letters, 10 digits (special char ignored completely)
+    char key[KEY_SIZE] = {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+                    't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    for(int i = 0; i < input.length(); i++){
+        for(int j = 0; j < KEY_SIZE; j++){
+            if(tolower(input[i]) == key[j]){
+                if(j > 26){ tmp += (j*j);} //make numbers contribute much more so it is less likely that Baseline == CxD1 for example
+                else tmp += j; //note that space is in index 0 so would not count; a is index 1 so does count
+            }
+        }
+    }
+    return tmp;
+}
+
 TR::TissueReport::TissueReport(){
 
 }
 
 TR::TissueReport::~TissueReport(){
-    for(int i = 0; i < parsedLines.size(); i++){
-        delete parsedLines[i];
-        parsedLines[i] = NULL;
-    }
+    for(int i = 0; i < parsedLines.size(); i++){ delete parsedLines[i]; parsedLines[i] = NULL;}
+    for(int i = 0; i < sampleSortedLines.size(); i++){ delete sampleSortedLines[i]; sampleSortedLines[i] = NULL;}
 }
