@@ -57,15 +57,15 @@ void TR::TissueReport::sampleTypeSort(){
     }
     else return; //no need to sort if list is empty
     for(int i = 1; i < sortedLines.size(); i++){ //already added the first item to vector, start at 1
-        bool foundTime = false; bool foundSampleType = false; //check 1) is timepoint present 2) is sample type present in that timepoint
+        bool foundTime = false; bool foundSampleType = false;
         int timepointIndex = -1;
-        for(int j = 0; j < sampleSortedLines.size(); j++){
+        for(int j = 0; j < sampleSortedLines.size(); j++){ //check if timepoint is present
             if(spacelessHash(sortedLines.at(i)->visit) == spacelessHash(sampleSortedLines.at(j)->timepoint)){ 
                 foundTime = true; timepointIndex = j;
-                for(int r = 0; r < sampleSortedLines.at(j)->sampleType.size(); r++){
+                for(int r = 0; r < sampleSortedLines.at(j)->sampleType.size(); r++){ //check if sample type present within timepoint
                     if(spacelessHash(sortedLines.at(i)->sampleType) == spacelessHash(sampleSortedLines.at(j)->sampleType.at(r))){
                         foundSampleType = true;
-                        sampleSortedLines.at(j)->count.at(r)++;
+                        (sampleSortedLines.at(j)->count.at(r))++;
                     }
                 }
             }
