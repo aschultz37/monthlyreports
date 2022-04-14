@@ -22,13 +22,13 @@ for sourcefile in $SOURCEDIRBLOOD; do
 done
 
 shopt -s nullglob
-for sourcefile in $SOURCEDIRTISSUE; do
-    BASE=${sourcefile##*/}
-    /home/aus87/BTIL/monthlyreports/reportgenerator $month $year "2" $sourcefile "${DESTDIRTISSUE}${BASE}" #first item is program location (CHANGE)
-done
-
-shopt -s nullglob
 for sourcefile in $SOURCEDIRSTOOL; do
     BASE=${sourcefile##*/}
     /home/aus87/BTIL/monthlyreports/reportgenerator $month $year "3" $sourcefile "${DESTDIRSTOOL}${BASE}" #first item is program location (CHANGE)
+done
+
+shopt -s nullglob
+for sourcefile in $SOURCEDIRTISSUE; do
+    BASE=${sourcefile##*/}
+    /home/aus87/BTIL/monthlyreports/reportgenerator $month $year "2" $sourcefile "${DESTDIRTISSUE}${BASE}" #first item is program location (CHANGE)
 done

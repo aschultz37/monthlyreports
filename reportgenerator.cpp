@@ -153,7 +153,7 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
                     if(spacelessHash(sheets->bloodreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                         //check year, month <= parsedLines.at(i)->date; still count return 0 exceptions
                         if(extractYear(sheets->bloodreport->getParsedLines().at(i)->date) <= year){
-                            if(extractMonth(sheets->bloodreport->getParsedLines().at(i)->date) <= month || extractYear(sheets->bloodreport->getParsedLines().at(i)->date) < year){
+                            if(extractMonth(sheets->bloodreport->getParsedLines().at(i)->date) <= month){
                                 timepointVecs.at(j).push_back(sheets->bloodreport->getParsedLines().at(i));
                             }
                         }
@@ -193,7 +193,7 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
                     if(spacelessHash(sheets->tissuereport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                         //check year, month <= parsedLines.at(i)->date; check for return 0 exception
                         if(extractYear(sheets->tissuereport->getParsedLines().at(i)->date) <= year){
-                            if(extractMonth(sheets->tissuereport->getParsedLines().at(i)->date) <= month || extractYear(sheets->bloodreport->getParsedLines().at(i)->date) < year){
+                            if(extractMonth(sheets->tissuereport->getParsedLines().at(i)->date) <= month){
                                 timepointVecs.at(j).push_back(sheets->tissuereport->getParsedLines().at(i));
                             }
                         }
@@ -234,7 +234,7 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
                     if(spacelessHash(sheets->stoolreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                         //check year, month <= parsedLines.at(i)->date; check for return 0 exception
                         if(extractYear(sheets->stoolreport->getParsedLines().at(i)->date) <= year){
-                            if(extractMonth(sheets->stoolreport->getParsedLines().at(i)->date) <= month || extractYear(sheets->bloodreport->getParsedLines().at(i)->date) < year){
+                            if(extractMonth(sheets->stoolreport->getParsedLines().at(i)->date) <= month){
                                 timepointVecs.at(j).push_back(sheets->stoolreport->getParsedLines().at(i));
                             }
                         }
@@ -262,23 +262,23 @@ void RG::ReportGenerator::writeReport(std::string outFileName){
     for(int i = 0; i < timepointTotal.size(); i++){
         outfile << timepointTotal.at(i)->timepoint << "," << timepointTotal.at(i)->count << endl;
     }
-    if(filetype != RG::filetypes::tissue){ //print the monthly timepoints w/ no regard to sample type (irrelevant)
+    //if(filetype != RG::filetypes::tissue){ //print the monthly timepoints w/ no regard to sample type (irrelevant)
         outfile << "Timepoint,Number,MONTHLY" << endl;
         for(int i = 0; i < timepointTracker.size(); i++){
             outfile << timepointTracker.at(i)->timepoint << "," << timepointTracker.at(i)->count << endl;
         }
-    }
-    else{ //print the monthly timepoints broken out by sample type (FFPE, OCT, RNAlater)
-        outfile << "Timepoint,SampleType,Number,MONTHLY" << endl;
-        sheets->tissuereport->sampleTypeSort();
-        for(int i = 0; i < sheets->tissuereport->getSampleSortedLines().size(); i++){
-            for(int j = 0; j < sheets->tissuereport->getSampleSortedLines().at(i)->sampleType.size(); j++){
-                outfile << sheets->tissuereport->getSampleSortedLines().at(i)->timepoint << "," 
-                << sheets->tissuereport->getSampleSortedLines().at(i)->sampleType.at(j) << "," 
-                << sheets->tissuereport->getSampleSortedLines().at(i)->count.at(j) << endl;
-            }
-        }
-    }
+    //}
+    // else{ //print the monthly timepoints broken out by sample type (FFPE, OCT, RNAlater)
+    //     outfile << "Timepoint,SampleType,Number,MONTHLY" << endl;
+    //     sheets->tissuereport->sampleTypeSort();
+    //     for(int i = 0; i < sheets->tissuereport->getSampleSortedLines().size(); i++){
+    //         for(int j = 0; j < sheets->tissuereport->getSampleSortedLines().at(i)->sampleType.size(); j++){
+    //             outfile << sheets->tissuereport->getSampleSortedLines().at(i)->timepoint << "," 
+    //             << sheets->tissuereport->getSampleSortedLines().at(i)->sampleType.at(j) << "," 
+    //             << sheets->tissuereport->getSampleSortedLines().at(i)->count.at(j) << endl;
+    //         }
+    //     }
+    // }
     if(filetype == RG::filetypes::blood){
         outfile << "PN,Arm,Visit,OncID,StudyID,Rec.,Date" << endl;
         for(int i = 0; i < sheets->bloodreport->getSortedLines().size(); i++){
