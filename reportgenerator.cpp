@@ -153,7 +153,7 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
                     if(spacelessHash(sheets->bloodreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                         //check year, month <= parsedLines.at(i)->date; still count return 0 exceptions
                         if(extractYear(sheets->bloodreport->getParsedLines().at(i)->date) <= year){
-                            if(extractMonth(sheets->bloodreport->getParsedLines().at(i)->date) <= month){
+                            if(extractMonth(sheets->bloodreport->getParsedLines().at(i)->date) <= month || extractYear(sheets->bloodreport->getParsedLines().at(i)->date) < year){
                                 timepointVecs.at(j).push_back(sheets->bloodreport->getParsedLines().at(i));
                             }
                         }
@@ -193,7 +193,7 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
                     if(spacelessHash(sheets->tissuereport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                         //check year, month <= parsedLines.at(i)->date; check for return 0 exception
                         if(extractYear(sheets->tissuereport->getParsedLines().at(i)->date) <= year){
-                            if(extractMonth(sheets->tissuereport->getParsedLines().at(i)->date) <= month){
+                            if(extractMonth(sheets->tissuereport->getParsedLines().at(i)->date) <= month || extractYear(sheets->tissuereport->getParsedLines().at(i)->date) < year){
                                 timepointVecs.at(j).push_back(sheets->tissuereport->getParsedLines().at(i));
                             }
                         }
@@ -234,7 +234,7 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
                     if(spacelessHash(sheets->stoolreport->getParsedLines().at(i)->visit) == spacelessHash(timepoints.at(j))){
                         //check year, month <= parsedLines.at(i)->date; check for return 0 exception
                         if(extractYear(sheets->stoolreport->getParsedLines().at(i)->date) <= year){
-                            if(extractMonth(sheets->stoolreport->getParsedLines().at(i)->date) <= month){
+                            if(extractMonth(sheets->stoolreport->getParsedLines().at(i)->date) <= month || extractYear(sheets->stoolreport->getParsedLines().at(i)->date) < year){
                                 timepointVecs.at(j).push_back(sheets->stoolreport->getParsedLines().at(i));
                             }
                         }
