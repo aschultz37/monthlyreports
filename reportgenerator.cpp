@@ -260,25 +260,25 @@ void RG::ReportGenerator::writeReport(std::string outFileName){
     ofstream outfile; outfile.open(outFileName);
     outfile << "Timepoint,Number,TOTAL" << endl;
     for(int i = 0; i < timepointTotal.size(); i++){
-        outfile << timepointTotal.at(i)->timepoint << "," << timepointTotal.at(i)->count << endl;
+        outfile << timepointTotal.at(i)->timepoint << "," << timepointTotal.at(i)->count << std::endl;
     }
-    //if(filetype != RG::filetypes::tissue){ //print the monthly timepoints w/ no regard to sample type (irrelevant)
+    if(filetype != RG::filetypes::tissue){ //print the monthly timepoints w/ no regard to sample type (irrelevant)
         outfile << "Timepoint,Number,MONTHLY" << endl;
         for(int i = 0; i < timepointTracker.size(); i++){
-            outfile << timepointTracker.at(i)->timepoint << "," << timepointTracker.at(i)->count << endl;
+            outfile << timepointTracker.at(i)->timepoint << "," << timepointTracker.at(i)->count << std::endl;
         }
-    //}
-    // else{ //print the monthly timepoints broken out by sample type (FFPE, OCT, RNAlater)
-    //     outfile << "Timepoint,SampleType,Number,MONTHLY" << endl;
-    //     sheets->tissuereport->sampleTypeSort();
-    //     for(int i = 0; i < sheets->tissuereport->getSampleSortedLines().size(); i++){
-    //         for(int j = 0; j < sheets->tissuereport->getSampleSortedLines().at(i)->sampleType.size(); j++){
-    //             outfile << sheets->tissuereport->getSampleSortedLines().at(i)->timepoint << "," 
-    //             << sheets->tissuereport->getSampleSortedLines().at(i)->sampleType.at(j) << "," 
-    //             << sheets->tissuereport->getSampleSortedLines().at(i)->count.at(j) << endl;
-    //         }
-    //     }
-    // }
+    }
+    else{ //print the monthly timepoints broken out by sample type (FFPE, OCT, RNAlater)
+        outfile << "Timepoint,SampleType,Number,MONTHLY" << endl;
+        sheets->tissuereport->sampleTypeSort();
+        for(int i = 0; i < sheets->tissuereport->getSampleSortedLines().size(); i++){ //i is each timepoint
+            for(int j = 0; j < sheets->tissuereport->getSampleSortedLines().at(i)->sampleType.size(); j++){ //j is sample types within timepoint
+                outfile << sheets->tissuereport->getSampleSortedLines().at(i)->timepoint << "," 
+                << sheets->tissuereport->getSampleSortedLines().at(i)->sampleType.at(j) << "," 
+                << sheets->tissuereport->getSampleSortedLines().at(i)->count.at(j) << std::endl;
+            }
+        }
+    }
     if(filetype == RG::filetypes::blood){
         outfile << "PN,Arm,Visit,OncID,StudyID,Rec.,Date" << endl;
         for(int i = 0; i < sheets->bloodreport->getSortedLines().size(); i++){
@@ -340,6 +340,7 @@ void RG::ReportGenerator::sort(int option){
 void RG::ReportGenerator::pnSort(){
     if(filetype == RG::filetypes::blood){
         sheets->bloodreport->clearSort();
+        if(sheets->bloodreport->getFilteredLines().size() == 0){ return;} 
         vector <string> pns;
         for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
             if(pns.size() > 0){ //to account for first iteration
@@ -380,6 +381,7 @@ void RG::ReportGenerator::pnSort(){
     }
     else if(filetype == RG::filetypes::tissue){
         sheets->tissuereport->clearSort();
+        if(sheets->tissuereport->getFilteredLines().size() == 0){ return;} 
         vector <string> pns;
         for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
             if(pns.size() > 0){ //to account for first iteration
@@ -420,6 +422,7 @@ void RG::ReportGenerator::pnSort(){
     }
     else if(filetype == RG::filetypes::stool){
         sheets->stoolreport->clearSort();
+        if(sheets->stoolreport->getFilteredLines().size() == 0){ return;} 
         vector <string> pns;
         for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
             if(pns.size() > 0){ //to account for first iteration
@@ -466,6 +469,7 @@ void RG::ReportGenerator::pnSort(){
 void RG::ReportGenerator::oncSort(){
     if(filetype == RG::filetypes::blood){
         sheets->bloodreport->clearSort();
+        if(sheets->bloodreport->getFilteredLines().size() == 0){ return;} 
         //copy filteredLines into sortedLines
         for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
             sheets->bloodreport->pushSortedLines(sheets->bloodreport->getFilteredLines().at(i));
@@ -488,6 +492,7 @@ void RG::ReportGenerator::oncSort(){
     }
     else if(filetype == RG::filetypes::tissue){
         sheets->tissuereport->clearSort();
+        if(sheets->tissuereport->getFilteredLines().size() == 0){ return;} 
         //copy filteredLines into sortedLines
         for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
             sheets->tissuereport->pushSortedLines(sheets->tissuereport->getFilteredLines().at(i));
@@ -510,6 +515,7 @@ void RG::ReportGenerator::oncSort(){
     }
     else if(filetype == RG::filetypes::stool){
         sheets->stoolreport->clearSort();
+        if(sheets->stoolreport->getFilteredLines().size() == 0){ return;} 
         //copy filteredLines into sortedLines
         for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
             sheets->stoolreport->pushSortedLines(sheets->stoolreport->getFilteredLines().at(i));
@@ -538,6 +544,7 @@ void RG::ReportGenerator::oncSort(){
 void RG::ReportGenerator::subjectSort(){
     if(filetype == RG::filetypes::blood){
         sheets->bloodreport->clearSort();
+        if(sheets->bloodreport->getFilteredLines().size() == 0){ return;} 
         //copy filteredLines into sortedLines
         for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
             sheets->bloodreport->pushSortedLines(sheets->bloodreport->getFilteredLines().at(i));
@@ -560,6 +567,7 @@ void RG::ReportGenerator::subjectSort(){
     }
     else if(filetype == RG::filetypes::tissue){
         sheets->tissuereport->clearSort();
+        if(sheets->tissuereport->getFilteredLines().size() == 0){ return;} 
         //copy filteredLines into sortedLines
         for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
             sheets->tissuereport->pushSortedLines(sheets->tissuereport->getFilteredLines().at(i));
@@ -582,6 +590,7 @@ void RG::ReportGenerator::subjectSort(){
     }
     else if(filetype == RG::filetypes::stool){
         sheets->stoolreport->clearSort();
+        if(sheets->stoolreport->getFilteredLines().size() == 0){ return;} 
         //copy filteredLines into sortedLines
         for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
             sheets->stoolreport->pushSortedLines(sheets->stoolreport->getFilteredLines().at(i));
@@ -611,6 +620,7 @@ void RG::ReportGenerator::subjectSort(){
 void RG::ReportGenerator::stoolSort(){
     if(filetype != RG::filetypes::stool){ return;}
     sheets->stoolreport->clearSort();
+    if(sheets->stoolreport->getFilteredLines().size() == 0){ return;} 
     //copy filteredLines into sortedLines
     for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
         sheets->stoolreport->pushSortedLines(sheets->stoolreport->getFilteredLines().at(i));
@@ -639,6 +649,7 @@ void RG::ReportGenerator::stoolSort(){
 void RG::ReportGenerator::timeSort(){
     if(filetype == RG::filetypes::blood){
         sheets->bloodreport->clearSort();
+        if(sheets->bloodreport->getFilteredLines().size() == 0){ return;} 
         //list of unique timepoints
         vector <string> timepoints;
         for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
@@ -676,6 +687,7 @@ void RG::ReportGenerator::timeSort(){
     }
     else if(filetype == RG::filetypes::tissue){
         sheets->tissuereport->clearSort();
+        if(sheets->tissuereport->getFilteredLines().size() == 0){ return;} 
         //list of unique timepoints
         vector <string> timepoints;
         for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
@@ -713,6 +725,7 @@ void RG::ReportGenerator::timeSort(){
     }
     else if(filetype == RG::filetypes::stool){
         sheets->stoolreport->clearSort();
+        if(sheets->stoolreport->getFilteredLines().size() == 0){ return;} 
         //list of unique timepoints
         vector <string> timepoints;
         for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
@@ -756,6 +769,7 @@ void RG::ReportGenerator::timeSort(){
 void RG::ReportGenerator::dateSort(){
     if(filetype == RG::filetypes::blood){
         sheets->bloodreport->clearSort();
+        if(sheets->bloodreport->getFilteredLines().size() == 0){ return;}        
         //copy filteredLines into sortedLines
         for(int i = 0; i < sheets->bloodreport->getFilteredLines().size(); i++){
             sheets->bloodreport->pushSortedLines(sheets->bloodreport->getFilteredLines().at(i));
@@ -774,6 +788,7 @@ void RG::ReportGenerator::dateSort(){
     }
     else if(filetype == RG::filetypes::tissue){
         sheets->tissuereport->clearSort();
+        if(sheets->tissuereport->getFilteredLines().size() == 0){ return;}
         //copy filteredLines into sortedLines
         for(int i = 0; i < sheets->tissuereport->getFilteredLines().size(); i++){
             sheets->tissuereport->pushSortedLines(sheets->tissuereport->getFilteredLines().at(i));
@@ -792,6 +807,7 @@ void RG::ReportGenerator::dateSort(){
     }
     else if(filetype == RG::filetypes::stool){
         sheets->stoolreport->clearSort();
+        if(sheets->stoolreport->getFilteredLines().size() == 0){ return;}
         //copy filteredLines into sortedLines
         for(int i = 0; i < sheets->stoolreport->getFilteredLines().size(); i++){
             sheets->stoolreport->pushSortedLines(sheets->stoolreport->getFilteredLines().at(i));
