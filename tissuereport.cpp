@@ -48,37 +48,37 @@ int TR::TissueReport::tissueMonthFilter(int month, int year){
 * Counts # of each sample type per timepoint in a month, ex. C1D1 FFPE 5; C1D1 OCT 3; C2D1 FFPE 2
 */
 void TR::TissueReport::sampleTypeSort(){
-    if(sortedLines.size() > 0){ //if not empty, account for 0th iteration in below for loop
+    if(filteredLines.size() > 0){ //if not empty, account for 0th iteration in below for loop
         TimepointSampleCount *tmp = new TimepointSampleCount; //consider using filteredLines instead of sortedLines?
-        tmp->timepoint = sortedLines.at(0)->visit;
-        tmp->sampleType.push_back(sortedLines.at(0)->sampleType);
+        tmp->timepoint = filteredLines.at(0)->visit;
+        tmp->sampleType.push_back(filteredLines.at(0)->sampleType);
         tmp->count.push_back(1);
         sampleSortedLines.push_back(tmp);
     }
     else return; //no need to sort if list is empty
-    for(int i = 1; i < sortedLines.size(); i++){ //already added the first item to vector, start at 1
+    for(int i = 1; i < filteredLines.size(); i++){ //i filteredLines iterator; already added the first item to vector, start at 1
         bool foundTime = false; bool foundSampleType = false;
-        int timepointIndex = -1;
-        for(int j = 0; j < sampleSortedLines.size(); j++){ //check if timepoint is present
-            if(spacelessHash(sortedLines.at(i)->visit) == spacelessHash(sampleSortedLines.at(j)->timepoint)){ 
+        int timepointIndex = 0;
+        for(int j = 0; j < sampleSortedLines.size(); j++){ //j sampleSorted iterator; check if timepoint is present
+            if(spacelessHash(filteredLines.at(i)->visit) == spacelessHash(sampleSortedLines.at(j)->timepoint)){ 
                 foundTime = true; timepointIndex = j;
-                for(int r = 0; r < sampleSortedLines.at(j)->sampleType.size(); r++){ //check if sample type present within timepoint
-                    if(spacelessHash(sortedLines.at(i)->sampleType) == spacelessHash(sampleSortedLines.at(j)->sampleType.at(r))){
+                for(int r = 0; r < sampleSortedLines.at(j)->sampleType.size(); r++){ //r is sampleType iterator; check if sample type present within timepoint
+                    if(spacelessHash(filteredLines.at(i)->sampleType) == spacelessHash(sampleSortedLines.at(j)->sampleType.at(r))){
                         foundSampleType = true;
                         (sampleSortedLines.at(j)->count.at(r))++;
                     }
                 }
             }
         }
-        if(foundTime == false){
+        if(!foundTime){ //if timepoint not found, need a new entry
             TimepointSampleCount *tmp = new TimepointSampleCount;
-            tmp->timepoint = sortedLines.at(i)->visit;
-            tmp->sampleType.push_back(sortedLines.at(i)->sampleType);
+            tmp->timepoint = filteredLines.at(i)->visit;
+            tmp->sampleType.push_back(filteredLines.at(i)->sampleType);
             tmp->count.push_back(1);
             sampleSortedLines.push_back(tmp);
         }
-        else if(foundTime == true && foundSampleType == false){
-            sampleSortedLines.at(timepointIndex)->sampleType.push_back(sortedLines.at(i)->sampleType);
+        else if(foundTime && !foundSampleType){ //if found timepoint but not sample type, add sample type to existing entry
+            sampleSortedLines.at(timepointIndex)->sampleType.push_back(filteredLines.at(i)->sampleType);
             sampleSortedLines.at(timepointIndex)->count.push_back(1);
         }
     }
