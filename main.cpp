@@ -37,7 +37,7 @@ int main(int argc, char **argv){ //argv format:./a.out mm yyyy filetype infilena
             else if(argc >= 6){
                 report.sort(5); //sort by timepoint (to fill timepointTracker)
                 report.sort(6); //sort by date
-                report.writeReport(argv[5]); //write to file specified
+                report.writeReport(argv[5], month, year); //write to file specified
                 runbit = false;
             }
         } catch(std::exception){
@@ -118,7 +118,7 @@ int main(int argc, char **argv){ //argv format:./a.out mm yyyy filetype infilena
             writefile(outputfile);
             cout << "The output will be written to " << outputfile << ".\n";
             try{
-                report.writeReport(outputfile);
+                report.writeReport(outputfile, month, year);
             } catch(runtime_error){
                 cout << "Runtime Error: Check file name and try again.\n";
             } catch(logic_error){

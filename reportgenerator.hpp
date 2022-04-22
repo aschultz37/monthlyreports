@@ -38,7 +38,7 @@ namespace RG{
             void displayReport();
             void displayTimepointTracker();
             void totalTimepoints(int month, int year);
-            void writeReport(std::string outFileName);
+            void writeReport(std::string outFileName, int month, int year);
             void sort(int option);
 
             void setFileType(int inFileType){ filetype = inFileType;}
