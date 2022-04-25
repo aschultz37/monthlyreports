@@ -264,4 +264,5 @@ TR::TissueReport::TissueReport(){
 TR::TissueReport::~TissueReport(){
     for(int i = 0; i < parsedLines.size(); i++){ delete parsedLines[i]; parsedLines[i] = NULL;}
     for(int i = 0; i < sampleSortedLines.size(); i++){ delete sampleSortedLines[i]; sampleSortedLines[i] = NULL;}
+    for(int i = 0; i < sampleSortedLinesTotal.size(); i++){ delete sampleSortedLinesTotal[i]; sampleSortedLinesTotal[i] = NULL;}
 }
