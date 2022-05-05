@@ -84,6 +84,76 @@ void TR::TissueReport::sampleTypeSort(){
     }
 }
 
+/*sampleTypeSortTotal()
+* Counts # of each sample type per timepoint over ALL samples, ex. C1D1 FFPE 5; C1D1 OCT 3; C2D1 FFPE 2
+*/
+void TR::TissueReport::sampleTypeSortTotal(int month, int year){
+    //1) check that the entry is <= the current month, similar to totalTimepoints
+    //2) same algorithm as sampleTypeSort() but using parsedLines and sampleSortedLinesTotal vector
+    if(parsedLines.size() > 0){ //if not empty, account for 0th iteration in below for loop
+        //first, locate the first entry that is <= current month/year
+        int firstEntry = 0; bool foundFirst = false;
+        while(extractYear(parsedLines.at(firstEntry)->date) >= year && !foundFirst){
+            if(extractYear(parsedLines.at(firstEntry)->date) == year){
+                if(extractMonth(parsedLines.at(firstEntry)->date) <= month){
+                    if(!isEmpty(firstEntry)){
+                        foundFirst = true;
+                    }
+                }
+            }
+            if(!foundFirst){ //firstEntry > year or empty
+                firstEntry++;
+            }
+        }
+        TimepointSampleCount *tmp = new TimepointSampleCount; //consider using filteredLines instead of sortedLines?
+        tmp->timepoint = parsedLines.at(firstEntry)->visit;
+        tmp->sampleType.push_back(parsedLines.at(firstEntry)->sampleType);
+        tmp->count.push_back(1);
+        sampleSortedLinesTotal.push_back(tmp);
+    }
+    else return; //no need to sort if list is empty
+    for(int i = 1; i < parsedLines.size(); i++){ //i parsededLines iterator; already added the first item to vector, start at 1
+        bool foundTime = false; bool foundSampleType = false;
+        int timepointIndex = 0;
+        bool validEntry = true;
+        if(isEmpty(i)){
+            validEntry = false;
+        }
+        if(extractYear(parsedLines.at(i)->date) > year){
+            validEntry = false;
+        }
+        else if(extractYear(parsedLines.at(i)->date) == year){
+            if(extractMonth(parsedLines.at(i)->date) > month){
+                validEntry = false;
+            }
+        }
+        if(validEntry){
+            for(int j = 0; j < sampleSortedLinesTotal.size(); j++){ //j sampleSortedTotal iterator; check if timepoint is present
+                if(spacelessHash(parsedLines.at(i)->visit) == spacelessHash(sampleSortedLinesTotal.at(j)->timepoint)){ 
+                    foundTime = true; timepointIndex = j;
+                    for(int r = 0; r < sampleSortedLinesTotal.at(j)->sampleType.size(); r++){ //r is sampleType iterator; check if sample type present within timepoint
+                        if(spacelessHash(parsedLines.at(i)->sampleType) == spacelessHash(sampleSortedLinesTotal.at(j)->sampleType.at(r))){
+                            foundSampleType = true;
+                            (sampleSortedLinesTotal.at(j)->count.at(r))++;
+                        }
+                    }
+                }
+            }
+            if(!foundTime){ //if timepoint not found, need a new entry
+                TimepointSampleCount *tmp = new TimepointSampleCount;
+                tmp->timepoint = parsedLines.at(i)->visit;
+                tmp->sampleType.push_back(parsedLines.at(i)->sampleType);
+                tmp->count.push_back(1);
+                sampleSortedLinesTotal.push_back(tmp);
+            }
+            else if(foundTime && !foundSampleType){ //if found timepoint but not sample type, add sample type to existing entry
+                sampleSortedLinesTotal.at(timepointIndex)->sampleType.push_back(parsedLines.at(i)->sampleType);
+                sampleSortedLinesTotal.at(timepointIndex)->count.push_back(1);
+            }
+        }
+    }
+}
+
 /*copytoSortTissue
 * Copies filteredLines to sortedLines
 */
@@ -92,24 +162,6 @@ void TR::TissueReport::copytoSortTissue(){
         sortedLines.push_back(filteredLines.at(i));
     }
 }
-
-// /*copySortedLines
-// * Copies sortedLines to sortedLinesCopy
-// */
-// void TR::TissueReport::copySortedLines(){
-//     for(int i = 0; i < sortedLines.size(); i++){
-//         sortedLinesCopy.push_back(sortedLines.at(i));
-//     }
-// }
-
-// /*copyBackSortedLines
-// * Copies sortedLinesCopy back to sortedLines
-// */
-// void TR::TissueReport::copyBackSortedLines(){
-//     for(int i = 0; i < sortedLinesCopy.size(); i++){
-//         sortedLines.push_back(sortedLinesCopy.at(i));
-//     }
-// }
 
 /*clearSort()
 * Clears the sortLines vector
@@ -124,13 +176,6 @@ void TR::TissueReport::clearSort(){
 void TR::TissueReport::clearFiltered(){
     filteredLines.clear();
 }
-
-// /*clearSortedCopy()
-// * Clears the sortedLinesCopy vector
-// */
-// void TR::TissueReport::clearSortedCopy(){
-//     sortedLinesCopy.clear();
-// }
 
 /*clearSampleSortedLines()
 * Clears the sampleSortedLines vector
@@ -168,13 +213,13 @@ bool TR::TissueReport::isEmpty(int index){
 * Returns the month (as an integer) as extracted from a date (string) of format m/d/y
 */
 int TR::TissueReport::extractMonth(string date){
-    char delimiter = '/'; 
-    int i = 0; string month = "";
-    while(date[i] != delimiter){ month.append(1, date[i++]);}
+    string delimiter = "/";
     try{
+        string month = date.substr(0, date.find(delimiter));
         return stoi(month);
-    } catch(invalid_argument){
-        return 0;
+    }
+    catch(std::exception){
+        return 0; //exclude things with no/invalid date
     }
 }
 
@@ -182,17 +227,13 @@ int TR::TissueReport::extractMonth(string date){
 * Returns the year (as an integer) as extracted from a date (string) of format m/d/y
 */
 int TR::TissueReport::extractYear(string date){
-    char delimiter = '/'; 
-    int i = 0; string year = "";
-    while(date[i] != delimiter){i++;} //thru month
-    i++; //skip /
-    while(date[i] != delimiter){i++;} //thru day
-    i++; //skip /
-    year = date.substr(i, date.length());
+    string delimiter = "/";
     try{
+        int delimiter1 = date.find_last_of(delimiter);
+        string year = date.substr((delimiter1+1), date.length());
         return stoi(year);
-    } catch(invalid_argument){
-        return 0;
+    } catch(std::exception){
+        return 0; //exclude things with no/invalid date
     }
 }
 
@@ -223,4 +264,5 @@ TR::TissueReport::TissueReport(){
 TR::TissueReport::~TissueReport(){
     for(int i = 0; i < parsedLines.size(); i++){ delete parsedLines[i]; parsedLines[i] = NULL;}
     for(int i = 0; i < sampleSortedLines.size(); i++){ delete sampleSortedLines[i]; sampleSortedLines[i] = NULL;}
+    for(int i = 0; i < sampleSortedLinesTotal.size(); i++){ delete sampleSortedLinesTotal[i]; sampleSortedLinesTotal[i] = NULL;}
 }

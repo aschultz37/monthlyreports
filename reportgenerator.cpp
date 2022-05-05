@@ -256,19 +256,28 @@ void RG::ReportGenerator::totalTimepoints(int month, int year){
 * Writes the resulting/sorted list to csv file
 * TODO for tissue, break out FFPE/OCT/RNAlater by timepoint
 */
-void RG::ReportGenerator::writeReport(std::string outFileName){
+void RG::ReportGenerator::writeReport(std::string outFileName, int month, int year){
     ofstream outfile; outfile.open(outFileName);
-    outfile << "Timepoint,Number,TOTAL" << endl;
-    for(int i = 0; i < timepointTotal.size(); i++){
-        outfile << timepointTotal.at(i)->timepoint << "," << timepointTotal.at(i)->count << std::endl;
-    }
     if(filetype != RG::filetypes::tissue){ //print the monthly timepoints w/ no regard to sample type (irrelevant)
+        outfile << "Timepoint,Number,TOTAL" << endl;
+        for(int i = 0; i < timepointTotal.size(); i++){
+            outfile << timepointTotal.at(i)->timepoint << "," << timepointTotal.at(i)->count << std::endl;
+        }
         outfile << "Timepoint,Number,MONTHLY" << endl;
         for(int i = 0; i < timepointTracker.size(); i++){
             outfile << timepointTracker.at(i)->timepoint << "," << timepointTracker.at(i)->count << std::endl;
         }
     }
     else{ //print the monthly timepoints broken out by sample type (FFPE, OCT, RNAlater)
+        outfile << "Timepoint,SampleType,Number,TOTAL" << endl;
+        sheets->tissuereport->sampleTypeSortTotal(month, year);
+        for(int i = 0; i < sheets->tissuereport->getSampleSortedLinesTotal().size(); i++){ //i is each timepoint
+            for(int j = 0; j < sheets->tissuereport->getSampleSortedLinesTotal().at(i)->sampleType.size(); j++){ //j is sample types within timepoint
+                outfile << sheets->tissuereport->getSampleSortedLinesTotal().at(i)->timepoint << "," 
+                << sheets->tissuereport->getSampleSortedLinesTotal().at(i)->sampleType.at(j) << "," 
+                << sheets->tissuereport->getSampleSortedLinesTotal().at(i)->count.at(j) << std::endl;
+            }
+        }
         outfile << "Timepoint,SampleType,Number,MONTHLY" << endl;
         sheets->tissuereport->sampleTypeSort();
         for(int i = 0; i < sheets->tissuereport->getSampleSortedLines().size(); i++){ //i is each timepoint

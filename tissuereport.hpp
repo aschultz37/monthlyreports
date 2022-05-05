@@ -30,12 +30,14 @@ namespace TR{
             std::vector <TR::EntryData*> const &getSortedLines(){ return sortedLines;}
             std::vector <TR::EntryData*> const &getParsedLines(){ return parsedLines;}
             std::vector <TR::TimepointSampleCount*> const &getSampleSortedLines(){ return sampleSortedLines;}
+            std::vector <TR::TimepointSampleCount*> const &getSampleSortedLinesTotal(){ return sampleSortedLinesTotal;}
 
             void pushSortedLines(TR::EntryData* input){ sortedLines.push_back(input);}
 
             void importParser(std::string lineIn);
             int tissueMonthFilter(int month, int year);
             void sampleTypeSort();
+            void sampleTypeSortTotal(int month, int year);
             void copytoSortTissue();
             void clearSort();
             void clearFiltered();
@@ -47,6 +49,7 @@ namespace TR{
             std::vector <TR::EntryData*> filteredLines;
             std::vector <TR::EntryData*> sortedLines;
             std::vector <TR::TimepointSampleCount*> sampleSortedLines;
+            std::vector <TR::TimepointSampleCount*> sampleSortedLinesTotal;
 
             int extractMonth(std::string date);
             int extractYear(std::string date);
